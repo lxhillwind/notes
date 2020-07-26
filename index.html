@@ -7,11 +7,12 @@
     </head>
 <script>
 fetch('https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/index.html').
+    then(res => res.json()).
     then(res => atob(res.content)).
     then(text => {
         var el = document.createElement('html');
         el.innerHTML = text;
-        document.query_selector('body').innerHTML = el.query_selector('body').innerHTML;
+        document.querySelector('body').innerHTML = el.querySelector('body').innerHTML;
     });
 </script>
 
@@ -52,7 +53,6 @@ vim-start = !git -C ~/vimfiles/pack/git/start
     - shortcut (add new pre)
     - format (keep all pres not indented)
 - apply style (via JavaScript if supported)
-
 ```
 </pre>
     </body>
