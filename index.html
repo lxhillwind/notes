@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>lxhillwind random note</title>
+        <meta charset='utf-8' />
+    </head>
+    <body>
+<pre>
+```gitconfig
+
+[alias]
+
+# win32 may not support `sort`?
+a = !git config --get-regexp alias. | sort
+
+vim = !git -C ~/vimfiles/pack/git
+vim-doc = !git vim submodule foreach vim --cmd 'sil! helpt doc | q'
+
+vim-opt = !git -C ~/vimfiles/pack/git/opt
+vim-start = !git -C ~/vimfiles/pack/git/start
+
+```
+</pre>
+<hr />
+<pre>
+```todo
+- edit
+    - highlight
+    - shortcut (add new pre)
+    - format (keep all pres not indented)
+- apply style (via JavaScript if supported)
+```
+</pre>
+    </body>
+</html>
