@@ -17,6 +17,17 @@ fetch('https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/index.html'
 
     <body>
 <pre>
+```sh
+
+# view this page (updated) if JavaScript is not supported;
+# requirement: curl, jq, base64, w3m
+
+curl -sL https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/index.html | jq -r .content | base64 -d | w3m -T text/html
+
+```
+</pre>
+<hr />
+<pre>
 ```gitconfig
 
 [alias]
