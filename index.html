@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <!-- vim:fdm=marker -->
 
-<!-- html head, style, script, etc {{{ -->
 <html>
     <head>
+<style>/* pre template:
+
+# XXX_title <!-- {{{ -->
+<pre>
+```XXX_filetype
+
+// content
+
+```
+</pre><hr /> <!-- }}} -->
+
+*/</style>
+<!-- html head, style, script, etc {{{ -->
         <title>lxhillwind random note</title>
         <meta charset='utf-8' />
 <!-- icon (long line) {{{ -->
@@ -11,6 +23,12 @@
 <!-- }}} -->
     </head>
 <script>
+(() => {
+
+if (document.location.protocol === 'file:') {
+    return;
+}
+
 fetch('https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/index.html').
     then(res => res.json()).
     then(res => atob(res.content)).
@@ -19,10 +37,14 @@ fetch('https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/index.html'
         el.innerHTML = text;
         document.querySelector('body').innerHTML = el.querySelector('body').innerHTML;
     });
+
+})();
 </script>
 
     <body>
 <!-- }}} -->
+
+# view this page <!-- {{{ -->
 <pre>
 ```sh
 
@@ -32,8 +54,9 @@ fetch('https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/index.html'
 curl -sL https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/index.html | jq -r .content | base64 -d | w3m -T text/html
 
 ```
-</pre>
-<hr />
+</pre><hr /> <!-- }}} -->
+
+# gitconfig <!-- {{{ -->
 <pre>
 ```gitconfig
 
@@ -49,8 +72,9 @@ vim-opt = !git -C ~/vimfiles/pack/git/opt
 vim-start = !git -C ~/vimfiles/pack/git/start
 
 ```
-</pre>
-<hr />
+</pre><hr /> <!-- }}} -->
+
+# todo <!-- {{{ -->
 <pre>
 ```todo
 
@@ -61,6 +85,67 @@ vim-start = !git -C ~/vimfiles/pack/git/start
 - apply style (via JavaScript if supported)
 
 ```
-</pre>
+</pre><hr /> <!-- }}} -->
+
+# windows note <!-- {{{ -->
+<pre>
+```markdown
+
+# intro
+How to get Linux / UNIX-like environment on Windows?
+
+# finaly
+DO NOT USE WINDOWS! (auto update? old win 7?)
+
+Or just use:
+- VirtualBox
+- alacritty (if gl is available) / ConEmu (vim render issue / key binding) / and pre-installed openssh
+- or putty (no colorscheme / key binding).
+
+Or, if native is required:
+- mingit-busybox (cmd folder put in PATH)
+- less (put in PATH)
+- vim or neovim (sh / shcf set to busybox)
+
+DO NOT use Python on Windows: package update; io performance (e.g. in vim); executable path (run script).
+
+# meta
+
+- All software (except msys2) does not support upgrade check.
+
+# neovim
+
+- <del>[X] To use plug.vim (modified), remember to set sh and shcf. (busybox ash and msys2 bash are tested and work) </del> Just use git submodule to manage plugins.
+
+# Python
+
+- ipython in mingw-w64 seems to be broken (Python 3.8.3, tested in 2020-06-06). Maybe we should use msvc build from
+  python mirror (then pygobject is not available).
+
+- mingw-w64 and msvc build don't support ansi code in neovim terminal. Maybe this is problem of shell?
+
+# Git
+
+- `less` in mingit-busybox doesn't support `-r` flag, so some command (example: `git log`) has messy output.
+
+- But we can download binary build of `less`, and put it in `$PATH`; it will overwrite busybox-less.
+
+- <del>mingit has no shell / coreutils (I guess).</del> It has; but `less` is not available.
+
+- mingit (not busybox) has no readline, so sh / bash / dash key binding is terrible.
+
+- others are too big (~40MB; but this is much smaller than msys2). (ssh, perl, tclsh is available)
+
+# msys2
+
+- filesystem / permission is a main problem: `chmod +x xxx.sh` has no effect.
+
+- [X] msys2 home is different from Windows home. To solve this, we can set HOME env in shell rc.
+
+
+```
+</pre><hr /> <!-- }}} -->
+
+END
     </body>
 </html>
