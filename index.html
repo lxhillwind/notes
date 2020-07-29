@@ -63,8 +63,8 @@ curl -sL https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/index.htm
 
 [alias]
 
-# win32 may not support `sort`?
 a = !git config --get-regexp alias. | sort
+g = !git --git-dir ~/dotfiles/.git --work-tree ~
 
 vim = !git -C ~/vimfiles/pack/git
 vim-doc = !git vim submodule foreach vim --cmd 'sil! helpt doc | q'
