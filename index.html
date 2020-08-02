@@ -147,6 +147,50 @@ DO NOT use Python on Windows: package update; io performance (e.g. in vim); exec
 ```
 </pre><hr /> <!-- }}} -->
 
+# vimrc on Windows <!-- {{{ -->
+<pre>
+```vim
+so ~/lib/rc.vim
+
+if !get(g:, 'vimrc_loaded')
+    let g:vimrc_loaded = 1
+    set guioptions=
+    set gfn=Consolas:h11:cANSI:qDRAFT
+    set lines=32
+    set columns=128
+
+    if !executable('git')
+        let $PATH = expand('~/apps/MinGit/cmd') . ';' . $PATH
+    endif
+endif
+
+command! KtoggleShell call <SID>ToggleShell()
+function! s:ToggleShell()
+    if &shell =~ 'sh'
+        let &shell = 'cmd.exe'
+        let &shellcmdflag = '/s /c'
+        let &shellquote = ''
+    else
+        let &shell = 'git bb sh'
+        let &shellcmdflag = '-c'
+        let &shellquote = '"'
+    endif
+endfunction
+
+sil normal st
+```
+</pre><hr /> <!-- }}} -->
+
+# gitconfig on Windows <!-- {{{ -->
+<pre>
+```gitconfig
+
+bb = !busybox
+
+e = !~/apps/Vim/vim82/gvim
+
+```
+</pre><hr /> <!-- }}} -->
 END
     </body>
 </html>
