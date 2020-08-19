@@ -20,8 +20,8 @@ if (document.location.protocol === 'file:') {
 fetch('https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md').
     then(res => res.text).
     then(text => {
-        let text = text.replace(/[<>&]/g, c => ({'<': '&lt;', '>': '&gt;', '&': '&amp;'}[c]));
-        document.querySelector('pre#main').innerHTML = text;
+        document.querySelector('pre#main').innerHTML =
+            text.replace(/[<>&]/g, c => ({'<': '&lt;', '>': '&gt;', '&': '&amp;'}[c]));
     });
 
 })();

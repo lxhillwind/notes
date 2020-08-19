@@ -3,7 +3,6 @@
 # gitconfig
 
 ```gitconfig
-
 [alias]
 
 a = !git config --get-regexp alias. | sort
@@ -14,7 +13,6 @@ vim-doc = !git vim submodule foreach vim --cmd 'sil! helpt doc | q'
 
 vim-opt = !git -C ~/vimfiles/pack/git/opt
 vim-start = !git -C ~/vimfiles/pack/git/start
-
 ```
 
 ------------------------------------------------------------------------------
@@ -22,13 +20,11 @@ vim-start = !git -C ~/vimfiles/pack/git/start
 # todo
 
 ```todo
-
 - edit
     - highlight
     - shortcut (add new pre)
     - format (keep all pres not indented)
 - apply style (via JavaScript if supported)
-
 ```
 
 ------------------------------------------------------------------------------
@@ -128,11 +124,9 @@ sil normal st
 # gitconfig on Windows
 
 ```gitconfig
-
 bb = !busybox
 
 e = !~/apps/Vim/vim82/gvim
-
 ```
 
 ------------------------------------------------------------------------------
