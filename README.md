@@ -102,7 +102,7 @@ home:
 bin/      dotfiles/ info/     lib/      vimfiles/
 ```
 
-## vimrc
+## vimrc (Neovim/share/nvim/sysinit.vim)
 
 ```vim
 command! KtoggleShell call s:ToggleShell()
