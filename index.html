@@ -12,13 +12,11 @@
     </head>
 <script>
 (() => {
-
-if (document.location.protocol === 'file:') {
-    return;
-}
-
-fetch('https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md').
-    then(res => res.text).
+// We can't fetch https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md
+// since CORS.
+fetch('https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/README.md').
+    then(res => res.json()).
+    then(res => atob(res.content)).
     then(text => {
         document.querySelector('pre#main').innerHTML =
             text.replace(/[<>&]/g, c => ({'<': '&lt;', '>': '&gt;', '&': '&amp;'}[c]));
@@ -33,7 +31,6 @@ fetch('https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md').
 # view this page
 
 ```sh
-
 # In terminal: (requirement: curl (or wget?), w3m)
 
 curl -sL https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md | w3m -T text/html
@@ -41,7 +38,6 @@ curl -sL https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md | w3m -T t
 # or, view it in rendered markdown (depend on bat)
 
 curl -sL https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md | bat -l md
-
 ```
 </pre>
 
