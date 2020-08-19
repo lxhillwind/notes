@@ -31,18 +31,14 @@ fetch('https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/README.md')
 # view this page
 
 ```sh
-# In terminal: (requirement: curl (or wget?), w3m)
+# In terminal: (requirement: curl (or wget?), bat)
 
-curl -sL https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md | w3m -T text/html
-
-# or, view it in rendered markdown (depend on bat)
-
-curl -sL https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md | bat -l md
+curl -sL <a href='https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md'>https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md</a> | bat -l md -p
 ```
 </pre>
 
 <pre id='main'>
-<a href='https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md'>README.md</a>
+fetching README.md ...
 </pre>
 
     </body>
