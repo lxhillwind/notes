@@ -17,18 +17,6 @@ vim-start = !git -C ~/vimfiles/pack/git/start
 
 ------------------------------------------------------------------------------
 
-# todo
-
-```todo
-- edit
-    - highlight
-    - shortcut (add new pre)
-    - format (keep all pres not indented)
-- apply style (via JavaScript if supported)
-```
-
-------------------------------------------------------------------------------
-
 # Microsoft Windows note
 
 ## intro
