@@ -91,13 +91,15 @@ DO NOT use Python on Windows: package update; io performance (e.g. in vim); exec
 ## setup
 
 ```console
-~/apps $ ls
-MinGit       Neovim       bin          home         nvim-qt.lnk
-~/apps $ ls home
-bin       dotfiles  info      lib       vimfiles
-~/apps $ ls bin
-less.exe
-~/apps $
+~/apps $ ls -F . bin home
+.:
+MinGit/      Neovim/      bin/         home/        nvim-qt.lnk
+
+bin:
+less.exe*
+
+home:
+bin/      dotfiles/ info/     lib/      vimfiles/
 ```
 
 ## vimrc
