@@ -86,24 +86,24 @@ DO NOT use Python on Windows: package update; io performance (e.g. in vim); exec
 
 ------------------------------------------------------------------------------
 
-# vimrc on Windows
+# neovim on Windows
+
+## setup
+
+```console
+~/apps $ ls
+MinGit       Neovim       bin          home         nvim-qt.lnk
+~/apps $ ls home
+bin       dotfiles  info      lib       vimfiles
+~/apps $ ls bin
+less.exe
+~/apps $
+```
+
+## vimrc
 
 ```vim
-so ~/lib/rc.vim
-
-if !get(g:, 'vimrc_loaded')
-    let g:vimrc_loaded = 1
-    set guioptions=
-    set gfn=Consolas:h11:cANSI:qDRAFT
-    set lines=32
-    set columns=128
-
-    if !executable('git')
-        let $PATH = expand('~/apps/MinGit/cmd') . ';' . $PATH
-    endif
-endif
-
-command! KtoggleShell call <SID>ToggleShell()
+command! KtoggleShell call s:ToggleShell()
 function! s:ToggleShell()
     if &shell =~ 'sh'
         let &shell = 'cmd.exe'
@@ -116,7 +116,43 @@ function! s:ToggleShell()
     endif
 endfunction
 
-sil normal st
+if !get(g:, 'vimrc#loaded')
+    " set env: vimrc; bin path; change home
+    let $MYVIMRC = expand('<sfile>')
+    let s:root = expand('<sfile>:p:h:h:h:h')
+    if !executable('git')
+        let $PATH = s:root . '/MinGit/cmd' . ';' . $PATH
+    endif
+    if !executable('less')
+        let $PATH = s:root . '/bin' . ';' . $PATH
+    endif
+    let $HOME = s:root . '/home'
+
+    " so vimrc
+    source ~/vimfiles/rc.vim
+
+    " busybox sh as &sh
+    KtoggleShell
+    if stridx(&sh, 'sh') < 0
+        KtoggleShell
+    endif
+
+    " light theme
+    sil norm st
+endif
+
+" gui init (nvim-qt)
+function! s:gui_init()
+    set guioptions=
+    set lines=32
+    set columns=128
+
+    GuiTabline 0
+endfunction
+
+au UIEnter * call <SID>gui_init()
+
+au FileType dirvish nmap <buffer> H <Plug>(dirvish_up) | nmap <buffer> L i
 ```
 
 ------------------------------------------------------------------------------
