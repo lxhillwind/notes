@@ -33,6 +33,9 @@ function! s:gui_init()
     if has('nvim')
         GuiTabline 0
     endif
+
+    " light theme
+    set bg=light
 endfunction
 
 if !get(g:, 'vimrc#loaded')
@@ -51,10 +54,10 @@ if !get(g:, 'vimrc#loaded')
         au UIEnter * call <SID>gui_init()
     elseif has('gui_running')
         call s:gui_init()
+    else
+        set nocursorcolumn
+        color pablo
     endif
-
-    " light theme
-    set bg=light
 endif
 ```
 
