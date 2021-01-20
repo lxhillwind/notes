@@ -1,65 +1,11 @@
 ------------------------------------------------------------------------------
 
 # gitconfig
-
 <https://gitee.com/lxhillwind/dotfiles/blob/master/.gitconfig>
 
 ------------------------------------------------------------------------------
 
-# `_vimrc` on Windows
-
-```vim
-command! KtoggleShell call s:ToggleShell()
-function! s:ToggleShell()
-    if &shell =~ 'sh'
-        let &shell = 'cmd.exe'
-        let &shellcmdflag = '/s /c'
-        let &shellquote = ''
-    else
-        let &shell = 'busybox sh'
-        let &shellcmdflag = '-c'
-        if has('nvim')
-            let &shellquote = '"'
-        endif
-    endif
-endfunction
-
-" gui init
-function! s:gui_init()
-    set guioptions=
-    set lines=32
-    set columns=128
-
-    if has('nvim')
-        GuiTabline 0
-    endif
-
-    " light theme
-    set bg=light
-endfunction
-
-if !get(g:, 'vimrc#loaded')
-    " so vimrc
-    source ~/vimfiles/rc.vim
-
-    " avoid /bin/sh as &shell; set busybox if possible; else set cmd.exe
-    KtoggleShell
-    if (!executable('busybox') && stridx(&sh, 'sh') >= 0)
-                \ ||
-                \ (executable('busybox') && stridx(&sh, 'sh') < 0)
-        KtoggleShell
-    endif
-
-    if has('nvim')
-        au UIEnter * call <SID>gui_init()
-    elseif has('gui_running')
-        call s:gui_init()
-    else
-        set nocursorcolumn
-        color pablo
-    endif
-endif
-```
+~~# `_vimrc` on Windows~~ is moved to vimrc.
 
 ------------------------------------------------------------------------------
 
