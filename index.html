@@ -21,11 +21,11 @@ fetch('https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/README.md')
         document.querySelector('pre#main').innerHTML =
             text.
             replace(/[<>&]/g, c => ({'<': '&lt;', '>': '&gt;', '&': '&amp;'}[c])).
-            replace(/(?<!\\)(\*\*.+?\*\*)/, '<strong>$1</strong>').
-            replace(/(?<!\\|\*)(\*[^*].*?\*)(?!\*)/, '<em>$1</em>').
-            replace(/(?<!\\)(~~.+?~~)/, '<del>$1</del>').
+            replace(/(?<!\\)(\*\*.+?\*\*)/g, '<strong>$1</strong>').
+            replace(/(?<!\\|\*)(\*[^*].*?\*)(?!\*)/g, '<em>$1</em>').
+            replace(/(?<!\\)(~~.+?~~)/g, '<del>$1</del>').
             // no quote escape / `&` recover in $2
-            replace(/(?<!\\)(&lt;)(.+?)(&gt;)/, '$1<a href="$2">$2</a>$3');
+            replace(/(?<!\\)(&lt;)(.+?)(&gt;)/g, '$1<a href="$2">$2</a>$3');
     });
 
 })();
