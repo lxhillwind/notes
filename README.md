@@ -15,4 +15,20 @@ Thin PC iso:
 
 ------------------------------------------------------------------------------
 
+------------------------------------------------------------------------------
+
+# vm
+Choose based on host OS.
+
+Just use qemu on Linux. Guest OS (Windows / Linux) in VirtualBox (Linux host)
+seems to have font rendering issue (scale mode?). GL support (Linux guest on
+Linux host) is much better than on VirtualBox.
+
+Use VirtualBox on macos. qemu network (Windows guest) seems buggy. Display
+(cocoa) is also not well supported.
+
+------------------------------------------------------------------------------
+
 # END
+
+<!-- vim: tw=78 -->
