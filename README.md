@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------
 
 # gitconfig
-<https://gitee.com/lxhillwind/dotfiles/blob/master/.gitconfig>
+<https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
 
 ------------------------------------------------------------------------------
 
@@ -35,7 +35,10 @@ endfunction
 
 function! s:rg(arg) abort
   let buf = bufnr()
-  execute 'KvimRun' '%Sh rg --column' a:arg
+  let l:result = execute('%Sh rg --column ' . a:arg)
+  bel 7sp +enew | setl buftype=nofile
+  put =l:result
+  norm gg"_dd
   execute printf("nnoremap <buffer> <CR> <cmd>call <SID>jumpback(%s)<CR>", buf)
   syn match String '\v^[0-9]+'
 endfunction
@@ -46,4 +49,4 @@ endfunction
 
 # END
 
-<!-- vim: tw=78 -->
+<!-- vim: tw=78 fdm=marker -->
