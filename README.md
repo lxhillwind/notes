@@ -17,7 +17,7 @@ Use VirtualBox on macos. qemu network (Windows guest) seems buggy. Display
 
 ------------------------------------------------------------------------------
 
-# vim random config
+# vimrc
 
 ```vim
 " :Rgbuffer {...} {{{
@@ -43,6 +43,20 @@ function! s:rg(arg) abort
   syn match String '\v^[0-9]+'
 endfunction
 " }}}
+```
+
+------------------------------------------------------------------------------
+
+# zshrc
+
+```sh
+# capture tmux output to put in vim (easy jump to file of rg / grep output)
+# optional $1: start line from visible top; default: 1000
+# requires vim plugin: sh.vim (:Terminal), jump.vim (<CR> in terminal buffer)
+sv()
+{
+    tmux capture -e -p -S -${1-:1000} -E $(tmux display -p "#{cursor_y}") | vim - -c 'set buftype=nofile noswapfile | %Terminal cat'
+}
 ```
 
 ------------------------------------------------------------------------------
