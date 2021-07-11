@@ -21,6 +21,7 @@ Use VirtualBox on macos. qemu network (Windows guest) seems buggy. Display
 
 ```vim
 " :Rgbuffer {...} {{{
+" requires vim plugin: sh.vim (:Sh), jump.vim (<Plug>(jump_to_file))
 command! -nargs=+ Rgbuffer call s:rg(<q-args>)
 
 function! s:jumpback(buf) abort
