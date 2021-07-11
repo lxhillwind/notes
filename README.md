@@ -53,9 +53,10 @@ endfunction
 # capture tmux output to put in vim (easy jump to file of rg / grep output)
 # optional $1: start line from visible top; default: 1000
 # requires vim plugin: sh.vim (:Terminal), jump.vim (<CR> in terminal buffer)
+# shell: posix
 sv()
 {
-    tmux capture -e -p -S -${1-:1000} -E $(tmux display -p "#{cursor_y}") | vim - -c 'set buftype=nofile noswapfile | %Terminal cat'
+    tmux capture -e -p -S -${1:-1000} -E $(tmux display -p "#{cursor_y}") | vim - -c 'set buftype=nofile noswapfile | %Terminal cat'
 }
 ```
 
