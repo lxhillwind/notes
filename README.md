@@ -79,6 +79,9 @@ function! s:write_bin(name) abort
     job_start('xxd -r', #{in_io: 'buffer', in_buf: bufnr(), out_io: 'file', out_name: a:name})
   else
     execute printf('%w !%s -r > %s', s:xxd, shellescape(a:name))
+    if !empty(v:shell_error)
+      return
+    endif
   endif
   setl nomodified
   redrawstatus | echon 'written.'
