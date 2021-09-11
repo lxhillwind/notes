@@ -58,6 +58,34 @@ nnoremap <Leader>y :Oscyank<CR>
 nnoremap <Leader>p :echoerr 'system clipboard is not available!'<CR>
 ```
 
+## view / modify binary file
+
+```vim
+" exe {{{
+au BufReadCmd *.exe call s:read_bin(expand('<amatch>'))
+au BufWriteCmd *.exe call s:write_bin(expand('<amatch>'))
+
+" avoid using busybox xxd.
+let s:xxd = exists($VIM . '/bin/xxd') ? '"$VIM"/bin/xxd' : 'xxd'
+
+function! s:read_bin(name) abort
+  execute printf('r !%s %s', s:xxd, shellescape(a:name))
+  normal gg"_dd
+endfunction
+
+function! s:write_bin(name) abort
+  if has('win32') && !has('nvim')
+    " returncode check is ignored.
+    job_start('xxd -r', #{in_io: 'buffer', in_buf: bufnr(), out_io: 'file', out_name: a:name})
+  else
+    execute printf('%w !%s -r > %s', s:xxd, shellescape(a:name))
+  endif
+  setl nomodified
+  redrawstatus | echon 'written.'
+endfunction
+" }}}
+```
+
 ------------------------------------------------------------------------------
 
 # zshrc
