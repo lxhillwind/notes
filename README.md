@@ -1,11 +1,11 @@
 ------------------------------------------------------------------------------
 
-# gitconfig
+# gitconfig {{{1
 <https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
 
 ------------------------------------------------------------------------------
 
-# vm
+# vm {{{1
 Choose based on host OS.
 
 Just use qemu on Linux. Guest OS (Windows / Linux) in VirtualBox (Linux host)
@@ -17,7 +17,7 @@ Use VirtualBox on macos. qemu network (Windows guest) seems buggy. Display
 
 ------------------------------------------------------------------------------
 
-# vimrc
+# vimrc {{{1
 
 ```vim
 " :Rgbuffer {...} {{{
@@ -46,7 +46,7 @@ endfunction
 " }}}
 ```
 
-## clipboard via osc52
+## clipboard via osc52 {{{2
 
 Access system clipboard in session via ssh, serial console, etc.
 
@@ -58,7 +58,7 @@ nnoremap <Leader>y :Oscyank<CR>
 nnoremap <Leader>p :echoerr 'system clipboard is not available!'<CR>
 ```
 
-## view / modify binary file
+## view / modify binary file {{{2
 
 ```vim
 " exe {{{
@@ -89,9 +89,27 @@ endfunction
 " }}}
 ```
 
+## tasks.ini (see tasks.vim) {{{2
+```ini
+[conf-edit]
+@key = ;
+@glob = *
+
+[conf-edit:tasks.ini]
+* = tabe ~/vimfiles/plugin/tasks.ini
+
+[conf-edit:vimrc.local]
+* = tabe ~/vimfiles/vimrc.local
+
+[jump]
+@key = j
+@glob = *
+* = call feedkeys("\<Plug>(jump_to_file)")
+```
+
 ------------------------------------------------------------------------------
 
-# zshrc
+# zshrc {{{1
 
 ```sh
 # capture tmux output to put in vim (easy jump to file of rg / grep output)
@@ -106,9 +124,9 @@ sv()
 
 ------------------------------------------------------------------------------
 
-# qemu
+# qemu {{{1
 
-## usb passthrough
+## usb passthrough {{{2
 
 reference:
 
@@ -142,6 +160,8 @@ udevadm control --reload
 ```
 
 ------------------------------------------------------------------------------
+
+}}}1
 
 # END
 
