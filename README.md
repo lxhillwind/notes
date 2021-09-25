@@ -51,8 +51,7 @@ endfunction
 Access system clipboard in session via ssh, serial console, etc.
 
 ```vim
-Plug 'https://github.com/fcpg/vim-osc52'
-silent! let g:plugs['vim-osc52'].commit = '551f20e62e68684a5b745ae08b0c4236d86e4c2b'
+Pack 'https://github.com/fcpg/vim-osc52', #{commit: '551f20e62e68684a5b745ae08b0c4236d86e4c2b'}
 
 nnoremap <Leader>y :Oscyank<CR>
 nnoremap <Leader>p :echoerr 'system clipboard is not available!'<CR>
@@ -96,7 +95,7 @@ endfunction
 @glob = *
 
 [conf-edit:tasks.ini]
-* = tabe ~/vimfiles/plugin/tasks.ini
+* = tabe ~/vimfiles/rc/tasks.ini
 
 [conf-edit:vimrc.local]
 * = tabe ~/vimfiles/vimrc.local
