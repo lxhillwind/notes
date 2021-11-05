@@ -160,6 +160,20 @@ udevadm control --reload
 
 ------------------------------------------------------------------------------
 
+# busybox-w32 {{{1
+
+build busybox-w32 using alpine linux (i386/alpine):
+
+```sh
+# build dependency
+apk add musl-dev gcc make ncurses-dev mingw-w64-gcc
+
+# then run `make mingw32_defconfig` and `make`, according to busybox-w32 README.md
+
+# since perl is not installed, doc generation will fail;
+# but $? should be 0 (err in doc generation is ignored).
+```
+
 }}}1
 
 # END
