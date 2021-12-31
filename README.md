@@ -1,9 +1,5 @@
-------------------------------------------------------------------------------
-
 # gitconfig {{{1
 <https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
-
-------------------------------------------------------------------------------
 
 # vm {{{1
 Choose based on host OS.
@@ -15,12 +11,11 @@ Linux host) is much better than on VirtualBox.
 Use VirtualBox on macos. qemu network (Windows guest) seems buggy. Display
 (cocoa) is also not well supported.
 
-------------------------------------------------------------------------------
+# vim {{{1
 
-# vimrc {{{1
+## :Rgbuffer {...} {{{2
 
 ```vim
-" :Rgbuffer {...} {{{
 " requires vim plugin: sh.vim (:Sh), jump.vim (<Plug>(jump_to_file))
 command! -nargs=+ Rgbuffer call s:rg(<q-args>)
 
@@ -43,7 +38,7 @@ function! s:rg(arg) abort
   execute printf("nnoremap <buffer> <CR> <cmd>call <SID>jumpback(%s)<CR>", buf)
   syn match String '\v^[0-9]+'
 endfunction
-" }}}
+"
 ```
 
 ## clipboard via osc52 {{{2
@@ -106,9 +101,15 @@ endfunction
 * = call feedkeys("\<Plug>(jump_to_file)")
 ```
 
-------------------------------------------------------------------------------
+## about `go-!` option {{{2
+It makes `:!{cmd}` in gvim on win32 run cmd in embeded window, but stderr (?)
+is discarded.
 
-# zshrc {{{1
+So do not use it.
+
+}}}1
+
+# zsh {{{1
 
 ```sh
 # capture tmux output to put in vim (easy jump to file of rg / grep output)
@@ -120,8 +121,6 @@ sv()
     tmux capture -e -p -S -${1:-1000} -E $(tmux display -p "#{cursor_y}") | vim - -c 'set buftype=nofile noswapfile | %Terminal cat'
 }
 ```
-
-------------------------------------------------------------------------------
 
 # qemu {{{1
 
@@ -157,8 +156,6 @@ udevadm control --reload
 ```sh
 ... -usb -device usb-host,vendorid=0x{xxxx},productid=0x{yyyy} ...
 ```
-
-------------------------------------------------------------------------------
 
 # busybox-w32 {{{1
 

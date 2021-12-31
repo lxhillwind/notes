@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <!-- vim:fdm=marker -->
 
+<!--
+supports serving locally (with http://).
+e.g.
+python3 -m http.server --bind localhost
+-->
+
 <html>
     <head>
         <title>lxhillwind random note</title>
@@ -15,12 +21,22 @@
 (() => {
 // We can't fetch https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md
 // since CORS.
-fetch('https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/README.md').
-    then(res => res.json()).
-    then(res => atob(res.content)).
+var is_local = /^http:\/\//.test(location.href);
+var url = is_local ?
+    location.href + '/README.md' :
+    'https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/README.md';
+fetch(url).
+    then(res => is_local ? res.text() : atob(res.json().content)).
     then(text => {
         var md = window.markdownit();
-        document.querySelector('pre#main').innerHTML = md.render(text);
+        var text_new = text.split('\n').
+                map(i => i.
+                        replace(/^(.*)\{\{\{1\s*$/, '---\n$1').
+                        replace(/^\s*\{\{\{\d*\s*$/, '').
+                        replace(/^\s*\}\}\}\d*\s*$/, '')
+                    ).
+                join('\n');
+        document.querySelector('pre#main').innerHTML = md.render(text_new);
     });
 
 })();
