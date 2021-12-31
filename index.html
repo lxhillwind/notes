@@ -26,7 +26,8 @@ var url = is_local ?
     location.href + '/README.md' :
     'https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents/README.md';
 fetch(url).
-    then(res => is_local ? res.text() : atob(res.json().content)).
+    then(res => is_local ? res.text() : res.json()).
+    then(res => is_local ? res : atob(res.content)).
     then(text => {
         var md = window.markdownit();
         var text_new = text.split('\n').
