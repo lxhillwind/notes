@@ -107,8 +107,6 @@ is discarded.
 
 So do not use it.
 
-}}}1
-
 # zsh {{{1
 
 ```sh
