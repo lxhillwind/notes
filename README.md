@@ -38,7 +38,6 @@ function! s:rg(arg) abort
   execute printf("nnoremap <buffer> <CR> <cmd>call <SID>jumpback(%s)<CR>", buf)
   syn match String '\v^[0-9]+'
 endfunction
-"
 ```
 
 ## clipboard via osc52 {{{2
