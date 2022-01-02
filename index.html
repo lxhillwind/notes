@@ -29,7 +29,10 @@ var url = (is_local ?
     ) + '/' + path;
 fetch(url).
     then(res => is_local ? res.text() : res.json()).
-    then(res => is_local ? res : atob(res.content)).
+    then(res => is_local ? res :
+            // decodeURIComponent(escape(atob(...))):
+            // https://developer.mozilla.org/en-US/docs/Glossary/Base64#the_unicode_problem
+            decodeURIComponent(escape(atob(res.content)))).
     then(text => {
         var md = window.markdownit();
         var text_new = /\.md$/.test(path) ?
