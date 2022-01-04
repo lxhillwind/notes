@@ -1,4 +1,4 @@
-# link {{{1
+# link
 - [windows/README.md](windows/README.md)
 
 # gitconfig {{{1
