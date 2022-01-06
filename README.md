@@ -1,5 +1,6 @@
 # link
 - [windows/README.md](windows/README.md)
+- [vimrc.local](vim/vimrc.vim)
 
 # gitconfig {{{1
 <https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
@@ -15,34 +16,6 @@ Use VirtualBox on macos. qemu network (Windows guest) seems buggy. Display
 (cocoa) is also not well supported.
 
 # vim {{{1
-
-## :Rgbuffer {...} {{{2
-
-```vim
-" requires vim plugin: sh.vim (:Sh), jump.vim (<Plug>(jump_to_file))
-command! -nargs=+ Rgbuffer call s:rg(<q-args>)
-
-function! s:jumpback(buf) abort
-  let buffers = tabpagebuflist()
-  let idx = index(buffers, a:buf)
-  if idx >= 0
-    execute 'normal' idx+1 "\<Plug>(jump_to_file)"
-  else
-    echoerr 'buffer not found!'
-  endif
-endfunction
-
-function! s:rg(arg) abort
-  let buf = bufnr()
-  let l:result = execute('%Sh rg --column ' . a:arg)
-  bel 7sp +enew | setl buftype=nofile
-  put =l:result
-  norm gg"_dd
-  execute printf("nnoremap <buffer> <CR> <cmd>call <SID>jumpback(%s)<CR>", buf)
-  syn match String '\v^[0-9]+'
-endfunction
-```
-
 ## clipboard via osc52 {{{2
 
 Access system clipboard in session via ssh, serial console, etc.
@@ -52,37 +25,6 @@ Pack 'https://github.com/fcpg/vim-osc52', #{commit: '551f20e62e68684a5b745ae08b0
 
 nnoremap <Leader>y :Oscyank<CR>
 nnoremap <Leader>p :echoerr 'system clipboard is not available!'<CR>
-```
-
-## view / modify binary file {{{2
-
-```vim
-" exe {{{
-au BufReadCmd *.exe call s:read_bin(expand('<amatch>'))
-au BufWriteCmd *.exe call s:write_bin(expand('<amatch>'))
-
-" avoid using busybox xxd.
-let s:xxd = exists($VIM . '/bin/xxd') ? '"$VIM"/bin/xxd' : 'xxd'
-
-function! s:read_bin(name) abort
-  execute printf('r !%s %s', s:xxd, shellescape(a:name))
-  normal gg"_dd
-endfunction
-
-function! s:write_bin(name) abort
-  if has('win32') && !has('nvim')
-    " returncode check is ignored.
-    job_start('xxd -r', #{in_io: 'buffer', in_buf: bufnr(), out_io: 'file', out_name: a:name})
-  else
-    execute printf('%w !%s -r > %s', s:xxd, shellescape(a:name))
-    if !empty(v:shell_error)
-      return
-    endif
-  endif
-  setl nomodified
-  redrawstatus | echon 'written.'
-endfunction
-" }}}
 ```
 
 ## tasks.ini (see tasks.vim) {{{2
