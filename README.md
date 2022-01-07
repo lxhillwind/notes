@@ -114,6 +114,87 @@ apk add musl-dev gcc make ncurses-dev mingw-w64-gcc
 ```
 
 }}}1
+# awk {{{1
+
+## portable shebang
+
+### cmd in `//`
+
+NOTE:
+
+- with pipe: verbose if slash (`/`) is in cmd;
+
+with pipe:
+
+```awk
+#!/bin/sh
+/ 2>\/dev\/null; exec sh -ec '{cmd} | awk -f "$0"' "$0" / {}
+
+# ...
+```
+
+without pipe:
+
+```awk
+#!/bin/sh
+/ 2>\/dev\/null; exec awk -f "$0"; / {}
+
+# ...
+```
+
+### cmd in `{}`
+
+NOTE:
+
+- with pipe: warning message in gawk (about escape sequence);
+- variable `false` should be undefined;
+
+with pipe:
+
+```awk
+#!/bin/sh
+false {
+    "exec" "sh" "-ec" "cmd | awk -f \"\$0\"" "$0"
+}
+
+# ...
+```
+
+without pipe:
+
+```awk
+#!/bin/sh
+false {
+    "exec" "awk" "-f" "$0"
+}
+
+# ...
+```
+
+### `awk program`
+
+NOTE:
+
+- may exceed argument length limit for exec;
+- with pipe: syntax highlight is bad;
+
+with pipe:
+
+```awk
+#!/bin/sh
+exec sh -c '{cmd} | awk "$0"' "$(awk 'NR > 2' "$0")"
+
+# ...
+```
+
+without pipe:
+
+```awk
+#!/bin/sh
+exec awk "$(awk 'NR > 2' "$0")"
+
+# ...
+```
 
 # END
 
