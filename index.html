@@ -38,20 +38,23 @@ fetch(url).
             decodeURIComponent(escape(atob(res.content)))).
     then(text => {
         var md = window.markdownit();
-        var text_new = /\.md$/.test(path) ?
-                // markdown
-                text.split('\n').
+        if (/\.md$/.test(path)) {
+            text = text.split('\n').
                 map(i => i.
-                        replace(/\[([^\]]+)\]\(([^)]+)\)/, '[$1](?$2)').
-                        replace(/^(#.*)\{\{\{1\s*$/, '---\n$1').
-                        replace(/^(#.*)\{\{\{\d*\s*$/, '$1').
-                        replace(/^\s*\{\{\{\d*\s*$/, '').
-                        replace(/^\s*\}\}\}\d*\s*$/, '')
+                        replace(/\[([^\]]+)\]\(([^):]+)\)/, '[$1](?$2)')
                     ).
-                join('\n') :
-                // not markdown
-                '```' + (path.split('.').slice(-1)[0] || '') + '\n' + text + '\n```';
-        document.querySelector('pre#main').innerHTML = md.render(text_new);
+                join('\n');
+        } else {
+            // not markdown
+            text = '```' + (path.split('.').slice(-1)[0] || '') + '\n' + text + '\n```';
+        }
+        document.querySelector('pre#main').innerHTML = md.render(text);
+        document.querySelector('pre#main').querySelectorAll('h1').forEach(el => {
+            var prev = el.previousSibling;
+            if (prev !== null && prev.tagName != "HR" ) {
+                el.parentElement.insertBefore(document.createElement('hr'), el);
+            }
+        });
         document.querySelectorAll('code').forEach(el => {
             if (/language-.*/.test(el.className)) {
                 hljs.highlightElement(el);
@@ -65,11 +68,8 @@ fetch(url).
     <body>
 
 <pre id='head'>
-
 <a href='/'><h1>home</h1></a>
-
 <hr />
-
 </pre>
 
 <pre id='main'>

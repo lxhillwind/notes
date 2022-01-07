@@ -2,10 +2,10 @@
 - [windows/README.md](windows/README.md)
 - [vimrc.local](vim/vimrc.vim)
 
-# gitconfig {{{1
+# gitconfig
 <https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
 
-# vm {{{1
+# vm
 Choose based on host OS.
 
 Just use qemu on Linux. Guest OS (Windows / Linux) in VirtualBox (Linux host)
@@ -15,8 +15,8 @@ Linux host) is much better than on VirtualBox.
 Use VirtualBox on macos. qemu network (Windows guest) seems buggy. Display
 (cocoa) is also not well supported.
 
-# vim {{{1
-## clipboard via osc52 {{{2
+# vim
+## clipboard via osc52
 
 Access system clipboard in session via ssh, serial console, etc.
 
@@ -27,7 +27,7 @@ nnoremap <Leader>y :Oscyank<CR>
 nnoremap <Leader>p :echoerr 'system clipboard is not available!'<CR>
 ```
 
-## tasks.ini (see tasks.vim) {{{2
+## tasks.ini (see tasks.vim)
 ```ini
 [conf-edit]
 @key = ;
@@ -45,13 +45,13 @@ nnoremap <Leader>p :echoerr 'system clipboard is not available!'<CR>
 * = call feedkeys("\<Plug>(jump_to_file)")
 ```
 
-## about `go-!` option {{{2
+## about `go-!` option
 It makes `:!{cmd}` in gvim on win32 run cmd in embeded window, but stderr (?)
 is discarded.
 
 So do not use it.
 
-# zsh {{{1
+# zsh
 
 ```sh
 # capture tmux output to put in vim (easy jump to file of rg / grep output)
@@ -64,9 +64,9 @@ sv()
 }
 ```
 
-# qemu {{{1
+# qemu
 
-## usb passthrough {{{2
+## usb passthrough
 
 reference:
 
@@ -99,7 +99,7 @@ udevadm control --reload
 ... -usb -device usb-host,vendorid=0x{xxxx},productid=0x{yyyy} ...
 ```
 
-# busybox-w32 {{{1
+# busybox-w32
 
 build busybox-w32 using alpine linux (i386/alpine):
 
@@ -113,8 +113,7 @@ apk add musl-dev gcc make ncurses-dev mingw-w64-gcc
 # but $? should be 0 (err in doc generation is ignored).
 ```
 
-}}}1
-# awk {{{1
+# awk
 
 ## portable shebang
 
@@ -197,5 +196,3 @@ exec awk "$(awk 'NR > 2' "$0")"
 ```
 
 # END
-
-<!-- vim: tw=78 fdm=marker -->
