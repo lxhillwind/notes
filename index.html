@@ -17,7 +17,13 @@ python3 -m http.server --bind localhost
 <!-- }}} -->
         <script src='https://cdn.jsdelivr.net/npm/markdown-it@12.0.6/dist/markdown-it.min.js'></script>
         <script src='https://cdn.jsdelivr.net/npm/markdown-it-mathjax@2.0.0/markdown-it-mathjax.js'></script>
-        <script async src='https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js'></script>
+
+        <script async id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js'></script>
+        <script>
+document.querySelector('#MathJax-script').addEventListener('load', () => {
+    window.MathJax.typeset(['p']);
+});
+        </script>
 
         <link rel="stylesheet" href="./highlight/styles/default.min.css">
         <!-- use bundled js because of custom programming language selection. -->
@@ -55,10 +61,6 @@ var handle = text => {
             text = '```' + (path.split('.').slice(-1)[0] || '') + '\n' + text + '\n```';
         }
         document.querySelector('pre#main').innerHTML = md.render(text);
-        if (window.MathJax) {
-            // check if it is available since it is loaded async.
-            MathJax.typeset(['p']);
-        }
         document.querySelector('pre#main').querySelectorAll('h1').forEach(el => {
             var prev = el.previousSibling;
             if (prev !== null && prev.tagName != "HR" ) {
@@ -70,6 +72,9 @@ var handle = text => {
                 hljs.highlightElement(el);
             }
         });
+        if (window.MathJax) {
+            window.MathJax.typeset(['p']);
+        }
     };
 
 // We can't fetch https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md
@@ -81,14 +86,14 @@ var url = (is_gitee ?
         '.'
     ) + '/' + path;
 if (is_gitee) {
-    fetch(url).
+    fetch(url, {cache: 'no-cache'}).
         then(res => res.json()).
         // decodeURIComponent(escape(atob(...))):
         // https://developer.mozilla.org/en-US/docs/Glossary/Base64#the_unicode_problem
         then(res => decodeURIComponent(escape(atob(res.content)))).
         then(handle);
 } else {
-    fetch(url).
+    fetch(url, {cache: 'no-cache'}).
         then(res => res.text()).
         then(handle);
 }
