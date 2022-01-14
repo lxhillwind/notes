@@ -1,6 +1,7 @@
 # link
 - [windows/README.md](windows/README.md)
 - [vimrc.local](vim/vimrc.vim)
+- [zshrc](zsh/zshrc.sh)
 
 # gitconfig
 <https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
