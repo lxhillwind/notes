@@ -184,4 +184,14 @@ exec awk "$(awk 'NR > 2' "$0")"
 # ...
 ```
 
+# ssh
+
+## local port forwarding
+
+`-D` flag.
+
+```sh
+ssh -D 9050 -N "{host}"
+```
+
 # END
