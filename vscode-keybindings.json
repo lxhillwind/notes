@@ -42,6 +42,11 @@
     },
     {
         "key": "ctrl+f",
+        "command": "actions.find",
+        "when": "terminalFindFocused || terminalFocus"
+    },
+    {
+        "key": "ctrl+f",
         "command": "-workbench.action.terminal.focusFind",
         "when": "terminalFindFocused || terminalFocus"
     },
@@ -53,5 +58,10 @@
         "key": "ctrl+f",
         "command": "-workbench.action.terminal.focusFind",
         "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "editor.action.clipboardPasteAction",
+        "when": "terminalFindFocused || terminalFocus"
     }
 ]
