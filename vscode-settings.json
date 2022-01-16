@@ -4,6 +4,7 @@
     "editor.tabSize": 8,
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.allowChords": false,
+    "terminal.integrated.rightClickBehavior": "default",
     "vim.foldfix": true,
     "vim.leader": " ",
     "vim.normalModeKeyBindings": [
