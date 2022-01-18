@@ -27,8 +27,8 @@ else
     fi
 
     if [ $# -ne 0 ]; then
+        zenity --question --width=500 --title='qutebrowser wrapper' --text="copy url?\n\n$*"
         printf %s "$*" | pbcopy
-        exec zenity --info --title='qutebrowser wrapper' --text="url is copied: $(pbpaste)"
     else
         exec zenity --info --title='qutebrowser wrapper' --text="qutebrowser is already running."
     fi
