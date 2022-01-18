@@ -25,6 +25,14 @@ BindReadOnlyPaths = /home/lx/html/
 BindReadOnlyPaths = /home/lx/bin/ /home/lx/.vimrc /home/lx/vimfiles/
 ```
 
+### set sudofile for qutebrowser.service
+
+User should be in wheel group.
+
+```console
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/systemctl start qutebrowser
+```
+
 ### update desktop file (optional)
 
 If `~/bin` wins `/usr/bin` in `$PATH` already, then there is no need to modify
