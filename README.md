@@ -2,6 +2,7 @@
 - [windows/README.md](windows/README.md)
 - [vimrc.local](vim/vimrc.vim)
 - [zshrc](zsh/zshrc.sh)
+- [qutebrowser](qutebrowser.md)
 
 # gitconfig
 <https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
