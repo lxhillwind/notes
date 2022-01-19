@@ -20,7 +20,10 @@ TemporaryFileSystem = /home/lx:uid=1000,gid=1000
 InaccessiblePaths = /usr/bin/sudo /usr/bin/su
 
 # usb is mounted in /run, so use tmpfs;
-TemporaryFileSystem = /boot /media /mnt /run
+# /dev is required for libgl / /dev/null (and maybe other thing).
+InaccessiblePaths = /boot /media /mnt /opt /root /srv /var
+TemporaryFileSystem = /etc /run
+BindReadOnlyPaths = /etc/fonts/ /etc/resolv.conf
 # fcitx and network
 BindReadOnlyPaths = /run/user/1000/bus /run/systemd/resolve/
 
