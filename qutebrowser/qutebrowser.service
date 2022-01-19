@@ -16,20 +16,21 @@ ProtectSystem = strict
 PrivateTmp = true
 TemporaryFileSystem = /home/lx:uid=1000,gid=1000
 
+# an empty directory.
+RootDirectory = /opt/qutebrowser-root/
+
+BindReadOnlyPaths = /usr /dev /lib64 /bin
+# rw required.
+BindPaths = /dev/shm
+
 # disable su / sudo (though it does not work already)
 InaccessiblePaths = /usr/bin/sudo /usr/bin/su
-
-# usb is mounted in /run, so use tmpfs;
-# /dev is required for libgl / /dev/null (and maybe other thing).
-InaccessiblePaths = /boot /media /mnt /opt /root /srv /var
-TemporaryFileSystem = /etc /run
+# font and network
 BindReadOnlyPaths = /etc/fonts/ /etc/resolv.conf
 # fcitx and network
 BindReadOnlyPaths = /run/user/1000/bus /run/systemd/resolve/
-
 # for X11. TODO: wayland?
 BindReadOnlyPaths = /home/lx/.Xauthority
-
 # sound requires additional setting.
 # see https://wiki.archlinux.org/title/PulseAudio/Examples#Allowing_multiple_users_to_share_a_PulseAudio_daemon
 BindReadOnlyPaths = /home/lx/.config/pulse/
