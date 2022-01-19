@@ -19,6 +19,13 @@ Pack '~/repos/vim-plug/'
 
 syntax on
 
+
+# ft {{{1
+augroup vimrc_ft
+  au!
+  au BufRead */qutebrowser/qutebrowser.service setl ft=systemd
+augroup END
+
 # misc {{{1
 if has('gui_running')
   set gfn=Hack\ 12

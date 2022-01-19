@@ -2,7 +2,16 @@
 [Service]
 User = lx
 Group = lx
+ExecStart = /home/lx/bin/qutebrowser
 
+# minimal
+ProtectSystem = strict
+PrivateTmp = true
+# we cannot set TemporaryFileSystem = /; use an empty dir here.
+RootDirectory = /opt/qutebrowser-root
+TemporaryFileSystem = /home/lx:uid=1000,gid=1000
+
+# env:
 # qutebrowser wrapper script
 Environment = SANDBOXED_QUTEBROWSER=1
 # x11
@@ -11,16 +20,9 @@ Environment = DISPLAY=:0.0
 Environment = DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 Environment = QT_IM_MODULE=fcitx GTK_IM_MODULE=fcitx XMODIFIERS=@im=fcitx
 
-ExecStart = /home/lx/bin/qutebrowser
-ProtectSystem = strict
-PrivateTmp = true
-TemporaryFileSystem = /home/lx:uid=1000,gid=1000
-
-# an empty directory.
-RootDirectory = /opt/qutebrowser-root/
-
+# lib and bin
 BindReadOnlyPaths = /usr /dev /lib64 /bin
-# rw required.
+# rw required for qt lib.
 BindPaths = /dev/shm
 
 # disable su / sudo (though it does not work already)
