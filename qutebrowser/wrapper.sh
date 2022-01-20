@@ -4,10 +4,9 @@
 
 qutebrowser="/usr/bin/qutebrowser"
 
-# env variable SANDBOXED_QUTEBROWSER is set in systemd service.
 if [ -n "$SANDBOXED_QUTEBROWSER" ]; then
-    # systemd $PATH does not contain ~/bin.
-    export PATH="$HOME/bin:$PATH"
+    # env variable SANDBOXED_QUTEBROWSER is set in systemd service.
+    # but this script is not bind; it is unlikely to happen.
     exec "$qutebrowser"
 else
     # assume it is Linux if systemd (systemctl) is available.

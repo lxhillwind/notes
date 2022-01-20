@@ -35,4 +35,7 @@ desktop file.
 
 ### `~/bin/qutebrowser` wrapper script
 
+This script is used to make desktop file work (open url in sandboxed
+qutebrowser).
+
 see [qutebrowser/wrapper.sh](qutebrowser/wrapper.sh)

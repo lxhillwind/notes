@@ -2,7 +2,7 @@
 [Service]
 User = lx
 Group = lx
-ExecStart = /home/lx/bin/qutebrowser
+ExecStart = /usr/bin/qutebrowser
 
 # minimal
 ProtectSystem = strict
@@ -48,5 +48,4 @@ BindPaths = /home/lx/.local/share/qutebrowser-box/:/home/lx/.local/share/qutebro
 
 BindPaths = /home/lx/Downloads/
 BindReadOnlyPaths = /home/lx/html/
-# set ~/bin/qutebrowser explicitly, otherwise it does not work...
-BindReadOnlyPaths = /home/lx/bin/qutebrowser /home/lx/bin/ /home/lx/.vimrc /home/lx/vimfiles/
+BindReadOnlyPaths = /home/lx/.vimrc /home/lx/vimfiles/
