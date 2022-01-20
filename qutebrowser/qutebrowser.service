@@ -35,7 +35,7 @@ BindReadOnlyPaths = /run/user/1000/bus /run/systemd/resolve/
 BindReadOnlyPaths = /home/lx/.Xauthority
 # sound requires additional setting.
 # see https://wiki.archlinux.org/title/PulseAudio/Examples#Allowing_multiple_users_to_share_a_PulseAudio_daemon
-BindReadOnlyPaths = /home/lx/.config/pulse/
+BindReadOnlyPaths = /home/lx/.config/pulse/client.conf
 BindReadOnlyPaths = /tmp/pulse-socket
 
 # bind ~/.config/qutebrowser as rw is required, otherwise quickmark will fail.
