@@ -1,20 +1,6 @@
 # qutebrowser
 
-## run qutebrowser in sandbox (Linux / systemd)
-
-### service unit file
-
-It may be necessary to modify username / groupname.
-
-see [qutebrowser/qutebrowser.service](qutebrowser/qutebrowser.service)
-
-### set sudofile for qutebrowser.service
-
-User should be in wheel group.
-
-```console
-%wheel ALL=(ALL) NOPASSWD: /usr/bin/systemctl start qutebrowser
-```
+## run qutebrowser in sandbox (Linux / bubblewrap)
 
 ### sound setting (pulseaudio)
 
@@ -45,9 +31,6 @@ default-server = unix:/tmp/pulse-socket
 If `~/bin` wins `/usr/bin` in `$PATH` already, then there is no need to modify
 desktop file.
 
-### `~/bin/qutebrowser` wrapper script
-
-This script is used to make desktop file work (open url in sandboxed
-qutebrowser).
+### `~/bin/qutebrowser`: bubblewrap wrapper
 
 see [qutebrowser/wrapper.sh](qutebrowser/wrapper.sh)
