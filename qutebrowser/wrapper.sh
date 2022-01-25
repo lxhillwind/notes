@@ -17,6 +17,9 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
         --setenv QT_QPA_PLATFORM wayland
         --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
         --ro-bind /run/user/"$UID"/"$WAYLAND_DISPLAY" /run/user/"$UID"/"$WAYLAND_DISPLAY"
+        # qt5 theme
+        --setenv QT_QPA_PLATFORMTHEME qt5ct
+        --ro-bind ~/.config/qt5ct/ ~/.config/qt5ct/
         # wayland text editor (gvim) wrapper; since gvim gtk3 does not work in wayland...
         --ro-bind ~/bin/gvim ~/bin/gvim
         --setenv PATH "$HOME"/bin:/usr/bin
