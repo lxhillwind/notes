@@ -11,6 +11,24 @@ fi
 
 mkdir -p "$XDG_RUNTIME_DIR"/qutebrowser/
 
+if [ -n "$WAYLAND_DISPLAY" ]; then
+    flags_gui=(
+        # wayland (qt)
+        --setenv QT_QPA_PLATFORM wayland
+        --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
+        --ro-bind /run/user/"$UID"/"$WAYLAND_DISPLAY" /run/user/"$UID"/"$WAYLAND_DISPLAY"
+        # wayland text editor (gvim) wrapper; since gvim gtk3 does not work in wayland...
+        --ro-bind ~/bin/gvim ~/bin/gvim
+        --setenv PATH "$HOME"/bin:/usr/bin
+    )
+else
+    flags_gui=(
+        # x11
+        --setenv DISPLAY "$DISPLAY"
+        --ro-bind ~/.Xauthority ~/.Xauthority
+    )
+fi
+
 flags=(
     # env:
     --clearenv
@@ -41,17 +59,7 @@ flags=(
     # fcitx
     --ro-bind /run/user/"$UID"/bus /run/user/"$UID"/bus
 
-    ## x11
-    --setenv DISPLAY "$DISPLAY"
-    --ro-bind ~/.Xauthority ~/.Xauthority
-
-    # wayland (qt)
-    # NOTE: to run gvim (gtk3) inside wayland qutebrowser, x11 is still required.
-    # TODO: make gvim work in wayland...
-    --setenv GDK_BACKEND x11
-    --setenv QT_QPA_PLATFORM wayland
-    --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
-    --ro-bind /run/user/"$UID"/"$WAYLAND_DISPLAY" /run/user/"$UID"/"$WAYLAND_DISPLAY"
+    "${flags_gui[@]}"
 
     # sound (pipewire)
     --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
