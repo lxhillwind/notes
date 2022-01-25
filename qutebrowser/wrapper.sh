@@ -27,24 +27,20 @@ flags=(
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
     # lib and bin
     --ro-bind /usr /usr --ro-bind /lib64 /lib64 --ro-bind /bin /bin
-    --ro-bind /dev/null /bin/su --ro-bind /dev/null /bin/sudo
-    --ro-bind /dev/null /usr/bin/su --ro-bind /dev/null /usr/bin/sudo
     # proc, sys, dev
     --proc /proc
     --ro-bind /sys /sys
-    --dev-bind /dev /dev
-    # rw required for qt lib.
-    #--bind /dev/shm /dev/shm
+    --dev /dev
+    # for webgl
+    --dev-bind /dev/dri/ /dev/dri/
     # font and network
     --ro-bind /etc/fonts/ /etc/fonts/ --ro-bind /etc/resolv.conf /etc/resolv.conf
     # fcitx and network
     --ro-bind /run/user/"$UID"/bus /run/user/"$UID"/bus --ro-bind /run/systemd/resolve/ /run/systemd/resolve/
     # x11
     --ro-bind ~/.Xauthority ~/.Xauthority
-    # sound requires additional setting.
-    # see https://wiki.archlinux.org/title/PulseAudio/Examples#Allowing_multiple_users_to_share_a_PulseAudio_daemon
-    --ro-bind ~/.config/pulse/client.conf ~/.config/pulse/client.conf
-    --ro-bind /tmp/pulse-socket /tmp/pulse-socket
+    # sound (pulseaudio)
+    --ro-bind /run/user/"$UID"/pulse /run/user/"$UID"/pulse
     # it throws warning. so add it.
     --ro-bind /run/dbus/system_bus_socket /run/dbus/system_bus_socket
     # app
