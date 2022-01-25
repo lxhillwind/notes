@@ -25,6 +25,7 @@ flags=(
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
     # lib and bin
     --ro-bind /usr /usr --ro-bind /lib64 /lib64 --ro-bind /bin /bin
+    --tmpfs /tmp
 
     # proc, sys, dev
     --proc /proc
