@@ -9,7 +9,7 @@ if ! command -v bwrap >/dev/null; then
     exec "$qutebrowser"
 fi
 
-mkdir -p "$XDG_RUNTIME_DIR"/qutebrowser/
+mkdir -p "$XDG_RUNTIME_DIR"/qutebrowser-box/
 
 if [ -n "$WAYLAND_DISPLAY" ]; then
     flags_gui=(
@@ -73,7 +73,7 @@ flags=(
     --ro-bind /run/dbus/system_bus_socket /run/dbus/system_bus_socket
 
     # app
-    --bind "$XDG_RUNTIME_DIR"/qutebrowser/ "$XDG_RUNTIME_DIR"/qutebrowser/
+    --bind "$XDG_RUNTIME_DIR"/qutebrowser-box/ "$XDG_RUNTIME_DIR"/qutebrowser/
     # bind ~/.config/qutebrowser as rw is required, otherwise quickmark will fail.
     --bind ~/.config/qutebrowser/ ~/.config/qutebrowser/
     --ro-bind ~/.config/qutebrowser/config.py ~/.config/qutebrowser/config.py
