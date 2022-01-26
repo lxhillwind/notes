@@ -22,6 +22,7 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
         --ro-bind ~/.config/qt5ct/ ~/.config/qt5ct/
         # wayland text editor (gvim) wrapper; since gvim gtk3 does not work in wayland...
         --ro-bind ~/bin/gvim ~/bin/gvim
+        --ro-bind ~/bin/pbcopy ~/bin/pbcopy --ro-bind ~/bin/pbpaste ~/bin/pbpaste
         --setenv PATH "$HOME"/bin:/usr/bin
     )
 else
