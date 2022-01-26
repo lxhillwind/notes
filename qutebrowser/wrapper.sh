@@ -12,8 +12,8 @@ fi
 mkdir -p "$XDG_RUNTIME_DIR"/qutebrowser-box/
 
 if [ -n "$WAYLAND_DISPLAY" ]; then
+    # wayland (qt)
     flags_gui=(
-        # wayland (qt)
         --setenv QT_QPA_PLATFORM wayland
         --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
         --ro-bind /run/user/"$UID"/"$WAYLAND_DISPLAY" /run/user/"$UID"/"$WAYLAND_DISPLAY"
@@ -25,10 +25,12 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
         --setenv PATH "$HOME"/bin:/usr/bin
     )
 else
+    # x11
     flags_gui=(
-        # x11
         --setenv DISPLAY "$DISPLAY"
         --ro-bind ~/.Xauthority ~/.Xauthority
+        # fcitx
+        --ro-bind /run/user/"$UID"/bus /run/user/"$UID"/bus
     )
 fi
 
@@ -59,8 +61,6 @@ flags=(
 
     # font and network (also --share-net)
     --ro-bind /etc/fonts/ /etc/fonts/ --ro-bind /etc/resolv.conf /etc/resolv.conf
-    # fcitx
-    --ro-bind /run/user/"$UID"/bus /run/user/"$UID"/bus
 
     "${flags_gui[@]}"
 
@@ -68,9 +68,6 @@ flags=(
     --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
     # sound (pulseaudio); use it even if using pipewire-pulse.
     --ro-bind /run/user/"$UID"/pulse /run/user/"$UID"/pulse
-
-    # it throws warning. so add it.
-    --ro-bind /run/dbus/system_bus_socket /run/dbus/system_bus_socket
 
     # app
     --bind "$XDG_RUNTIME_DIR"/qutebrowser-box/ "$XDG_RUNTIME_DIR"/qutebrowser/
