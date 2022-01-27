@@ -195,4 +195,12 @@ exec awk "$(awk 'NR > 2' "$0")"
 ssh -D 9050 -N "{host}"
 ```
 
+# kde
+
+## bind `Meta` (`Windows`) key
+
+When setting shortcut key, press `Meta+F1`.
+
+source: <https://unix.stackexchange.com/questions/519187/use-meta-super-windows-whatever-key-to-open-kde-plasmas-application-launcher-k>
+
 # END
