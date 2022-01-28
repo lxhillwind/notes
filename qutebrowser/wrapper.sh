@@ -72,6 +72,11 @@ flags=(
 
     # app
     --bind "$XDG_RUNTIME_DIR"/qutebrowser-box/ "$XDG_RUNTIME_DIR"/qutebrowser/
+
+    # NOTE: (security)
+    # --bind a/ then --ro-bind a/b (file), a/b is ro in sandbox;
+    # but if we modify a/b (change fd), then a/b will be rw!
+
     # bind ~/.config/qutebrowser as rw is required, otherwise quickmark will fail.
     --bind ~/.config/qutebrowser/ ~/.config/qutebrowser/
     --ro-bind ~/.config/qutebrowser/config.py ~/.config/qutebrowser/config.py
