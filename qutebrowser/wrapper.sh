@@ -76,13 +76,14 @@ flags=(
     # NOTE: (security)
     # --bind a/ then --ro-bind a/b (file), a/b is ro in sandbox;
     # but if we modify a/b (change fd), then a/b will be rw!
+    # so, do not use --ro-bind inside --bind.
 
-    # bind ~/.config/qutebrowser as rw is required, otherwise quickmark will fail.
-    --bind ~/.config/qutebrowser/ ~/.config/qutebrowser/
+    # ~/.config/qutebrowser as rw is required, otherwise quickmark will fail.
+    --bind ~/.config/qutebrowser-box/ ~/.config/qutebrowser/
     --ro-bind ~/.config/qutebrowser/config.py ~/.config/qutebrowser/config.py
+    --ro-bind ~/.config/qutebrowser/rc/ ~/.config/qutebrowser/rc/
     --ro-bind ~/.config/qutebrowser/userscripts/ ~/.config/qutebrowser/userscripts/
-    # if rc.py is available, then mount it.
-    --ro-bind ~/.config/qutebrowser/rc.py ~/.config/qutebrowser/rc.py
+    --ro-bind ~/.config/qutebrowser/greasemonkey/ ~/.config/qutebrowser/greasemonkey/
     # use separate history.
     --bind ~/.local/share/qutebrowser-box/ ~/.local/share/qutebrowser/
     # app
