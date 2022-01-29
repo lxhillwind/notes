@@ -1,3 +1,5 @@
+# vim:fdm=marker
+
 source ~/.config/env.sh
 
 alias o=xdg-open
@@ -62,5 +64,50 @@ if [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
 fi
 # }}}
 
+# wayland as sandbox {{{
+if [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
+    # TODO network is slow;
+    # TODO pcmanfm-qt does not work;
+    # TODO fcitx5;
+    s-sandbox() {
+
+    local args=(
+    --clearenv
+    --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
+    --setenv HOME "$HOME" --setenv USER "$USER"
+
+    # sandbox
+    --ro-bind / /
+    --perms 0700 --tmpfs "$XDG_RUNTIME_DIR"
+    --perms 0777 --tmpfs /tmp
+    --tmpfs ~
+
+    # sound (pipewire)
+    --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
+    # sound (pulseaudio); use it even if using pipewire-pulse.
+    --ro-bind /run/user/"$UID"/pulse /run/user/"$UID"/pulse
+
+    # special dir
+    --bind /sys /sys --proc /proc --dev-bind /dev /dev
+    --unshare-all --share-net
+
+    # qt
+    --setenv QT_QPA_PLATFORM wayland
+
+    # qutebrowser
+    --ro-bind ~/.config/qutebrowser/config.py ~/.config/qutebrowser/config.py
+    --ro-bind ~/.config/qutebrowser/rc/ ~/.config/qutebrowser/rc/
+    --ro-bind ~/.config/qutebrowser/userscripts/ ~/.config/qutebrowser/userscripts/
+    --ro-bind ~/.config/qutebrowser/greasemonkey/ ~/.config/qutebrowser/greasemonkey/
+
+    # start compositor
+    --ro-bind ~/.config/sway ~/.config/sway
+    sway
+)
+
+bwrap "${args[@]}"
+}
+fi
+# }}}
+
 alias pq='proxychains -q'
-# vim:fdm=marker
