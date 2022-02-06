@@ -33,6 +33,14 @@ sc()
 }
 fi
 
+# capture session output.
+if [ -n "$SCRIPT_SESSION_FILE" ]; then
+sv()
+{
+    script-session $1 | vim - -c 'set buftype=nofile noswapfile | %Terminal cat'
+}
+fi
+
 # x11 / wayland env {{{
 if [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
     _common() {
