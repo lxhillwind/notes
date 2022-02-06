@@ -100,6 +100,13 @@ if [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
     --ro-bind ~/.config/qutebrowser/userscripts/ ~/.config/qutebrowser/userscripts/
     --ro-bind ~/.config/qutebrowser/greasemonkey/ ~/.config/qutebrowser/greasemonkey/
 
+    # qemu
+    --ro-bind ~/bin/vm-list ~/bin/vm-list
+    --ro-bind ~/bin/vm-start ~/bin/vm-start
+    --ro-bind ~/bin/launch-qemu.py ~/bin/launch-qemu.py
+    --bind ~/qemu/ ~/qemu/
+    --ro-bind ~/qemu/config.yml ~/qemu/config.yml
+
     # start compositor
     --ro-bind ~/.config/sway ~/.config/sway
     sway
@@ -109,5 +116,12 @@ bwrap "${args[@]}"
 }
 fi
 # }}}
+
+# tmux sandbox
+if [ -z "$TMUX" ]; then
+    :
+    # cmd (works, but tweak needed):
+    # bwrap --ro-bind / / --tmpfs /tmp --tmpfs ~ --ro-bind ~/.config/tmux ~/.config/tmux --dev /dev --proc /proc --clearenv --setenv TERM "$TERM" --unshare-all --share-net tmux
+fi
 
 alias pq='proxychains -q'

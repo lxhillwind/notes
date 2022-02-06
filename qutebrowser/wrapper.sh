@@ -62,6 +62,13 @@ flags=(
 
     # font and network (also --share-net)
     --ro-bind /etc/fonts/ /etc/fonts/ --ro-bind /etc/resolv.conf /etc/resolv.conf
+    # icon
+    --setenv QT_AUTO_SCREEN_SCALE_FACTOR "$QT_AUTO_SCREEN_SCALE_FACTOR"
+    --setenv QT_WAYLAND_FORCE_DPI "$QT_WAYLAND_FORCE_DPI"
+    --setenv PLASMA_USE_QT_SCALING "$PLASMA_USE_QT_SCALING"
+    --setenv XCURSOR_SIZE "$XCURSOR_SIZE"
+    --setenv XCURSOR_THEME "$XCURSOR_THEME"
+    --ro-bind /usr/share/icons/ /usr/share/icons/
 
     "${flags_gui[@]}"
 
