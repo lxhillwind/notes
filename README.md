@@ -1,8 +1,13 @@
 # link
+- repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/wiki>
 - [windows/README.md](windows/README.md)
 - [vimrc.local](vim/vimrc.vim)
 - [zshrc](zsh/zshrc.sh)
 - [qutebrowser](qutebrowser.md)
+- [vimium](vimium-options.json)
+- vscode
+    - [vscode setting](vscode-settings.json)
+    - [vscode keybindings](vscode-keybindings.json)
 
 # gitconfig
 <https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
