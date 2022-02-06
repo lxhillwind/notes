@@ -33,11 +33,17 @@ sc()
 }
 fi
 
-# capture session output.
 if [ -n "$SCRIPT_SESSION_FILE" ]; then
 sv()
 {
     script-session $1 | vim - -c 'set buftype=nofile noswapfile | %Terminal cat'
+}
+fi
+
+if [ -n "$VIMSERVER_BIN" ]; then
+sv()
+{
+    "$VIMSERVER_BIN" "$VIMSERVER_ID" Tapi_shell_sv_helper
 }
 fi
 
