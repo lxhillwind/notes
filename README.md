@@ -3,7 +3,7 @@
 - [windows/README.md](windows/README.md)
 - [vimrc.local](vim/vimrc.vim)
 - [zshrc](zsh/zshrc.sh)
-- [qutebrowser](qutebrowser.md)
+- [bubblewrap wrapper script collections](sandbox-script/README.md)
 - [vimium](vimium-options.json)
 - vscode
     - [vscode setting](vscode-settings.json)

@@ -48,7 +48,10 @@ flags=(
     # app
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
     # lib and bin
-    --ro-bind /usr /usr --ro-bind /lib64 /lib64 --ro-bind /bin /bin
+    #--ro-bind /usr /usr --ro-bind /lib64 /lib64 --ro-bind /bin /bin
+    --ro-bind ~/.sandbox/archlinux/usr /usr
+    --ro-bind ~/.sandbox/archlinux/lib64 /lib64
+    --ro-bind ~/.sandbox/archlinux/usr/bin /bin
     --tmpfs /tmp
 
     # proc, sys, dev
