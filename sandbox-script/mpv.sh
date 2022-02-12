@@ -77,7 +77,7 @@ flags=(
 for arg in "$@"; do
     if [ -e "$arg" ]; then
         shopt -s nullglob
-        if [[ $arg =~ /* ]]; then
+        if [[ $arg =~ /.* ]]; then
             flags=("${flags[@]}" --ro-bind "$arg" "$arg")
         else
             flags=("${flags[@]}" --ro-bind "$arg" "$PWD/$arg" --chdir "$PWD")
@@ -86,7 +86,7 @@ for arg in "$@"; do
         filename_prefix="${arg%.*}"
         for file in "$filename_prefix".ass "$filename_prefix".*.ass; do
             if [ -e "$file" ]; then
-                if [[ $arg =~ /* ]]; then
+                if [[ $arg =~ /.* ]]; then
                     flags=("${flags[@]}" --ro-bind "$file" "$file")
                 else
                     flags=("${flags[@]}" --ro-bind "$file" "$PWD"/"$file")

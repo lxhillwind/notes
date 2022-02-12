@@ -1,5 +1,6 @@
 # link
 - repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/wiki>
+- [linux/README.md](linux/README.md)
 - [windows/README.md](windows/README.md)
 - [vimrc.local](vim/vimrc.vim)
 - [zshrc](zsh/zshrc.sh)

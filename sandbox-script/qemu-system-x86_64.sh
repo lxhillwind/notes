@@ -83,4 +83,8 @@ flags=(
     # network.
     --unshare-all --share-net
 )
-exec bwrap "${flags[@]}" -- "$qemu" "$@"
+
+# -L option is workaround for `qemu: could not load PC BIOS 'bios-256k.bin'`.
+# (in sandbox)
+# see https://unix.stackexchange.com/questions/134893/cannot-start-kvm-vm-because-missing-bios
+exec bwrap "${flags[@]}" -- "$qemu" -L /usr/share/qemu/ "$@"
