@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-mpv="/bin/mpv"
+remote_viewer="/bin/remote-viewer"
+
+spice_socket_dir=/tmp/vm_spice/
 
 # bwrap (bubblewrap) is required.
 
@@ -39,14 +41,10 @@ flags=(
     --ro-bind /sys/dev/char /sys/dev/char
     --ro-bind /sys/devices/pci0000:00 /sys/devices/pci0000:00
     --dev /dev
-    # for gl?
-    --dev-bind /dev/dri/ /dev/dri/
+    --dev-bind /dev/dri /dev/dri
 
     # font and network (also --share-net)
     --ro-bind /etc/fonts/ /etc/fonts/ --ro-bind /etc/resolv.conf /etc/resolv.conf
-    # network, more.
-    --ro-bind ~/.sandbox/archlinux/etc/ssl/ /etc/ssl/
-    --ro-bind ~/.sandbox/archlinux/etc/ca-certificates/ /etc/ca-certificates/
     # icon
     --setenv QT_AUTO_SCREEN_SCALE_FACTOR "$QT_AUTO_SCREEN_SCALE_FACTOR"
     --setenv QT_WAYLAND_FORCE_DPI "$QT_WAYLAND_FORCE_DPI"
@@ -57,43 +55,19 @@ flags=(
 
     "${flags_gui[@]}"
 
-    # sound (pipewire)
-    --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
-    # sound (pulseaudio); use it even if using pipewire-pulse.
-    --ro-bind /run/user/"$UID"/pulse /run/user/"$UID"/pulse
-
     # NOTE: (security)
     # --bind a/ then --ro-bind a/b (file), a/b is ro in sandbox;
     # but if we modify a/b (change fd), then a/b will be rw!
     # so, do not use --ro-bind inside --bind.
 
-    --ro-bind ~/.config/mpv/ ~/.config/mpv/
+    # app
+    --tmpfs /tmp
+    --bind "$spice_socket_dir" "$spice_socket_dir"
+    # fontconfig write to ~. "Fontconfig error: No writable cache directories"
+    --tmpfs ~
 
     # network.
     --unshare-all --share-net
 )
 
-# TODO multi file
-for arg in "$@"; do
-    if [ -e "$arg" ]; then
-        shopt -s nullglob
-        if [[ $arg =~ /* ]]; then
-            flags=("${flags[@]}" --ro-bind "$arg" "$arg")
-        else
-            flags=("${flags[@]}" --ro-bind "$arg" "$PWD/$arg" --chdir "$PWD")
-        fi
-
-        filename_prefix="${arg%.*}"
-        for file in "$filename_prefix".ass "$filename_prefix".*.ass; do
-            if [ -e "$file" ]; then
-                if [[ $arg =~ /* ]]; then
-                    flags=("${flags[@]}" --ro-bind "$file" "$file")
-                else
-                    flags=("${flags[@]}" --ro-bind "$file" "$PWD"/"$file")
-                fi
-            fi
-        done
-    fi
-done
-
-exec bwrap "${flags[@]}" -- "$mpv" "$@"
+exec bwrap "${flags[@]}" -- "$remote_viewer" "$@"

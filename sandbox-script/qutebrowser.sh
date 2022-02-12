@@ -73,8 +73,6 @@ flags=(
     --setenv XCURSOR_THEME "$XCURSOR_THEME"
     --ro-bind /usr/share/icons/ /usr/share/icons/
 
-    "${flags_gui[@]}"
-
     # sound (pipewire)
     --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
     # sound (pulseaudio); use it even if using pipewire-pulse.
@@ -88,6 +86,12 @@ flags=(
     # but if we modify a/b (change fd), then a/b will be rw!
     # so, do not use --ro-bind inside --bind.
 
+    # app (make symlink in ~/html/ work)
+    --bind ~/.sandbox/archlinux/"$HOME" ~/
+
+    # bind gui after ~, since we bind ~/bin/{some-script} there.
+    "${flags_gui[@]}"
+
     # ~/.config/qutebrowser as rw is required, otherwise quickmark will fail.
     --bind ~/.config/qutebrowser-box/ ~/.config/qutebrowser/
     --ro-bind ~/.config/qutebrowser/config.py ~/.config/qutebrowser/config.py
@@ -98,8 +102,6 @@ flags=(
     --bind ~/.local/share/qutebrowser-box/ ~/.local/share/qutebrowser/
     # app
     --bind ~/Downloads/ ~/Downloads/
-    # app
-    --ro-bind ~/html/ ~/html/
     --ro-bind ~/.vimrc ~/.vimrc --ro-bind ~/vimfiles/ ~/vimfiles/
 
     # network.
