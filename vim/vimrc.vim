@@ -15,7 +15,6 @@ Pack 'https://github.com/ziglang/zig.vim'
 Pack 'https://github.com/masukomi/vim-markdown-folding'
 g:markdown_fold_style = 'nested'
 g:markdown_fold_override_foldtext = 0
-Pack '~/repos/vim-plug/'
 
 syntax on
 
