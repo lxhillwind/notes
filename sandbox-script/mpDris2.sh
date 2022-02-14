@@ -40,26 +40,26 @@ flags=(
     # proc, sys, dev
     --proc /proc
     # --ro-bind /sys /sys; see https://wiki.archlinux.org/title/Bubblewrap
-    --ro-bind /sys/dev/char /sys/dev/char
-    --ro-bind /sys/devices/pci0000:00 /sys/devices/pci0000:00
-    --dev /dev
+    #--ro-bind /sys/dev/char /sys/dev/char
+    #--ro-bind /sys/devices/pci0000:00 /sys/devices/pci0000:00
+    #--dev /dev
 
     # font and network (also --share-net)
-    --ro-bind /etc/fonts/ /etc/fonts/ --ro-bind /etc/resolv.conf /etc/resolv.conf
+    #--ro-bind /etc/fonts/ /etc/fonts/ --ro-bind /etc/resolv.conf /etc/resolv.conf
     # icon
-    --setenv QT_AUTO_SCREEN_SCALE_FACTOR "$QT_AUTO_SCREEN_SCALE_FACTOR"
-    --setenv QT_WAYLAND_FORCE_DPI "$QT_WAYLAND_FORCE_DPI"
-    --setenv PLASMA_USE_QT_SCALING "$PLASMA_USE_QT_SCALING"
-    --setenv XCURSOR_SIZE "$XCURSOR_SIZE"
-    --setenv XCURSOR_THEME "$XCURSOR_THEME"
-    --ro-bind /usr/share/icons/ /usr/share/icons/
+    #--setenv QT_AUTO_SCREEN_SCALE_FACTOR "$QT_AUTO_SCREEN_SCALE_FACTOR"
+    #--setenv QT_WAYLAND_FORCE_DPI "$QT_WAYLAND_FORCE_DPI"
+    #--setenv PLASMA_USE_QT_SCALING "$PLASMA_USE_QT_SCALING"
+    #--setenv XCURSOR_SIZE "$XCURSOR_SIZE"
+    #--setenv XCURSOR_THEME "$XCURSOR_THEME"
+    #--ro-bind /usr/share/icons/ /usr/share/icons/
 
-    "${flags_gui[@]}"
+    #"${flags_gui[@]}"
 
     # sound (pipewire)
-    --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
+    #--ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
     # sound (pulseaudio); use it even if using pipewire-pulse.
-    --ro-bind /run/user/"$UID"/pulse /run/user/"$UID"/pulse
+    #--ro-bind /run/user/"$UID"/pulse /run/user/"$UID"/pulse
 
     # NOTE: (security)
     # --bind a/ then --ro-bind a/b (file), a/b is ro in sandbox;
@@ -76,6 +76,7 @@ flags=(
     --setenv MPD_HOST ~/.mpd/socket
 
     # network.
+    # NOTE: --share-net is required!
     --unshare-all --share-net
 
     # security

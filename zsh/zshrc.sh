@@ -55,7 +55,8 @@ if [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
         export XMODIFIERS=@im=fcitx
         # start mpd (without daemon) in background, so it works with bwrap's
         # --die-with-parent param.
-        [ -s ~/.mpd/pid ] || mpd --no-daemon &!
+        # start mpd via xdg autostart.
+        #[ -s ~/.mpd/pid ] || mpd --no-daemon &!
     }
     _start-wayland() {
         XDG_SESSION_TYPE=wayland dbus-run-session startplasma-wayland
