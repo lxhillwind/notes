@@ -27,7 +27,7 @@ optional: `blacklist pcspkr` (no beep).
   again.
 
 ```sh
-bwrap --uid 0 --gid 0 --bind root.x86_64 / --tmpfs /tmp --ro-bind /etc/resolv.conf /etc/resolv.conf --bind new-root /mnt/ --dev /dev --proc /proc --unshare-all --share-net --clearenv --setenv TERM "$TERM" --setenv USER root /bin/bash
+bwrap --uid 0 --gid 0 --bind root.x86_64 / --tmpfs /tmp --ro-bind /etc/resolv.conf /etc/resolv.conf --bind new-root /mnt/ --dev /dev --proc /proc --unshare-all --share-net --clearenv --setenv TERM "$TERM" --setenv USER root --new-session --die-with-parent /bin/bash
 ```
 
 ## run (root)
