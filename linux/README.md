@@ -35,7 +35,7 @@ bwrap --uid 0 --gid 0 --bind root.x86_64 / --tmpfs /tmp --ro-bind /etc/resolv.co
 - dir: ~/.sandbox/archlinux
 
 ```sh
-bwrap --uid 0 --gid 0 --bind ~/.sandbox/archlinux / --tmpfs /tmp --ro-bind /etc/resolv.conf /etc/resolv.conf --dev /dev --proc /proc --unshare-all --share-net --clearenv --setenv TERM "$TERM" --setenv USER root ---new-session -die-with-parent /bin/bash
+bwrap --uid 0 --gid 0 --bind ~/.sandbox/archlinux / --tmpfs /tmp --ro-bind /etc/resolv.conf /etc/resolv.conf --dev /dev --proc /proc --unshare-all --share-net --clearenv --setenv TERM "$TERM" --setenv USER root --new-session --die-with-parent /bin/bash
 ```
 
 ## run (non-root)
@@ -44,5 +44,5 @@ bwrap --uid 0 --gid 0 --bind ~/.sandbox/archlinux / --tmpfs /tmp --ro-bind /etc/
 - dir: ~/.sandbox/archlinux/"$HOME"
 
 ```sh
-bwrap --ro-bind ~/.sandbox/archlinux / --bind ~/.sandbox/archlinux/"$HOME" "$HOME" --tmpfs /tmp --ro-bind /etc/resolv.conf /etc/resolv.conf --dev /dev --proc /proc --unshare-all --share-net --clearenv --setenv TERM "$TERM" --setenv USER "$USER" --setenv HOME "$HOME" --setenv PATH "$HOME/bin:/bin:/usr/local/bin" ---new-session -die-with-parent /bin/bash
+bwrap --ro-bind ~/.sandbox/archlinux / --bind ~/.sandbox/archlinux/"$HOME" "$HOME" --tmpfs /tmp --ro-bind /etc/resolv.conf /etc/resolv.conf --dev /dev --proc /proc --unshare-all --share-net --clearenv --setenv TERM "$TERM" --setenv USER "$USER" --setenv HOME "$HOME" --setenv PATH "$HOME/bin:/bin:/usr/local/bin" --new-session --die-with-parent /bin/bash
 ```
