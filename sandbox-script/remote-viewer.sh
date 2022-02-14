@@ -68,6 +68,9 @@ flags=(
 
     # network.
     --unshare-all --share-net
+
+    # security
+    --die-with-parent --new-session
 )
 
 exec bwrap "${flags[@]}" -- "$remote_viewer" "$@"

@@ -69,6 +69,10 @@ flags=(
 
     # network.
     --unshare-all --share-net
+
+    # security
+    --die-with-parent --new-session
 )
 
+# NOTE: specify --no-daemon in mpd!
 exec bwrap "${flags[@]}" -- "$mpd" "$@"

@@ -82,6 +82,9 @@ flags=(
 
     # network.
     --unshare-all --share-net
+
+    # security
+    --die-with-parent --new-session
 )
 
 # -L option is workaround for `qemu: could not load PC BIOS 'bios-256k.bin'`.

@@ -71,6 +71,9 @@ flags=(
 
     # network.
     --unshare-all --share-net
+
+    # security
+    --die-with-parent --new-session
 )
 
 # TODO multi file

@@ -53,7 +53,9 @@ if [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
         export GTK_IM_MODULE=fcitx
         export QT_IM_MODULE=fcitx
         export XMODIFIERS=@im=fcitx
-        [ -s ~/.mpd/pid ] || mpd
+        # start mpd (without daemon) in background, so it works with bwrap's
+        # --die-with-parent param.
+        [ -s ~/.mpd/pid ] || mpd --no-daemon &!
     }
     _start-wayland() {
         XDG_SESSION_TYPE=wayland dbus-run-session startplasma-wayland
