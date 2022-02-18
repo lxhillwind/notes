@@ -2,6 +2,10 @@
 
 vim9script
 
+augroup vimrc_local
+  au!
+augroup END
+
 # pkgs {{{1
 runtime rc/pkgs.vim
 
@@ -20,8 +24,7 @@ syntax on
 
 
 # ft {{{1
-augroup vimrc_ft
-  au!
+augroup vimrc_local
   au BufRead */qutebrowser/qutebrowser.service setl ft=systemd
 augroup END
 
@@ -34,50 +37,52 @@ endif
 command! -nargs=+ Man Terminal zsh -ic 'man <q-args>'
 
 # :Rgbuffer {...} {{{2
-command! -nargs=+ Rgbuffer call s:rg(<q-args>)
+command! -nargs=+ Rgbuffer Rgbuffer(<q-args>)
 
-legacy function! s:jumpback(buf) abort
-  let buffers = tabpagebuflist()
-  let idx = index(buffers, a:buf)
+def Jumpback(buf: number)
+  const buffers = tabpagebuflist()
+  const idx = index(buffers, buf)
   if idx >= 0
-    execute 'normal' idx+1 "\<Plug>(jump_to_file)"
+    execute 'normal' (idx + 1) "\<Plug>(jump_to_file)"
   else
     echoerr 'buffer not found!'
   endif
-endfunction
+enddef
 
-legacy function! s:rg(arg) abort
-  let buf = bufnr()
-  let l:result = execute('%Sh rg -I --column ' .. a:arg)
-  bel 7sp +enew | setl buftype=nofile
-  put =l:result
+def Rgbuffer(arg: string)
+  const buf = bufnr()
+  const result = execute(':%Sh rg -I --column ' .. arg)
+  bel :7sp +enew | setl buftype=nofile
+  put =result
   norm gg"_dd
-  execute printf("nnoremap <buffer> <CR> <cmd>call <SID>jumpback(%s)<CR>", buf)
+  execute printf("nnoremap <buffer> <CR> <cmd>call <SID>Jumpback(%s)<CR>", buf)
   syn match String '\v^[0-9]+'
-endfunction
+enddef
 
 # exe {{{2
-au BufReadCmd *.exe,*.dll call s:read_bin(expand('<amatch>'))
-au BufWriteCmd *.exe,*.dll call s:write_bin(expand('<amatch>'))
+augroup vimrc_local
+au BufReadCmd *.exe,*.dll ReadBin(expand('<amatch>'))
+au BufWriteCmd *.exe,*.dll WriteBin(expand('<amatch>'))
+augroup END
 
 # avoid using busybox xxd.
-legacy let s:xxd = exists($VIM . '/bin/xxd') ? '"$VIM"/bin/xxd' : 'xxd'
+const xxd_path = exists($VIM .. '/bin/xxd') ? '"$VIM"/bin/xxd' : 'xxd'
 
-legacy function! s:read_bin(name) abort
-  execute printf('r !%s %s', s:xxd, shellescape(a:name))
+def ReadBin(name: string)
+  execute printf('silent r !%s %s', xxd_path, shellescape(name))
   normal gg"_dd
-endfunction
+enddef
 
-legacy function! s:write_bin(name) abort
+def WriteBin(name: string)
   if has('win32') && !has('nvim')
-    " returncode check is ignored.
-    job_start('xxd -r', #{in_io: 'buffer', in_buf: bufnr(), out_io: 'file', out_name: a:name})
+    # returncode check is ignored.
+    job_start('xxd -r', {in_io: 'buffer', in_buf: bufnr(), out_io: 'file', out_name: name})
   else
-    execute printf('%w !%s -r > %s', s:xxd, shellescape(a:name))
+    execute printf(':%w !%s -r > %s', xxd_path, shellescape(name))
     if !empty(v:shell_error)
       return
     endif
   endif
   setl nomodified
   redrawstatus | echon 'written.'
-endfunction
+enddef
