@@ -2,7 +2,7 @@
 - repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/wiki>
 - [linux/README.md](linux/README.md)
 - [windows/README.md](windows/README.md)
-- [vimrc.local](vim/vimrc.vim)
+- [vimrc](vim/vimrc.vim)
 - [zshrc](zsh/zshrc.sh)
 - [bubblewrap wrapper script collections](sandbox-script/README.md)
 - [vimium](vimium-options.json)
@@ -35,23 +35,11 @@ nnoremap <Leader>y :Oscyank<CR>
 nnoremap <Leader>p :echoerr 'system clipboard is not available!'<CR>
 ```
 
-## tasks.ini (see tasks.vim)
+## tasks-local.ini (see rc/tasks.vim)
 
 ```ini
-[conf-edit]
-@key = ;
-@glob = *
-
 [conf-edit:tasks.ini]
 * = tabe ~/vimfiles/rc/tasks.ini
-
-[conf-edit:vimrc.local]
-* = tabe ~/vimfiles/vimrc.local
-
-[jump]
-@key = j
-@glob = *
-* = call feedkeys("\<Plug>(jump_to_file)")
 ```
 
 ## about `go-!` option
