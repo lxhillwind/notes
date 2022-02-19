@@ -2,6 +2,8 @@
 
 vim9script
 
+source ~/vimfiles/vimrc.main
+
 augroup vimrc_local
   au!
 augroup END
@@ -20,12 +22,9 @@ Pack 'https://github.com/masukomi/vim-markdown-folding'
 g:markdown_fold_style = 'nested'
 g:markdown_fold_override_foldtext = 0
 
-syntax on
-
-
 # ft {{{1
 augroup vimrc_local
-  au BufRead */qutebrowser/qutebrowser.service setl ft=systemd
+  au BufNewFile,BufRead */qutebrowser/qutebrowser.service setl ft=systemd
 augroup END
 
 # misc {{{1
