@@ -1,6 +1,6 @@
 # vim:fdm=marker
 
-source ~/.config/env.sh
+source ~/.config/misc/env.sh
 
 alias o=xdg-open
 
