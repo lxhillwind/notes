@@ -1,4 +1,4 @@
-## zsh (grep, coreutils, findutils, ...)
+# zsh (grep, coreutils, findutils, ...)
 
 <del>
 
@@ -11,9 +11,9 @@
 
 See <https://github.com/lxhillwind/msys2-bundle>.
 
-## custom OS install
+# custom OS install
 
-### using normal (official) OS
+## using normal (official) OS
 In a normal OS (like thin pc), extract custom OS archive to an empty drive (formatted as ntfs);
 use `dism++` to write (fix) boot info (remember to select the correct drive!);
 shutdown and attach the new drive as new host's boot device.
@@ -21,7 +21,7 @@ shutdown and attach the new drive as new host's boot device.
 When booting new host, select another boot entry (since the first one is not actually available);
 after desktop is setup, run `msconfig` via win+r, edit boot entry (delete the unused one).
 
-### using WePE
+## using WePE
 prepare:
 - download WePE executable, execute it to create an ISO.
 - copy custom OS archive (`*.7z`) to another ISO (since ISO has filename limitation).
@@ -34,5 +34,29 @@ mkisofs -o cd.iso cd_dir
 Launch WePE ISO, extract data from archive inside another ISO to an empty drive (formatted as ntfs);
 then use bootice to re-create MBR (select the correct NT version). (`dism++` may not work)
 
-## thinpc 乱码 fix
+# thinpc 乱码 fix
 控制面板-更该显示语言-管理: 非Unicode程序的语言选择简体中文.
+
+# AutoHotkey (ahk) collections
+
+## remap `<Esc>` in gvim
+
+```ahk
+; use $ to prevent trigger itself.
+; see https://www.autohotkey.com/docs/Hotkeys.htm
+
+$Esc::
+if WinActive("ahk_exe gvim.exe")
+    Send ``
+else
+    Send {Esc}
+return
+
+; shift+esc
+$+Esc::
+if WinActive("ahk_exe gvim.exe")
+    Send ~
+else
+    Send +{Esc}
+return
+```
