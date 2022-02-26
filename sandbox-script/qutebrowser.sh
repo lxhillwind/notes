@@ -96,10 +96,13 @@ flags=(
     --ro-bind ~/.config/qutebrowser/greasemonkey/ ~/.config/qutebrowser/greasemonkey/
     # use separate history.
     --bind ~/.local/share/qutebrowser-box/ ~/.local/share/qutebrowser/
+    --bind ~/.cache/qutebrowser-box/ ~/.cache/qutebrowser/
     # app
     --bind ~/Downloads/ ~/Downloads/
     --ro-bind ~/html/ ~/html/
     --ro-bind ~/.vimrc ~/.vimrc --ro-bind ~/vimfiles/ ~/vimfiles/
+    # opensuse system doc.
+    --ro-bind-try /usr/share/doc/packages/ ~/opensuse-doc-packages/
 
     # network.
     --unshare-all --share-net
