@@ -42,6 +42,8 @@ flags=(
     # required for kvm.
     --dev-bind /dev/kvm /dev/kvm
 
+    # timezone.
+    --ro-bind /etc/localtime /etc/localtime
     # font and network (also --share-net)
     --ro-bind /etc/fonts/ /etc/fonts/ --ro-bind /etc/resolv.conf /etc/resolv.conf
     # icon
