@@ -33,10 +33,10 @@ sc()
 }
 fi
 
-if [ -n "$SCRIPT_SESSION_FILE" ]; then
+if [ -n "$DTACH_SESSION_FILE" ]; then
 sv()
 {
-    script-session $1 | vim - -c 'set buftype=nofile noswapfile | %Terminal cat'
+    dtach-session $1 | vim - -c 'set buftype=nofile noswapfile | %Terminal cat'
 }
 fi
 
