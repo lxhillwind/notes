@@ -63,6 +63,8 @@ flags=(
     # for webgl
     --dev-bind /dev/dri/ /dev/dri/
 
+    # timezone
+    --ro-bind /etc/localtime /etc/localtime
     # font and network (also --share-net)
     --ro-bind /etc/fonts/ /etc/fonts/ --ro-bind /etc/resolv.conf /etc/resolv.conf
     # icon
