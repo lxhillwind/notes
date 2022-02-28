@@ -77,6 +77,7 @@ flags=(
     --ro-bind ~/bin/remote-viewer ~/bin/remote-viewer
     --ro-bind ~/.local/share/applications/remote-viewer.desktop ~/.local/share/applications/remote-viewer.desktop
     --bind ~/qemu/ ~/qemu/
+    --ro-bind ~/iso/ ~/iso/
     --chdir ~/qemu/
 
     # this is to make xdg-open work (optional?)
