@@ -2,8 +2,6 @@
 - repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/wiki>
 - [linux/README.md](linux/README.md)
 - [windows/README.md](windows/README.md)
-- [vimrc](vim/vimrc.vim)
-- [zshrc](zsh/zshrc.sh)
 - [bubblewrap wrapper script collections](sandbox-script/README.md)
 - [vimium](vimium-options.json)
 - vscode
