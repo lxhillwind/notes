@@ -2,16 +2,35 @@
     "files.insertFinalNewline": true,
     "editor.lineNumbers": "relative",
     "editor.tabSize": 8,
+    "editor.cursorStyle": "line",
+    "editor.insertSpaces": false,
+    "editor.wordWrap": "off",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.allowChords": false,
     "terminal.integrated.rightClickBehavior": "default",
+    "terminal.integrated.enableFileLinks": false,
     "vim.foldfix": true,
     "vim.leader": " ",
+    "vim.ignorecase": false,
+    "vim.hlsearch": true,
+    "vim.sneak": true,
     "vim.normalModeKeyBindings": [
         {
             "before": ["K"],
             "commands": [
                 "editor.action.showHover"
+            ]
+        },
+        {
+            "before": ["]", "c"],
+            "commands": [
+                "workbench.action.editor.nextChange"
+            ]
+        },
+        {
+            "before": ["[", "c"],
+            "commands": [
+                "workbench.action.editor.previousChange"
             ]
         },
         {
@@ -25,6 +44,49 @@
             "commands": [
                 "editor.action.marker.prev"
             ]
+        },
+        {
+            "before": ["leader", "r"],
+            "commands": [
+                "workbench.action.tasks.runTask"
+            ]
+        },
+        {
+            "before": ["leader", "l"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["leader", "o"],
+            "commands": [
+                "projectManager.listProjects"
+            ]
+        },
+        {
+            "before": ["leader", "O"],
+            "commands": [
+                "projectManager.listProjectsNewWindow"
+            ]
+        },
+        {
+            "before": ["leader", "c"],
+            "commands": [
+                "editor.action.dirtydiff.next"
+            ]
         }
-    ]
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["leader", "r"],
+            "commands": [
+                "workbench.action.tasks.runTask"
+            ]
+        }
+    ],
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.startupEditor": "none",
+    "workbench.colorTheme": "Atom One Light",
+    "workbench.editor.untitled.hint": "hidden",
+    "window.newWindowDimensions": "maximized",
+    "projectManager.sortList": "Recent"
 }

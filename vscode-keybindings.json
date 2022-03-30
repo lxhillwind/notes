@@ -63,5 +63,41 @@
         "key": "ctrl+v",
         "command": "editor.action.clipboardPasteAction",
         "when": "terminalFindFocused || terminalFocus"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "-editor.action.transposeLetters",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
+        "key": "shift+cmd+=",
+        "command": "-workbench.action.zoomIn"
+    },
+    {
+        "key": "shift+cmd+-",
+        "command": "-workbench.action.zoomOut"
+    },
+    {
+        "key": "cmd+0",
+        "command": "workbench.action.zoomReset"
+    },
+    {
+        "key": "o",
+        "command": "projectManager.listProjects",
+        "when": "!editorIsOpen && !inputFocus"
+    },
+    {
+        "key": "shift+o",
+        "command": "projectManager.listProjectsNewWindow",
+        "when": "!editorIsOpen && !inputFocus"
+    },
+    {
+        "key": "f",
+        "command": "workbench.view.explorer",
+        "when": "!editorIsOpen && !inputFocus"
     }
 ]
