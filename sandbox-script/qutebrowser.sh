@@ -110,7 +110,9 @@ flags=(
     --unshare-all --share-net
 
     # security
-    --die-with-parent --new-session
+    --new-session
+    # disable --die-with-parent to allow `:restart` in it.
+    #--die-with-parent
 )
 
 exec bwrap "${flags[@]}" -- "$qutebrowser" "$@"
