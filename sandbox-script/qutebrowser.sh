@@ -102,7 +102,7 @@ flags=(
     # app
     --bind ~/Downloads/ ~/Downloads/
     --ro-bind ~/html/ ~/html/
-    --ro-bind ~/.vimrc ~/.vimrc --ro-bind ~/vimfiles/ ~/vimfiles/
+    --symlink ~/vimfiles/vimrc ~/.vimrc --ro-bind ~/vimfiles/ ~/vimfiles/
     # opensuse system doc.
     --ro-bind-try /usr/share/doc/packages/ ~/opensuse-doc-packages/
 

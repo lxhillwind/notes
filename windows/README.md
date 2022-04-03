@@ -60,3 +60,34 @@ else
     Send +{Esc}
 return
 ```
+
+## maximize window
+
+TODO still buggy.
+
+```ahk
+; maximize window
+!Return::
+WinMaximize, A
+```
+
+## raise or run
+
+refer: <https://tdem.in/post/autohotkey-ror/>
+
+```ahk
+RunOrRaise(class, run)
+{
+    if WinExist(class) {
+        WinActivate, %class%
+    }
+    else {
+        Run, %run%
+    }
+}
+
+; modify them if necessary.
+!,::RunOrRaise("ahk_exe 360chrome.exe", "C:\Users\box\AppData\Local\360Chrome\Chrome\Application\360chrome.exe")
+!.::RunOrRaise("ahk_exe Code.exe", "C:\Users\box\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+!/::RunOrRaise("ahk_exe gvim.exe", "C:\Users\box\vim\gvim")
+```
