@@ -56,7 +56,11 @@ flags=(
 
     "${flags_gui[@]}"
 
-    # sound does not work, don't know why.
+    # sound (pipewire)
+    --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
+    # sound (pulseaudio); use it even if using pipewire-pulse.
+    --ro-bind /run/user/"$UID"/pulse /run/user/"$UID"/pulse
+
 
     # NOTE: (security)
     # --bind a/ then --ro-bind a/b (file), a/b is ro in sandbox;

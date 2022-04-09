@@ -33,36 +33,12 @@ nnoremap <Leader>y :Oscyank<CR>
 nnoremap <Leader>p :echoerr 'system clipboard is not available!'<CR>
 ```
 
-## tasks-local.ini (see rc/tasks.vim)
-
-```ini
-[conf-edit:tasks.ini]
-* = tabe ~/vimfiles/rc/tasks.ini
-```
 
 ## about `go-!` option
 It makes `:!{cmd}` in gvim on win32 run cmd in embeded window, but stderr (?)
 is discarded.
 
 So do not use it.
-
-## restore position
-
-from openSUSE (/usr/share/vim/vim82/suse.vimrc):
-
-```vim
-if has("autocmd")
-    "Remember the positions in files with some git-specific exceptions"
-    autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$")
-      \           && expand("%") !~ "COMMIT_EDITMSG"
-      \           && expand("%") !~ "ADD_EDIT.patch"
-      \           && expand("%") !~ "addp-hunk-edit.diff"
-      \           && expand("%") !~ "git-rebase-todo" |
-      \   exe "normal g`\"" |
-      \ endif
-endif " has("autocmd")
-```
 
 # zsh
 # qemu
