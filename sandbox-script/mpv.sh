@@ -73,23 +73,27 @@ flags=(
     --unshare-all --share-net
 
     # security
-    --die-with-parent --new-session
+    --new-session
+    # allow to run it in background... (from cli)
+    #--die-with-parent
 )
 
 # TODO multi file
 for arg in "$@"; do
     if [ -e "$arg" ]; then
         shopt -s nullglob
-        if [[ $arg =~ /.* ]]; then
+        abs=1
+        if [[ $arg =~ ^/.* ]]; then
             flags=("${flags[@]}" --ro-bind "$arg" "$arg")
         else
+            abs=
             flags=("${flags[@]}" --ro-bind "$arg" "$PWD/$arg" --chdir "$PWD")
         fi
 
         filename_prefix="${arg%.*}"
         for file in "$filename_prefix".ass "$filename_prefix".*.ass; do
             if [ -e "$file" ]; then
-                if [[ $arg =~ /.* ]]; then
+                if [[ -n "$abs" ]]; then
                     flags=("${flags[@]}" --ro-bind "$file" "$file")
                 else
                     flags=("${flags[@]}" --ro-bind "$file" "$PWD"/"$file")

@@ -92,6 +92,9 @@ flags=(
 
     # security
     --die-with-parent --new-session
+
+    # move some disks in home, so they load faster.
+    --bind ~/qemu-fast/ ~/qemu-fast/
 )
 
 # -L option is workaround for `qemu: could not load PC BIOS 'bios-256k.bin'`.
