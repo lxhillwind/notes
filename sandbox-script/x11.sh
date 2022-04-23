@@ -43,6 +43,13 @@ flags=(
     --setenv PATH /usr/bin --setenv USER "$USER" --setenv HOME ~
     # app
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
+    --setenv SANDBOXED_QUTEBROWSER 1
+    --setenv SHELL /bin/zsh
+    --setenv LANG zh_CN.UTF-8  # local-gen required.
+    --setenv PATH "$HOME"/bin:/usr/bin  # ~/bin at first.
+    # fcitx: we are using container's, not hosts'.
+    --setenv QT_IM_MODULE "$QT_IM_MODULE" --setenv GTK_IM_MODULE "$GTK_IM_MODULE" --setenv XMODIFIERS "$XMODIFIERS"
+
     # lib and bin
     --ro-bind ~/.sandbox/archlinux/usr /usr
     --ro-bind ~/.sandbox/archlinux/lib64 /lib64
