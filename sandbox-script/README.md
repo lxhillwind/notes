@@ -4,6 +4,7 @@
 - [mpDris2](sandbox-script/mpDris2.sh)
 - [mpv](sandbox-script/mpv.sh)
 - [qutebrowser](sandbox-script/qutebrowser.sh)
+- [x11](sandbox-script/x11.sh)
 
 qemu related:
 
