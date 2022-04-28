@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-mpd="/bin/mpd"
+mpd="/usr/bin/mpd"
 
 # bwrap (bubblewrap) is required.
 
@@ -27,10 +27,9 @@ flags=(
     # app
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
     # lib and bin
-    #--ro-bind /usr /usr --ro-bind /lib64 /lib64 --ro-bind /bin /bin
-    --ro-bind ~/.sandbox/archlinux/usr /usr
-    --ro-bind ~/.sandbox/archlinux/lib64 /lib64
-    --ro-bind ~/.sandbox/archlinux/bin /bin
+    # check lib path via `file {binary}`.
+    --ro-bind ~/.sandbox/alpine-gui/usr /usr
+    --ro-bind ~/.sandbox/alpine-gui/lib /lib
     --tmpfs /tmp
 
     # proc, sys, dev
@@ -40,8 +39,8 @@ flags=(
     #--ro-bind /sys/devices/pci0000:00 /sys/devices/pci0000:00
     --dev /dev
 
-    # font and network (also --share-net)
-    #--ro-bind /etc/fonts/ /etc/fonts/ --ro-bind /etc/resolv.conf /etc/resolv.conf
+    # network (also --share-net)
+    #--ro-bind /etc/resolv.conf /etc/resolv.conf
     # icon
     #--setenv QT_AUTO_SCREEN_SCALE_FACTOR "$QT_AUTO_SCREEN_SCALE_FACTOR"
     #--setenv QT_WAYLAND_FORCE_DPI "$QT_WAYLAND_FORCE_DPI"

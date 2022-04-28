@@ -57,7 +57,8 @@ flags=(
     --ro-bind ~/.sandbox/archlinux/opt/visual-studio-code/ /opt/visual-studio-code/
     --ro-bind ~/.sandbox/archlinux/etc /etc
     --tmpfs /tmp
-    --tmpfs "$XDG_RUNTIME_DIR"
+    # fix qt app warning.
+    --perms 0700 --tmpfs "$XDG_RUNTIME_DIR"
 
     # proc, sys, dev
     --proc /proc
