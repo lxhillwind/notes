@@ -28,8 +28,8 @@ flags=(
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
     # lib and bin
     # check lib path via `file {binary}`.
-    --ro-bind ~/.sandbox/alpine-gui/usr /usr
-    --ro-bind ~/.sandbox/alpine-gui/lib /lib
+    --ro-bind ~/.sandbox/archlinux/usr /usr
+    --ro-bind ~/.sandbox/archlinux/lib64 /lib64
     --tmpfs /tmp
 
     # proc, sys, dev

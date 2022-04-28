@@ -28,8 +28,8 @@ flags=(
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
     # lib and bin
     # check lib path via `file {binary}`.
-    --ro-bind ~/.sandbox/alpine-gui/usr /usr
-    --ro-bind ~/.sandbox/alpine-gui/lib /lib
+    --ro-bind ~/.sandbox/archlinux/usr /usr
+    --ro-bind ~/.sandbox/archlinux/lib64 /lib64
     --ro-bind /usr/share/fonts /usr/share/fonts
     --ro-bind /etc/fonts /etc/fonts
     --tmpfs /tmp
@@ -46,8 +46,8 @@ flags=(
     # network (also --share-net)
     --ro-bind /etc/resolv.conf /etc/resolv.conf
     # network, more.
-    --ro-bind ~/.sandbox/alpine-gui/etc/ssl/ /etc/ssl/
-    --ro-bind ~/.sandbox/alpine-gui/etc/ca-certificates/ /etc/ca-certificates/
+    --ro-bind ~/.sandbox/archlinux/etc/ssl/ /etc/ssl/
+    --ro-bind ~/.sandbox/archlinux/etc/ca-certificates/ /etc/ca-certificates/
     # icon
     --setenv QT_AUTO_SCREEN_SCALE_FACTOR "$QT_AUTO_SCREEN_SCALE_FACTOR"
     --setenv QT_WAYLAND_FORCE_DPI "$QT_WAYLAND_FORCE_DPI"

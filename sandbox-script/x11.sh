@@ -69,6 +69,9 @@ flags=(
     # for webgl
     --dev-bind /dev/dri/ /dev/dri/
 
+    # fonts
+    --ro-bind /etc/fonts /etc/fonts
+    --ro-bind /usr/share/fonts /usr/share/fonts
     # network (also --share-net)
     --ro-bind /etc/resolv.conf /etc/resolv.conf
 
