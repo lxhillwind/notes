@@ -1,5 +1,5 @@
 # link
-- repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/wiki>
+- repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/lxhillwind.github.io>
 - [linux/README.md](linux/README.md)
 - [windows/README.md](windows/README.md)
 - [bubblewrap wrapper script collections](sandbox-script/README.md)
