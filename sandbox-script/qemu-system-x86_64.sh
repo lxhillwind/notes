@@ -30,7 +30,14 @@ flags=(
     # app
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
     # lib and bin
-    --ro-bind /usr /usr --ro-bind /lib64 /lib64 --ro-bind /bin /bin
+    --ro-bind /usr /usr
+    --symlink /usr/lib64 /lib64
+    --symlink /usr/bin /bin
+
+    # samba. (NOTE: samba seems not work in openSUSE)
+    --ro-bind /etc/passwd /etc/passwd
+    # fedora. (fix some missing .so; get this by `ls -l ...`)
+    --ro-bind /etc/alternatives/ /etc/alternatives/
 
     # proc, sys, dev
     --proc /proc
@@ -54,6 +61,8 @@ flags=(
     --setenv XCURSOR_THEME "$XCURSOR_THEME"
     --ro-bind /usr/share/icons/ /usr/share/icons/
 
+    # set ~ before gui (xauthority)
+    --tmpfs ~
     "${flags_gui[@]}"
 
     # sound (pipewire)
@@ -72,14 +81,14 @@ flags=(
     --tmpfs /tmp
     --bind "$spice_socket_dir" "$spice_socket_dir"
     --setenv TMPDIR "$spice_socket_dir"
-    --tmpfs ~
 
     # we will call bwrap in remote-viewer, so mount related stuff.
-    --ro-bind ~/.sandbox/archlinux/ ~/.sandbox/archlinux/
+    # fedora: use virt-viewer in host system.
+    #--ro-bind ~/.sandbox/archlinux/ ~/.sandbox/archlinux/
+    #--ro-bind ~/.config/mimeapps.list ~/.config/mimeapps.list
+    #--ro-bind ~/bin/remote-viewer ~/bin/remote-viewer
+    #--ro-bind ~/.local/share/applications/remote-viewer.desktop ~/.local/share/applications/remote-viewer.desktop
 
-    --ro-bind ~/.config/mimeapps.list ~/.config/mimeapps.list
-    --ro-bind ~/bin/remote-viewer ~/bin/remote-viewer
-    --ro-bind ~/.local/share/applications/remote-viewer.desktop ~/.local/share/applications/remote-viewer.desktop
     --bind ~/qemu/ ~/qemu/
     --ro-bind ~/iso/ ~/iso/
     --chdir ~/qemu/
@@ -92,12 +101,13 @@ flags=(
 
     # security
     --die-with-parent --new-session
-
-    # move some disks in home, so they load faster.
-    --bind ~/qemu-fast/ ~/qemu-fast/
 )
 
 # -L option is workaround for `qemu: could not load PC BIOS 'bios-256k.bin'`.
 # (in sandbox)
 # see https://unix.stackexchange.com/questions/134893/cannot-start-kvm-vm-because-missing-bios
-exec bwrap "${flags[@]}" -- "$qemu" -L /usr/share/qemu/ "$@"
+
+# opensuse
+#exec bwrap "${flags[@]}" -- "$qemu" -L /usr/share/qemu/ "$@"
+# fedora
+exec bwrap "${flags[@]}" -- "$qemu" -L /usr/share/seabios/ -L /usr/share/qemu/ -L /usr/share/ipxe/qemu/ -L /usr/share/seavgabios/ "$@"

@@ -29,6 +29,7 @@ flags=(
     # lib and bin
     # check lib path via `file {binary}`.
     --ro-bind ~/.sandbox/archlinux/usr /usr
+    --ro-bind ~/.sandbox/archlinux/bin /bin
     --ro-bind ~/.sandbox/archlinux/lib64 /lib64
     --ro-bind /usr/share/fonts /usr/share/fonts
     --ro-bind /etc/fonts /etc/fonts

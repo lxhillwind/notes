@@ -23,7 +23,7 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
         # wayland text editor (gvim) wrapper; since gvim gtk3 does not work in wayland...
         --ro-bind ~/bin/gvim ~/bin/gvim
         --ro-bind ~/bin/pbcopy ~/bin/pbcopy --ro-bind ~/bin/pbpaste ~/bin/pbpaste
-        --setenv PATH "$HOME"/bin:/usr/bin
+        --setenv PATH "$HOME"/bin:/usr/bin:/bin
     )
 else
     # x11
@@ -50,6 +50,7 @@ flags=(
     # lib and bin
     # check lib path via `file {binary}`.
     --ro-bind ~/.sandbox/archlinux/usr /usr
+    --ro-bind ~/.sandbox/archlinux/bin /bin
     --ro-bind ~/.sandbox/archlinux/lib64 /lib64
     --ro-bind /usr/share/fonts /usr/share/fonts
     --ro-bind /etc/fonts /etc/fonts
