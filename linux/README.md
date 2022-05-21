@@ -46,3 +46,12 @@ bwrap --uid 0 --gid 0 --bind ~/.sandbox/archlinux / --tmpfs /tmp --ro-bind /etc/
 ```sh
 bwrap --ro-bind ~/.sandbox/archlinux / --bind ~/.sandbox/archlinux/"$HOME" "$HOME" --tmpfs /tmp --ro-bind /etc/resolv.conf /etc/resolv.conf --dev /dev --proc /proc --unshare-all --share-net --clearenv --setenv TERM "$TERM" --setenv USER "$USER" --setenv HOME "$HOME" --setenv PATH "$HOME/bin:/bin:/usr/local/bin" --new-session --die-with-parent /bin/bash
 ```
+
+# openSUSE
+
+qemu builtin smb (samba) won't work in openSUSE tumbleweed.
+
+# fedora
+
+- disable avahi (which listens on 0.0.0.0), by `systemctl stop avahi-daemon.socket` and `systemctl stop avahi-daemon`.
+- make systemd-resolved not listen on 0.0.0.0 (LLMNR): edit `/etc/systemd/resolved.conf`, and set LLMNR to `no` (then restart service).
