@@ -1,5 +1,5 @@
 {
-  "settingsVersion": "1.63.3",
+  "settingsVersion": "1.67.1",
   "exclusionRules": [
     {
       "pattern": "https?://docs.google.com/*",
@@ -13,12 +13,12 @@
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
   "hideHud": false,
-  "keyMappings": "# Insert your preferred key mappings here.\nmap gf LinkHints.activateModeToOpenInNewForegroundTab\nmap af LinkHints.activateModeWithQueue\nmap gp togglePinTab\nmap gm toggleMuteTab\nmap J previousTab\nmap K nextTab\nmap w nextFrame\nmap R reload hard",
+  "keyMappings": "# Insert your preferred key mappings here.\nmap gf LinkHints.activateModeToOpenInNewForegroundTab\nmap af LinkHints.activateModeWithQueue\nmap gp togglePinTab\nmap gm toggleMuteTab\nmap J previousTab\nmap K nextTab\nmap w nextFrame\nmap R reload hard\nmap gC duplicateTab\nmap t Vomnibar.activateInNewTab\nunmap ge\nunmap gE\nmap go Vomnibar.activateEditUrl\nmap gO Vomnibar.activateEditUrlInNewTab",
   "linkHintCharacters": "qwertasdfgzxcv",
   "linkHintNumbers": "0123456789",
   "newTabUrl": "about:newtab",
-  "nextPatterns": "next,more,newer,>,>>,→,›,»,≫",
-  "previousPatterns": "prev,previous,back,older,<,<<,←,‹,«,≪",
+  "nextPatterns": "next,more,newer,>,>>,→,›,»,≫,下一章,下一页",
+  "previousPatterns": "prev,previous,back,older,<,<<,←,‹,«,≪,上一章,上一页",
   "regexFindMode": false,
   "ignoreKeyboardLayout": false,
   "scrollStepSize": 60,
