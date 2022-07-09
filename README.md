@@ -3,10 +3,11 @@
 - [linux/README.md](linux/README.md)
 - [windows/README.md](windows/README.md)
 - [bubblewrap wrapper script collections](sandbox-script/README.md)
-- [vimium](vimium-options.json)
+- [vimium](vimium/vimium-options.json)
 - vscode
-    - [vscode setting](vscode-settings.json)
-    - [vscode keybindings](vscode-keybindings.json)
+    - [vscode setting](vscode/vscode-settings.json)
+    - [vscode keybindings](vscode/vscode-keybindings.json)
+    - [vscode tasks](vscode/vscode-tasks.json)
 
 # gitconfig
 <https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
