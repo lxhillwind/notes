@@ -35,9 +35,6 @@ jobs:
       - name: Build site
         run: |-
           set -e
-          git branch -D pages || true
-          git checkout -b pages
-
           podman run --name pandoc --init --rm -dt --entrypoint= docker.io/pandoc/core tail -f
           (cd blog && ./build.sh;)
           podman stop pandoc

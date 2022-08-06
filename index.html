@@ -48,7 +48,7 @@ JavaScript needs to be enabled;
 <br />
 
 or view source in <a href='https://gitee.com/lxhillwind/lxhillwind'>Gitee</a>
-or <a href='https://github.com/lxhillwind/wiki'>GitHub</a>
+or <a href='https://github.com/lxhillwind/lxhillwind.github.io'>GitHub</a>
 </noscript>
 
 <style>
@@ -61,7 +61,6 @@ code {
 (() => {
 
 var handle = text => {
-        document.querySelector('a#blog').href = '?blog/index.md';
         var md = window.markdownit({html: true}).use(window.markdownitMathjax());
         if (/\.md$/.test(path)) {
             var prefix = path == '/blog/index.md' ? 'blog/' : '';
@@ -94,11 +93,15 @@ var handle = text => {
 // We can't fetch https://gitee.com/lxhillwind/lxhillwind/raw/master/README.md
 // since CORS.
 var is_gitee = /gitee.io/.test(location.host);
+var is_github = /github.io/.test(location.host);
 var path = '/' + ( location.search ? location.search.slice(1) : 'README.md' );
 var url = (is_gitee ?
         'https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents' :
         '.'
     ) + '/' + path;
+if (!is_github) {
+    document.querySelector('a#blog').href = '?blog/index.md';
+}
 if (is_gitee) {
     fetch(url, {cache: 'no-cache'}).
         then(res => res.json()).
