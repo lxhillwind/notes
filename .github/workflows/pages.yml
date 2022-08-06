@@ -30,6 +30,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      # our magic
+      - name: Build site
+        run: |-
+          set -e
+          git branch -D pages || true
+          git checkout -b pages
+
+          podman run --name pandoc --init --rm -dt --entrypoint= docker.io/pandoc/core tail -f
+          (cd blog && ./build.sh;)
+          podman stop pandoc
+
       - name: Setup Pages
         uses: actions/configure-pages@v1
       - name: Upload artifact
