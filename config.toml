@@ -1,7 +1,0 @@
-baseURL = 'https://lxhillwind.github.io/'
-languageCode = 'zh-cn'
-title = 'lxhillwind 的个人博客'
-theme = 'blank'
-
-# github requires this.
-publishDir = 'docs'
