@@ -73,7 +73,7 @@ var handle = text => {
             };
             if (/^\/blog\//.test(path)) {
                 var permalink = (
-                    is_gitee ? 'https://github.com' :
+                    is_gitee ? 'https://lxhillwind.github.io' :
                     location.href.replace(/\/\?.*$/, '')
                 ) + path.replace(/\.md$/, '.html').replace(/\/index\.html$/, '/');
                 text_list.splice(0, 0, `permalink: <${permalink}>\n`);
