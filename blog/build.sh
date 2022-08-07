@@ -8,6 +8,14 @@ set -e
 podman exec -i pandoc pandoc -r markdown+east_asian_line_breaks -w html --standalone < index.md > index.html
 sed -E -i 's/href="(.*).md"/href=".\/\1.html"/' index.html
 
+# put some file into container.
+for i in res-*.html; do
+    podman exec -i pandoc sh -c "cat > $i" < "$i"
+done
+
 for i in $(sed -nE 's/^- \[.*\(([0-9]+.*.md)\)$/\1/p' index.md); do
-    podman exec -i pandoc pandoc -r markdown+east_asian_line_breaks -w html --mathjax --standalone < "$i" > "${i%.md}.html"
+    # -H: --include-in-header=FILE
+    # -B: --include-after-body=FILE
+    # -A: --include-after-body=FILE
+    podman exec -i pandoc pandoc -r markdown+east_asian_line_breaks -w html --standalone --mathjax --toc -H res-icon.html -B res-style.html < "$i" > "${i%.md}.html"
 done
