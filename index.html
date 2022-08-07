@@ -64,11 +64,22 @@ var handle = text => {
         var md = window.markdownit({html: true}).use(window.markdownitMathjax());
         if (/\.md$/.test(path)) {
             var text_list = text.split('\n');
-            var prefix = path == '/blog/index.md' ? 'blog/' : '';
             if (/^%/.test(text_list[0])) {
                 title = text_list[0].replace(/^%\s*/, '');
+                while (/^%/.test(text_list[0])) {
+                    // remove heading % (pandoc markdown metadata).
+                    text_list.splice(0, 1);
+                }
             };
-            text = text.split('\n').
+            if (/^\/blog\//.test(path)) {
+                var permalink = (
+                    is_gitee ? 'https://github.com' :
+                    location.href.replace(/\/\?.*$/, '')
+                ) + path.replace(/\.md$/, '.html').replace(/\/index\.html$/, '/');
+                text_list.splice(0, 0, `permalink: <${permalink}>\n`);
+            }
+            var prefix = path == '/blog/index.md' ? 'blog/' : '';
+            text = text_list.
                 map(i => i.
                         replace(/\[([^\]]+)\]\(([^):]+)\)/, `[$1](?${prefix}$2)`)
                     ).
