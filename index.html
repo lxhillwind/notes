@@ -9,7 +9,7 @@ python3 -m http.server --bind localhost
 
 <html>
     <head>
-        <title>lxhillwind random note</title>
+        <title>lxhillwind's site</title>
         <meta charset='utf-8' />
         <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, width=device-width" />
 <!-- icon (long line) {{{ -->
@@ -34,13 +34,13 @@ document.querySelector('#MathJax-script').addEventListener('load', () => {
 <div id='head'>
 <h1>
 <a id='home' href='./'>home</a>
-<a id='blog' href='./blog/index.html'>blog</a>
+<a id='blog' href='./blog/'>blog</a>
 </h1>
 <hr />
 </div>
 
-<pre id='main'>
-</pre>
+<div id='main'>
+</div>
 
 <noscript>
 JavaScript needs to be enabled;
@@ -63,7 +63,11 @@ code {
 var handle = text => {
         var md = window.markdownit({html: true}).use(window.markdownitMathjax());
         if (/\.md$/.test(path)) {
+            var text_list = text.split('\n');
             var prefix = path == '/blog/index.md' ? 'blog/' : '';
+            if (/^%/.test(text_list[0])) {
+                title = text_list[0].replace(/^%\s*/, '');
+            };
             text = text.split('\n').
                 map(i => i.
                         replace(/\[([^\]]+)\]\(([^):]+)\)/, `[$1](?${prefix}$2)`)
@@ -73,8 +77,12 @@ var handle = text => {
             // not markdown
             text = '```' + (path.split('.').slice(-1)[0] || '') + '\n' + text + '\n```';
         }
-        document.querySelector('pre#main').innerHTML = md.render(text);
-        document.querySelector('pre#main').querySelectorAll('h1').forEach(el => {
+        if (title) {
+            title = title + " < lxhillwind's site";
+            document.title = title;
+        }
+        document.querySelector('div#main').innerHTML = md.render(text);
+        document.querySelector('div#main').querySelectorAll('h1').forEach(el => {
             var prev = el.previousSibling;
             if (prev !== null && prev.tagName != "HR" ) {
                 el.parentElement.insertBefore(document.createElement('hr'), el);
@@ -94,13 +102,17 @@ var handle = text => {
 // since CORS.
 var is_gitee = /gitee.io/.test(location.host);
 var is_github = /github.io/.test(location.host);
-var path = '/' + ( location.search ? location.search.slice(1) : 'README.md' );
+var title = location.search ? location.search.slice(1) : '';
+var path = '/' + ( title || 'README.md' );
+if (/\/$/.test(path)) {
+    path = path + 'index.md';
+}
 var url = (is_gitee ?
         'https://gitee.com/api/v5/repos/lxhillwind/lxhillwind/contents' :
         '.'
     ) + '/' + path;
 if (!is_github) {
-    document.querySelector('a#blog').href = '?blog/index.md';
+    document.querySelector('a#blog').href = '?blog/';
 }
 if (is_gitee) {
     fetch(url, {cache: 'no-cache'}).
