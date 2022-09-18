@@ -191,4 +191,119 @@ When setting shortcut key, press `Meta+F1`.
 
 source: <https://unix.stackexchange.com/questions/519187/use-meta-super-windows-whatever-key-to-open-kde-plasmas-application-launcher-k>
 
-# END
+# 20220826_113926 Zettelkasten for task tracking
+#Zettelkasten #work
+
+- add `#TODO` / `#DONE` as tag to track task status.
+- Use vim's `:vimgrep` or `grep` shell command to filter on tag (with regex
+  `^#` to filter lines define tag; exclude `#` in body).
+- also add tag for keyword as category.
+- bonus: output html, with `#DONE` / `#TODO` in html class; add button to hide
+  / show them.
+- use `<h1>` (html; in markdown it's `# xxx`) to record a task. no nested
+  level required.
+
+---
+<https://zettelkasten.de/introduction/>
+
+# 20220827_093944 botw IST bug
+#botw #ist #game
+
+---
+
+# 20220827_144841 support wsl in gvim win32
+#wsl #vim #gvim
+
+- link ~/vimfiles, ~/.gitconfig, ~/.config/git/config to wsl home;
+- copy ~/bin/dgit to wsl home, and modify it, set `--git-dir` / `--work-tree`
+  to windows home.
+
+Then `dgit` will work as expected.
+
+cons:
+
+- path; wsl path is not compatible with windows path, then shell cmd / script
+  is not exchangeable.
+
+---
+
+# 20220827_154900 install fedora (actually any distro) in wsl (wsl1)
+#wsl #docker #fedora
+
+via wsl's `--import` option. It also supports wsl version 1!
+
+fedora only: to get rootfs of fedora, go to
+<https://mirrors.bfsu.edu.cn/fedora/releases/36/Container/x86_64/images/>,
+download the image, and extract it; there is a `.tar` file in it, which
+contains rootfs. (this should also works for other docker image generated via
+`podman save {image} > xxx.tar`.
+
+tip: after setting up new user, edit `/etc/wsl.conf` to set default user on
+login.
+
+---
+<https://docs.microsoft.com/zh-cn/windows/wsl/use-custom-distro>
+
+# 20220904_151229 vim mark files for later use (bookmark)
+# 20220911_140549 vim open file in with xxd if it seems like a binary file
+# 20220912_093801 git on windows: how to change file mode
+
+```sh
+git update-index --chmod=+x path/to/file.ext
+# or make it not executable:
+git update-index --chmod=-x path/to/file.ext
+```
+
+Git stores only one bit for file permissions so it’s not possible to change
+CHMOD values to something else, such as 0750 in Windows.
+
+# 20220918_152356 chicken scheme: cross compile (from linux x64 to windows i386)
+#zig #scheme
+
+## requirement
+- chicken installation in host system; (easy: just install it with distro's
+  package manager)
+- chicken source code; (which is used to build win32 libchicken.a)
+- zig; (ease C cross compilation)
+
+## steps
+- => libchicken.a: (once generated, then no need to rebuild it)
+
+`make C_COMPILER=zig-cc-i386-windows-gnu PLATFORM=cross-linux-mingw LIBRARIAN='zig ar' CHICKEN=chicken libchicken.a`
+
+- t.scm => t.c:
+
+`csc -t t.scm`
+
+- t.c => t.exe:
+    - "chicken.h": -I include path should be replaced with actual path containing chicken.h
+    - libchicken.a path should be replaced with actual path pointing to libchicken.a
+
+`zig-cc-i386-windows-gnu -o t.exe t.c ~/repos/chicken-core/libchicken.a -lws2_32 -I ~/repos/chicken-core`
+
+(c to exe in seperate step for easier inspection:)
+
+    t.c => t.obj:
+
+    `zig-cc-i386-windows-gnu t.c -c -I ~/repos/chicken-core`
+
+    t.obj => t.exe:
+
+    `zig-cc-i386-windows-gnu -o t.exe t.obj ~/repos/chicken-core/libchicken.a -lws2_32`
+
+NOTE: zig-cc-i386-windows-gnu is a wrapper for `zig cc -target i386-windows-gnu`.
+Some languages (like Nim / Golang) don't support space in C compiler name, so
+I create the wrapper script to make them work.
+
+## Windows XP compatibility?
+To make generated exe work in Windows XP, before building `libchicken.a`,
+function `GetTickCount64` in source code `runtime.c` should be replaced (or
+comment out).
+
+For genereted exe, byte patching is required (xxd, replace the first `0600` in
+the 13th line of xxd output with `0500` (`0501`?)).
+
+If more module is loaded into scheme code, then maybe more win32 function
+would be loaded into final exe. For example, to compile csi.scm to csi.exe,
+`GetFinalPathNameByHandle` will be loaded, which is not available in Windows
+XP.
