@@ -347,4 +347,4 @@ patch for Makefile.wng:
 Then run `make -f Makefile.wng less` to get `less.exe`.
 
 To make `less.exe` run on Windows XP, modify binary, replace `\x06` with
-`\x05` (see [[20220920_213506]]).
+`\x05` (see [[20220918_152356]]).
