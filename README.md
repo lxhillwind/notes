@@ -307,3 +307,44 @@ If more module is loaded into scheme code, then maybe more win32 function
 would be loaded into final exe. For example, to compile csi.scm to csi.exe,
 `GetFinalPathNameByHandle` will be loaded, which is not available in Windows
 XP.
+# 20220920_213506 less.exe: cross compile (from linux to windows i386)
+#less #Windows_XP
+patch for Makefile.wng:
+
+```diff
+26c26
+< CC = gcc
+---
+> CC = zig-cc-i386-windows-gnu
+39a40
+> REGEX_PACKAGE = regcomp-local
+63c64
+< SHELL = cmd.exe
+---
+> SHELL = sh
+76c77
+< 	${CC} -c -I. ${CFLAGS} $<
+---
+> 	${CC} -c -I. ${CFLAGS} $< -o $*.o
+104c105
+< 	${CC} ${LDFLAGS} -o $@ ${OBJ} ${LIBS}
+---
+> 	${CC} ${LDFLAGS} -o $@.exe ${OBJ} ${LIBS}
+107c108
+< 	${CC} ${LDFLAGS} -o $@ lesskey.o lesskey_parse.o version.o xbuf.o
+---
+> 	${CC} ${LDFLAGS} -o $@.exe lesskey.o lesskey_parse.o version.o xbuf.o
+110c111
+< 	${CC} ${LDFLAGS} -o $@ lessecho.o version.o
+---
+> 	${CC} ${LDFLAGS} -o $@.exe lessecho.o version.o
+113c114
+< 	copy $< $@
+---
+> 	cp $< $@
+```
+
+Then run `make -f Makefile.wng less` to get `less.exe`.
+
+To make `less.exe` run on Windows XP, modify binary, replace `\x06` with
+`\x05` (see [[20220920_213506]]).
