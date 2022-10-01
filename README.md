@@ -244,8 +244,6 @@ login.
 ---
 <https://docs.microsoft.com/zh-cn/windows/wsl/use-custom-distro>
 
-# 20220904_151229 vim mark files for later use (bookmark)
-# 20220911_140549 vim open file in with xxd if it seems like a binary file
 # 20220912_093801 git on windows: how to change file mode
 
 ```sh
