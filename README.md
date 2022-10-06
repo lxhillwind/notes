@@ -214,11 +214,16 @@ source: <https://unix.stackexchange.com/questions/519187/use-meta-super-windows-
 # 20220827_144841 support wsl in gvim win32
 #wsl #vim #gvim
 
-- link ~/vimfiles, ~/.gitconfig, ~/.config/git/config to wsl home;
-- copy ~/bin/dgit to wsl home, and modify it, set `--git-dir` / `--work-tree`
-  to windows home.
+- link ~/vimfiles, ~/.config/git/config to wsl home;
+- in wsl home, create ~/.gitconfig like below, add rewrite `g` alias with
+  `--git-dir` / `--work-tree` point to windows home.
 
-Then `dgit` will work as expected.
+```gitconfig
+[include]
+    path = ~/c-lx/.gitconfig  # modify to path-to-windows-gitconfig
+```
+
+Then `git g` will work as expected.
 
 cons:
 
@@ -307,6 +312,7 @@ would be loaded into final exe. For example, to compile csi.scm to csi.exe,
 XP.
 # 20220920_213506 less.exe: cross compile (from linux to windows i386)
 #less #Windows_XP
+
 patch for Makefile.wng:
 
 ```diff
@@ -346,3 +352,26 @@ Then run `make -f Makefile.wng less` to get `less.exe`.
 
 To make `less.exe` run on Windows XP, modify binary, replace `\x06` with
 `\x05` (see [[20220918_152356]]).
+
+# 20221004_100107 Windows XP (or: legacy windows version) font tweak
+#Windows_XP #vm
+
+Just use mactype. (it seems that default setting (with MacTray standalone mode?) is ok.)
+
+For Windows XP, use <https://github.com/snowie2000/mactype/releases/tag/2019.1-beta6>.
+
+# 20221005_112443 Windows XP winpty CJK font display (hot)fix (update)
+#Windows_XP #winpty #CJK #vim
+
+Open ConEmu (then close it if desired). After this, winpty CJK font will display correctly.
+
+update (**permanent solution**): set environment variable
+`WINPTY_SHOW_CONSOLE=1` to display the hidden cmd console
+(e.g. `let $WINPTY_SHOW_CONSOLE = "1"`, then `terminal` or some other way to
+open winpty). Then, click on left-top corner, '属性' -> '字体', change font
+from '点阵字体' to '新宋体'; confirm the change and apply the second option
+(apply permanently).
+
+possible related issue: <https://github.com/rprichard/winpty/issues/41>
+(at least I know `WINPTY_SHOW_CONSOLE` env setting from this, and then
+"solved" this particular problem)
