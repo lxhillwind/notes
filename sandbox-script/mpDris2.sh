@@ -1,7 +1,10 @@
 #!/bin/bash
+#
+# NOTE: consider using host system package.
+
 set -e
 
-mpDris2="/usr/local/bin/mpDris2"
+mpDris2="/usr/bin/mpDris2"
 
 # bwrap (bubblewrap) is required.
 
@@ -30,6 +33,7 @@ flags=(
     --setenv PATH /usr/bin --setenv USER "$USER" --setenv HOME ~
     # app
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
+    --setenv TMPDIR "$mpDris2_cover_dir"
     # lib and bin
     #--ro-bind /usr /usr --ro-bind /lib64 /lib64 --ro-bind /bin /bin
     --ro-bind ~/.sandbox/archlinux/usr /usr
@@ -68,6 +72,8 @@ flags=(
 
     # app
     --setenv DBUS_SESSION_BUS_ADDRESS "$DBUS_SESSION_BUS_ADDRESS"
+    # TODO security?
+    --ro-bind /run/user/1000/bus /run/user/1000/bus
     --bind ~/.mpd/ ~/.mpd/
     --ro-bind ~/music/ ~/music/
     --ro-bind ~/.config/mpd/ ~/.config/mpd/
@@ -80,7 +86,8 @@ flags=(
     --unshare-all --share-net
 
     # security
-    --die-with-parent --new-session
+    #--die-with-parent --new-session
+    --new-session
 )
 
 exec bwrap "${flags[@]}" -- "$mpDris2" "$@"

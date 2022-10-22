@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+# pre:
+#   install mpd, pipewire-pulse;
+#   create dir ~/.mpd; (so it can be binded by bwrap)
+# usage:
+#   start with option --no-daemon;
+
 mpd="/usr/bin/mpd"
 
 # bwrap (bubblewrap) is required.
