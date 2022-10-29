@@ -375,3 +375,15 @@ from '点阵字体' to '新宋体'; confirm the change and apply the second opti
 possible related issue: <https://github.com/rprichard/winpty/issues/41>
 (at least I know `WINPTY_SHOW_CONSOLE` env setting from this, and then
 "solved" this particular problem)
+
+# 20221029_130949 idea: EAF like library, but not bundled to emacs
+#eaf #pyqt #idea
+
+- provide function to get selected data. e.g. when select word in browser, how
+  to send it to translation?
+
+- default mode: predefined key to open function (like in my qutebrowser, `cd`
+  to translate); provides fuzzy mode and hint mode for easier finding function
+(but slower) to open. use `<space>` to switch mode. (no way to switch back
+from fuzzy mode? maybe input OS defined shortcut to re-enter default mode, or,
+reopen this window)
