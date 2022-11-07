@@ -56,14 +56,17 @@ enddef
 def HandleMetadata(filename: string, args: list<string>): dict<string>
     var useful_args: list<string>
     for arg in args
-        if arg->match('^% ') < 0
+        # https://pandoc.org/MANUAL.html#metadata-blocks
+        # NOTE we do not handle multiple-lines.
+        if arg->match('\v^\%($| )') < 0
             break
         endif
         # skip leading "% "
         useful_args->add(arg[2 : ])
     endfor
     var title = useful_args->get(0, '')
-    const date = useful_args->get(1, '')
+    # the second line is author: we don't use it...
+    const date = useful_args->get(2, '')
     if title->empty()
         title = filename->substitute('\v^.*/', '', '')
     endif
