@@ -1,16 +1,5 @@
 # link
 - repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/lxhillwind.github.io>
-- [linux/README.md](linux/README.md)
-- [windows/README.md](windows/README.md)
-- [bubblewrap wrapper script collections](sandbox-script/README.md)
-- [vimium](vimium/vimium-options.json)
-- vscode
-    - [vscode setting](vscode/vscode-settings.json)
-    - [vscode keybindings](vscode/vscode-keybindings.json)
-    - [vscode tasks](vscode/vscode-tasks.json)
-
-# gitconfig
-<https://gitee.com/lxhillwind/dotfiles/blob/master/.config/git/config>
 
 # vm
 Choose based on host OS.
@@ -41,7 +30,6 @@ is discarded.
 
 So do not use it.
 
-# zsh
 # qemu
 
 ## usb passthrough
