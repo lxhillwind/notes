@@ -1,3 +1,5 @@
+% legacy notes
+
 # installation note
 
 Un-plug rtl8192 network controller before installation;

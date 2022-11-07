@@ -1,4 +1,4 @@
-# collection of bubblewrap wrapper script
+% collection of bubblewrap wrapper script
 
 - [mpd](mpd.sh)
 - [mpDris2](mpDris2.sh)

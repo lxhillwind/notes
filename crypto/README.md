@@ -1,3 +1,5 @@
+% crypto reading notes
+
 # 20221029_225657 otp (Shannon cipher)
 
 E(k, m) -> c; D(k, c) -> m.

@@ -1,3 +1,5 @@
+% legacy notes
+
 # link
 - repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/lxhillwind.github.io>
 
