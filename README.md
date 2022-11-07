@@ -21,8 +21,8 @@ Idea comes from <https://til.simonwillison.net/> (which comes from others...)
   - [legacy notes](linux/README.md)
 - mac
   - [legacy notes](mac/README.md)
-- untitled
-  - [legacy notes](untitled/README.md)
+- untitled.md
+  - [untitled](untitled.md)
 - vimium
   - [legacy notes](vimium/README.md)
 - vscode

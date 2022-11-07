@@ -1,7 +1,7 @@
-% legacy notes
+% untitled
 
 # link
-- repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/lxhillwind.github.io>
+repo: <https://gitee.com/lxhillwind/lxhillwind> / <https://github.com/lxhillwind/lxhillwind.github.io>
 
 # vm
 Choose based on host OS.
