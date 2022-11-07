@@ -11,6 +11,7 @@ set -e
 git ls-files '*.md' > files
 podman exec -i pandoc sh -s <<\EOF
 while read i; do
+    printf 'building %s\n' "$i" >&2
     pandoc -r markdown+east_asian_line_breaks -w html --standalone -T 'lxhillwind' --mathjax --toc -H res-icon.html -B res-style.html < "$i" > "${i%.md}.html"
 done < files
 rm files
