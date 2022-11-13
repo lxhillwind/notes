@@ -28,3 +28,5 @@ Idea comes from <https://til.simonwillison.net/> (which comes from others...)
   - [legacy notes](vimium/README.md)
 - vscode
   - [legacy notes](vscode/README.md)
+- windows
+  - [newline ("\r\n" or "\n"?) in some programming languages](windows/newline.md) 2022-11-13
