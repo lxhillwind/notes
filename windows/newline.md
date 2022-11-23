@@ -1,4 +1,4 @@
-% newline ("\r\n" or "\n"?) in some programming languages
+% newline ("\\r\\n" or "\\n"?) in some programming languages
 %
 % 2022-11-13
 
