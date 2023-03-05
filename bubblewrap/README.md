@@ -4,6 +4,7 @@
 - [mpDris2](mpDris2.sh)
 - [mpv](mpv.sh)
 - [qutebrowser](qutebrowser.sh)
+- [firefox](firefox.sh)
 - [x11](x11.sh)
 
 qemu related:
