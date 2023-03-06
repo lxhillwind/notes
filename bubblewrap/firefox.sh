@@ -69,6 +69,8 @@ flags=(
     --ro-bind /usr/share/icons/ /usr/share/icons/
 
     --dir /run/user/"$UID"/
+    # TODO NOTE ok, this is dangerous. but if not, we cannot open url with existing instance.
+    --ro-bind /run/user/"$UID"/bus /run/user/"$UID"/bus
     # sound (pipewire)
     --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
     # sound (pulseaudio); use it even if using pipewire-pulse.
