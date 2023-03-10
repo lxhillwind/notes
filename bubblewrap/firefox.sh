@@ -85,6 +85,8 @@ flags=(
     --ro-bind ~/.sandbox/archlinux/etc/ssl /etc/ssl
     --ro-bind ~/.sandbox/archlinux/etc/ca-certificates /etc/ca-certificates
 
+    # font CJK fix
+    --ro-bind ~/lx/linux/font-cjk-fix.conf ~/.config/fontconfig/fonts.conf
     # app
     --bind ~/.mozilla-box ~/.mozilla
     --bind ~/.local/share/tridactyl-box ~/.local/share/tridactyl
