@@ -17,6 +17,7 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
     # wayland
     flags_gui=(
         --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
+        --setenv MOZ_ENABLE_WAYLAND 1
         --ro-bind /run/user/"$UID"/"$WAYLAND_DISPLAY" /run/user/"$UID"/"$WAYLAND_DISPLAY"
     )
 else
@@ -24,9 +25,18 @@ else
     flags_gui=(
         --setenv DISPLAY "$DISPLAY"
         --ro-bind ~/.Xauthority ~/.Xauthority
-        # fcitx
-        --ro-bind /run/user/"$UID"/bus /run/user/"$UID"/bus
     )
+    dbus_file=$(printf %s "$DBUS_SESSION_BUS_ADDRESS" | sed 's/unix:path=//; s/,.*//')
+    # fcitx;
+    # NOTE: startup notification should be false (in firefox.desktop).
+    if [ -S "$dbus_file" ]; then
+        flags_gui=(
+            "${flags_gui[@]}"
+            # this seems to be /run/user/"$UID"/bus when started with lightdm;
+            # /tmp/some-random-path when stared via startx.
+            --ro-bind "$dbus_file" "$dbus_file"
+        )
+    fi
 fi
 
 flags=(
@@ -39,6 +49,9 @@ flags=(
     --setenv QT_IM_MODULE "$QT_IM_MODULE" --setenv GTK_IM_MODULE "$GTK_IM_MODULE" --setenv XMODIFIERS "$XMODIFIERS"
     # app
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
+    --setenv LANG zh_CN.utf8
+    --setenv LC_ALL zh_CN.utf8
+    --setenv LC_CTYPE zh_CN.utf8
     # lib and bin
     # check lib path via `file {binary}`.
     --ro-bind ~/.sandbox/archlinux/usr /usr
@@ -58,6 +71,9 @@ flags=(
     # for webgl
     --dev-bind /dev/dri/ /dev/dri/
 
+    # locale?
+    --ro-bind /etc/locale.conf /etc/locale.conf
+    --ro-bind /usr/share/locale/ /usr/share/locale/
     # timezone
     --ro-bind /etc/localtime /etc/localtime
     # network (also --share-net)
@@ -91,7 +107,6 @@ flags=(
     --bind ~/.mozilla-box ~/.mozilla
     --bind ~/.local/share/tridactyl-box ~/.local/share/tridactyl
     --bind ~/.config/transmission-box ~/.config/transmission
-    --setenv MOZ_ENABLE_WAYLAND 1
 
     --ro-bind ~/.config/tridactyl/ ~/.config/tridactyl/
     --bind ~/Downloads/ ~/Downloads/
