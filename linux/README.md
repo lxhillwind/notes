@@ -57,3 +57,13 @@ qemu builtin smb (samba) won't work in openSUSE tumbleweed.
 
 - disable avahi (which listens on 0.0.0.0), by `systemctl stop avahi-daemon.socket` and `systemctl stop avahi-daemon`.
 - make systemd-resolved not listen on 0.0.0.0 (LLMNR): edit `/etc/systemd/resolved.conf`, and set LLMNR to `no` (then restart service).
+
+# .xprofile / env / dm
+
+It's quite tricky to make session script loaded at startup (have not figured
+out yet).
+
+So just remove any dm (`systemctl disable lightdm` first if using lightdm;
+then uninstall it), use plain old `startx` instead.
+
+    It seems that on Fedora, xprofile script may not run because of selinux.
