@@ -22,6 +22,7 @@ Idea comes from <https://til.simonwillison.net/> (which comes from others...)
   - [mount file or dir from secret](kubernetes/mount-file-or-dir-from-secret.md) 2022-11-23
 - linux
   - [legacy notes](linux/README.md)
+  - [create iso file on linux (without root)](linux/create-iso.md) 2023-04-07
 - mac
   - [legacy notes](mac/README.md)
 - untitled.md
