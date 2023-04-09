@@ -1,20 +1,19 @@
 #!/bin/bash
 set -e
 
-# prefer flags_fedora (fedora host) since it enables va-api by default;
-#   (but why does not it take less cpu?)
-# use flags_archlinux (archlinux sandbox) otherwise for its update frequency.
+code="/usr/bin/code"
 
-firefox="/usr/bin/firefox"
-
-mkdir -p ~/.mozilla-box
-mkdir -p ~/.local/share/tridactyl-box
-mkdir -p ~/.config/transmission-box
+mkdir -p ~/.code-box/vscode
+mkdir -p ~/.code-box/config
+mkdir -p ~/.code-box/cache-fontconfig
+mkdir -p ~/.code-box/pki
+[ -e ~/.code-box/zshrc ] || printf 'source ~/.config/zshrc\n' >> ~/.code-box/zshrc
 
 flags_archlinux=(
     --ro-bind ~/.sandbox/archlinux/usr /usr
     --ro-bind ~/.sandbox/archlinux/bin /bin
     --ro-bind ~/.sandbox/archlinux/lib64 /lib64
+    --ro-bind ~/.sandbox/archlinux/opt/visual-studio-code /opt/visual-studio-code
     --ro-bind ~/.sandbox/archlinux/etc/ssl /etc/ssl
     --ro-bind ~/.sandbox/archlinux/etc/ca-certificates /etc/ca-certificates
     --ro-bind /etc/locale.conf /etc/locale.conf
@@ -31,23 +30,10 @@ flags_archlinux=(
     --ro-bind /usr/share/icons/ /usr/share/icons/
     )
 
-flags_fedora=(
-    --ro-bind /usr/ /usr/
-    # mount /bin to make /bin/sh (/bin/bash, etc) work.
-    --ro-bind /bin/ /bin/
-    --ro-bind /lib64/ /lib64/
-    # this is necessary to make network (ff in fedora) work.
-    --ro-bind /etc/alternatives/ /etc/alternatives/
-    # /etc/resolv.conf is symlink.
-    --ro-bind /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-    --ro-bind /etc/fonts/ /etc/fonts/
-    )
-
 if [ -n "$WAYLAND_DISPLAY" ]; then
     # wayland
     flags_gui=(
         --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
-        --setenv MOZ_ENABLE_WAYLAND 1
         --ro-bind /run/user/"$UID"/"$WAYLAND_DISPLAY" /run/user/"$UID"/"$WAYLAND_DISPLAY"
     )
 else
@@ -58,7 +44,7 @@ else
     )
     dbus_file=$(printf %s "$DBUS_SESSION_BUS_ADDRESS" | sed 's/unix:path=//; s/,.*//')
     # fcitx;
-    # NOTE: startup notification should be false (in firefox.desktop).
+    # NOTE: startup notification should be false (in code.desktop).
     if [ -S "$dbus_file" ]; then
         flags_gui=(
             "${flags_gui[@]}"
@@ -83,8 +69,7 @@ flags=(
     --setenv LC_ALL zh_CN.utf8
     --setenv LC_CTYPE zh_CN.utf8
 
-    #"${flags_archlinux[@]}"
-    "${flags_fedora[@]}"
+    "${flags_archlinux[@]}"
 
     --tmpfs /tmp
 
@@ -100,11 +85,7 @@ flags=(
 
     --dir /run/user/"$UID"/
     # TODO NOTE ok, this is dangerous. but if not, we cannot open url with existing instance.
-    --ro-bind /run/user/"$UID"/bus /run/user/"$UID"/bus
-    # sound (pipewire)
-    --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0
-    # sound (pulseaudio); use it even if using pipewire-pulse.
-    --ro-bind /run/user/"$UID"/pulse /run/user/"$UID"/pulse
+    #--ro-bind /run/user/"$UID"/bus /run/user/"$UID"/bus
 
     # NOTE: (security)
     # --bind a/ then --ro-bind a/b (file), a/b is ro in sandbox;
@@ -113,27 +94,23 @@ flags=(
 
     "${flags_gui[@]}"
 
-    # font CJK fix
-    --ro-bind ~/lx/linux/font-cjk-fix.conf ~/.config/fontconfig/fonts.conf
     # app
-    --bind ~/.mozilla-box ~/.mozilla
-    --bind ~/.local/share/tridactyl-box ~/.local/share/tridactyl
-    --bind ~/.config/transmission-box ~/.config/transmission
+    --setenv SHELL /bin/zsh
+    --bind ~/.code-box/zshrc ~/.zshrc
+    --bind ~/.code-box/vscode ~/.vscode
+    --bind ~/.code-box/config ~/.config/Code
+    --bind ~/.code-box/cache-fontconfig ~/.cache/fontconfig
+    --bind ~/.code-box/pki ~/.pki
 
-    --ro-bind ~/.config/tridactyl/ ~/.config/tridactyl/
-    --bind ~/Downloads/ ~/Downloads/
-    --ro-bind ~/html/ ~/html/
-    --symlink ~/vimfiles/vimrc ~/.vimrc --ro-bind ~/vimfiles/ ~/vimfiles/
-    # opensuse system doc.
-    --ro-bind-try /usr/share/doc/packages/ ~/opensuse-doc-packages/
+    --ro-bind ~/.config/zshrc ~/.config/zshrc
 
     # network.
     --unshare-all --share-net
 
     # security
     --new-session
-    # disable --die-with-parent to allow `:restart` in it.
+    # code is run like daemon mode.
     #--die-with-parent
 )
 
-exec bwrap "${flags[@]}" -- "$firefox" "$@"
+exec bwrap "${flags[@]}" -- "$code" "$@"

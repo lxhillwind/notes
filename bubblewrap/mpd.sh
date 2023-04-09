@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# why using mpd in archlinux sandbox?
+#   don't know why yet.
+#
 # pre:
 #   install mpd, pipewire-pulse;
 #   create dir ~/.mpd; (so it can be binded by bwrap)
@@ -8,22 +11,6 @@ set -e
 #   start with option --no-daemon;
 
 mpd="/usr/bin/mpd"
-
-# bwrap (bubblewrap) is required.
-
-if [ -n "$WAYLAND_DISPLAY" ]; then
-    # wayland
-    flags_gui=(
-        --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
-        --ro-bind /run/user/"$UID"/"$WAYLAND_DISPLAY" /run/user/"$UID"/"$WAYLAND_DISPLAY"
-    )
-else
-    # x11
-    flags_gui=(
-        --setenv DISPLAY "$DISPLAY"
-        --ro-bind ~/.Xauthority ~/.Xauthority
-    )
-fi
 
 flags=(
     # env:
@@ -40,22 +27,7 @@ flags=(
 
     # proc, sys, dev
     --proc /proc
-    # --ro-bind /sys /sys; see https://wiki.archlinux.org/title/Bubblewrap
-    #--ro-bind /sys/dev/char /sys/dev/char
-    #--ro-bind /sys/devices/pci0000:00 /sys/devices/pci0000:00
     --dev /dev
-
-    # network (also --share-net)
-    #--ro-bind /etc/resolv.conf /etc/resolv.conf
-    # icon
-    #--setenv QT_AUTO_SCREEN_SCALE_FACTOR "$QT_AUTO_SCREEN_SCALE_FACTOR"
-    #--setenv QT_WAYLAND_FORCE_DPI "$QT_WAYLAND_FORCE_DPI"
-    #--setenv PLASMA_USE_QT_SCALING "$PLASMA_USE_QT_SCALING"
-    #--setenv XCURSOR_SIZE "$XCURSOR_SIZE"
-    #--setenv XCURSOR_THEME "$XCURSOR_THEME"
-    #--ro-bind /usr/share/icons/ /usr/share/icons/
-
-    #"${flags_gui[@]}"
 
     # sound (pipewire)
     --ro-bind /run/user/"$UID"/pipewire-0 /run/user/"$UID"/pipewire-0

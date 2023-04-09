@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
 
-mpv="/usr/bin/mpv"
+# why using mpv in archlinux sandbox?
+# because it contains mpv lua script, and we have symlink to it in dotfiles (~/.config/xxx),
+# then the path should be uniform to make dotfiles manage easier.
 
-# bwrap (bubblewrap) is required.
+mpv="/usr/bin/mpv"
 
 if [ -n "$WAYLAND_DISPLAY" ]; then
     # wayland
