@@ -30,11 +30,12 @@ DBUS_SESSION_BUS_ADDRESS="unix:path=$dbus_file_new"
 
 # main {{{1
 code="/usr/bin/code"
-
+mkdir -p ~/.code-box/home
 mkdir -p ~/.code-box/vscode
 mkdir -p ~/.code-box/config
 mkdir -p ~/.code-box/cache-fontconfig
 mkdir -p ~/.code-box/pki
+mkdir -p ~/repos/UNTRUSTED
 [ -e ~/.code-box/zshrc ] || printf 'source ~/.config/zshrc\n' >> ~/.code-box/zshrc
 [ -e ~/.code-box/electron-flags.conf ] || \
     printf '%s\n%s\n' '--enable-features=UseOzonePlatform' '--ozone-platform=wayland' \
@@ -114,7 +115,7 @@ flags=(
     # but if we modify a/b (change fd), then a/b will be rw!
     # so, do not use --ro-bind inside --bind.
 
-    --tmpfs ~  # add this before flags_gui because of electron-flags.conf
+    --bind ~/.code-box/home ~  # add this before flags_gui because of electron-flags.conf
     "${flags_gui[@]}"
 
     # app
@@ -124,7 +125,7 @@ flags=(
     --bind ~/.code-box/config ~/.config/Code
     --bind ~/.code-box/cache-fontconfig ~/.cache/fontconfig
     --bind ~/.code-box/pki ~/.pki
-
+    --bind ~/repos/UNTRUSTED ~/repos/UNTRUSTED
     --ro-bind ~/.config/zshrc ~/.config/zshrc
 
     # network.
