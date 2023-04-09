@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+# seems that we cannot open url inside vscode because of url handler missing.
+#
+# possible workaround:
+# click url in code -> call some program in sandbox -> some program in host get notified by socket
+# -> open url in host.
+
 # dbus proxy {{{1
 dbus_file=$(printf %s "$DBUS_SESSION_BUS_ADDRESS" | sed 's/unix:path=//; s/,.*//')
 mkdir -p /tmp/dbus-proxy
