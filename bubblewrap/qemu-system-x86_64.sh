@@ -70,7 +70,6 @@ flags=(
     # sound (pulseaudio); use it even if using pipewire-pulse.
     --ro-bind /run/user/"$UID"/pulse /run/user/"$UID"/pulse
 
-
     # NOTE: (security)
     # --bind a/ then --ro-bind a/b (file), a/b is ro in sandbox;
     # but if we modify a/b (change fd), then a/b will be rw!
@@ -81,13 +80,6 @@ flags=(
     --tmpfs /tmp
     --bind "$spice_socket_dir" "$spice_socket_dir"
     --setenv TMPDIR "$spice_socket_dir"
-
-    # we will call bwrap in remote-viewer, so mount related stuff.
-    # fedora: use virt-viewer in host system.
-    #--ro-bind ~/.sandbox/archlinux/ ~/.sandbox/archlinux/
-    #--ro-bind ~/.config/mimeapps.list ~/.config/mimeapps.list
-    #--ro-bind ~/bin/remote-viewer ~/bin/remote-viewer
-    #--ro-bind ~/.local/share/applications/remote-viewer.desktop ~/.local/share/applications/remote-viewer.desktop
 
     --bind ~/qemu/ ~/qemu/
     --ro-bind ~/iso/ ~/iso/

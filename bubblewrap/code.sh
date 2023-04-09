@@ -1,6 +1,28 @@
 #!/bin/bash
 set -e
 
+# dbus proxy {{{1
+dbus_file=$(printf %s "$DBUS_SESSION_BUS_ADDRESS" | sed 's/unix:path=//; s/,.*//')
+mkdir -p /tmp/dbus-proxy
+if [ -n "$WAYLAND_DISPLAY" ]; then
+    is_wayland=.wayland
+else
+    is_wayland=
+fi
+# sway does not kill flock automatically after quiting (unlike x11), so we should use different set.
+dbus_file_new=/tmp/dbus-proxy/"${0##*/}$is_wayland"
+touch "$dbus_file_new"
+dbus_rules=(
+    --talk='org.fcitx.Fcitx5'  # fcitx5
+    )
+# run flock to avoid duplicating xdg-dbus-proxy process;
+# run in background, so error check is not required;
+flock -xn "$dbus_file_new.flock" \
+    xdg-dbus-proxy "$DBUS_SESSION_BUS_ADDRESS" "$dbus_file_new" --filter --log \
+    "${dbus_rules[@]}" &
+DBUS_SESSION_BUS_ADDRESS="unix:path=$dbus_file_new"
+
+# main {{{1
 code="/usr/bin/code"
 
 mkdir -p ~/.code-box/vscode
@@ -8,6 +30,9 @@ mkdir -p ~/.code-box/config
 mkdir -p ~/.code-box/cache-fontconfig
 mkdir -p ~/.code-box/pki
 [ -e ~/.code-box/zshrc ] || printf 'source ~/.config/zshrc\n' >> ~/.code-box/zshrc
+[ -e ~/.code-box/electron-flags.conf ] || \
+    printf '%s\n%s\n' '--enable-features=UseOzonePlatform' '--ozone-platform=wayland' \
+    >> ~/.code-box/electron-flags.conf
 
 flags_archlinux=(
     --ro-bind ~/.sandbox/archlinux/usr /usr
@@ -35,6 +60,9 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
     flags_gui=(
         --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
         --ro-bind /run/user/"$UID"/"$WAYLAND_DISPLAY" /run/user/"$UID"/"$WAYLAND_DISPLAY"
+        # https://github.com/microsoft/vscode/issues/109176
+        # https://wiki.archlinux.org/title/Visual_Studio_Code#Running_natively_under_Wayland
+        --ro-bind ~/.code-box/electron-flags.conf ~/.config/code-flags.conf
     )
 else
     # x11
@@ -42,17 +70,6 @@ else
         --setenv DISPLAY "$DISPLAY"
         --ro-bind ~/.Xauthority ~/.Xauthority
     )
-    dbus_file=$(printf %s "$DBUS_SESSION_BUS_ADDRESS" | sed 's/unix:path=//; s/,.*//')
-    # fcitx;
-    # NOTE: startup notification should be false (in code.desktop).
-    if [ -S "$dbus_file" ]; then
-        flags_gui=(
-            "${flags_gui[@]}"
-            # this seems to be /run/user/"$UID"/bus when started with lightdm;
-            # /tmp/some-random-path when stared via startx.
-            --ro-bind "$dbus_file" "$dbus_file"
-        )
-    fi
 fi
 
 flags=(
@@ -72,6 +89,7 @@ flags=(
     "${flags_archlinux[@]}"
 
     --tmpfs /tmp
+    --ro-bind "$dbus_file_new" "$dbus_file_new"
 
     # proc, sys, dev
     --proc /proc
@@ -84,14 +102,13 @@ flags=(
     --dev-bind /dev/dri/ /dev/dri/
 
     --dir /run/user/"$UID"/
-    # TODO NOTE ok, this is dangerous. but if not, we cannot open url with existing instance.
-    #--ro-bind /run/user/"$UID"/bus /run/user/"$UID"/bus
 
     # NOTE: (security)
     # --bind a/ then --ro-bind a/b (file), a/b is ro in sandbox;
     # but if we modify a/b (change fd), then a/b will be rw!
     # so, do not use --ro-bind inside --bind.
 
+    --tmpfs ~  # add this before flags_gui because of electron-flags.conf
     "${flags_gui[@]}"
 
     # app
