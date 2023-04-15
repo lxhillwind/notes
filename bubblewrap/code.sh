@@ -46,12 +46,14 @@ flags_archlinux=(
     --ro-bind ~/.sandbox/archlinux/bin /bin
     --ro-bind ~/.sandbox/archlinux/lib64 /lib64
     --ro-bind ~/.sandbox/archlinux/opt/visual-studio-code /opt/visual-studio-code
-    --ro-bind ~/.sandbox/archlinux/etc/ssl /etc/ssl
-    --ro-bind ~/.sandbox/archlinux/etc/ca-certificates /etc/ca-certificates
-    --ro-bind /etc/locale.conf /etc/locale.conf
-    --ro-bind /usr/share/locale/ /usr/share/locale/
+    # font
     --ro-bind /usr/share/fonts/ /usr/share/fonts/
     --ro-bind /etc/fonts /etc/fonts
+    # locale
+    --ro-bind /etc/locale.conf /etc/locale.conf
+    --ro-bind /usr/share/locale/ /usr/share/locale/
+    # ssl
+    --ro-bind /etc/ssl/cert.pem /etc/ssl/cert.pem
     # timezone
     --ro-bind /etc/localtime /etc/localtime
     # network (also --share-net)

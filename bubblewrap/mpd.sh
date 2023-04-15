@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-# why using mpd in archlinux sandbox?
-#   don't know why yet.
+# why using mpd in sandbox?
+#   because mpd in fedora pulls huge deps.
 #
 # pre:
-#   install mpd, pipewire-pulse;
+#   install mpd, pipewire;
 #   create dir ~/.mpd; (so it can be binded by bwrap)
 # usage:
 #   start with option --no-daemon;
@@ -21,8 +21,8 @@ flags=(
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
     # lib and bin
     # check lib path via `file {binary}`.
-    --ro-bind ~/.sandbox/archlinux/usr /usr
-    --ro-bind ~/.sandbox/archlinux/lib64 /lib64
+    --ro-bind ~/.sandbox/alpine/usr /usr
+    --ro-bind ~/.sandbox/alpine/lib /lib
     --tmpfs /tmp
 
     # proc, sys, dev
