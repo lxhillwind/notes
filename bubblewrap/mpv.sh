@@ -1,9 +1,8 @@
 #!/bin/bash
 set -e
 
-# why using mpv in archlinux sandbox?
-# because it contains mpv lua script, and we have symlink to it in dotfiles (~/.config/xxx),
-# then the path should be uniform to make dotfiles manage easier.
+# why using mpv in sandbox?
+# - does not leave footprint.
 
 mpv="/usr/bin/mpv"
 
@@ -30,11 +29,17 @@ flags=(
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
     # lib and bin
     # check lib path via `file {binary}`.
-    --ro-bind ~/.sandbox/archlinux/usr /usr
-    --ro-bind ~/.sandbox/archlinux/bin /bin
-    --ro-bind ~/.sandbox/archlinux/lib64 /lib64
-    --ro-bind /usr/share/fonts /usr/share/fonts
+    --ro-bind /usr /usr
+    --ro-bind /bin /bin
+    --ro-bind /lib64 /lib64
     --ro-bind /etc/fonts /etc/fonts
+
+    # fix missing lib
+    --ro-bind /etc/ld.so.conf /etc/ld.so.conf
+    --ro-bind /etc/ld.so.conf.d /etc/ld.so.conf.d
+    --ro-bind /etc/ld.so.cache /etc/ld.so.cache
+    --ro-bind /etc/alternatives /etc/alternatives
+
     --tmpfs /tmp
 
     # proc, sys, dev
@@ -48,16 +53,10 @@ flags=(
 
     # network (also --share-net)
     --ro-bind /etc/resolv.conf /etc/resolv.conf
-    # network, more.
-    --ro-bind ~/.sandbox/archlinux/etc/ssl/ /etc/ssl/
-    --ro-bind ~/.sandbox/archlinux/etc/ca-certificates/ /etc/ca-certificates/
+
     # icon
-    --setenv QT_AUTO_SCREEN_SCALE_FACTOR "$QT_AUTO_SCREEN_SCALE_FACTOR"
-    --setenv QT_WAYLAND_FORCE_DPI "$QT_WAYLAND_FORCE_DPI"
-    --setenv PLASMA_USE_QT_SCALING "$PLASMA_USE_QT_SCALING"
     --setenv XCURSOR_SIZE "$XCURSOR_SIZE"
     --setenv XCURSOR_THEME "$XCURSOR_THEME"
-    --ro-bind /usr/share/icons/ /usr/share/icons/
 
     "${flags_gui[@]}"
 

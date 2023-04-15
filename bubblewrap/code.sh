@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# setup:
+# download vscode tar, extract to ~/.sandbox/vscode/
+
 # seems that we cannot open url inside vscode because of url handler missing.
 #
 # possible workaround:
@@ -29,7 +32,7 @@ flock -xn "$dbus_file_new.flock" \
 DBUS_SESSION_BUS_ADDRESS="unix:path=$dbus_file_new"
 
 # main {{{1
-code="/usr/bin/code"
+code="/opt/vscode/code"
 mkdir -p ~/.code-box/home
 mkdir -p ~/.code-box/vscode
 mkdir -p ~/.code-box/config
@@ -37,21 +40,21 @@ mkdir -p ~/.code-box/cache-fontconfig
 mkdir -p ~/.code-box/pki
 mkdir -p ~/repos/UNTRUSTED
 [ -e ~/.code-box/zshrc ] || printf 'source ~/.config/zshrc\n' >> ~/.code-box/zshrc
-[ -e ~/.code-box/electron-flags.conf ] || \
-    printf '%s\n%s\n' '--enable-features=UseOzonePlatform' '--ozone-platform=wayland' \
-    >> ~/.code-box/electron-flags.conf
+code_flags=()
 
-flags_archlinux=(
-    --ro-bind ~/.sandbox/archlinux/usr /usr
-    --ro-bind ~/.sandbox/archlinux/bin /bin
-    --ro-bind ~/.sandbox/archlinux/lib64 /lib64
-    --ro-bind ~/.sandbox/archlinux/opt/visual-studio-code /opt/visual-studio-code
+flags_system=(
+    # vscode lib dep
+    --ro-bind /lib64/ /lib64/
+    --ro-bind /etc/alternatives/ /etc/alternatives/
+    --ro-bind /usr/ /usr/
+    # shell, tool, etc.
+    --setenv SHELL /bin/zsh
+    --ro-bind /bin/ /bin/
+    --tmpfs /usr/sbin/
+    # --bind here to make it upgrade.
+    --bind ~/.sandbox/vscode/VSCode-linux-x64 /opt/vscode
     # font
-    --ro-bind /usr/share/fonts/ /usr/share/fonts/
     --ro-bind /etc/fonts /etc/fonts
-    # locale
-    --ro-bind /etc/locale.conf /etc/locale.conf
-    --ro-bind /usr/share/locale/ /usr/share/locale/
     # ssl
     --ro-bind /etc/ssl/cert.pem /etc/ssl/cert.pem
     # timezone
@@ -69,10 +72,8 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
     flags_gui=(
         --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY"
         --ro-bind /run/user/"$UID"/"$WAYLAND_DISPLAY" /run/user/"$UID"/"$WAYLAND_DISPLAY"
-        # https://github.com/microsoft/vscode/issues/109176
-        # https://wiki.archlinux.org/title/Visual_Studio_Code#Running_natively_under_Wayland
-        --ro-bind ~/.code-box/electron-flags.conf ~/.config/code-flags.conf
     )
+    code_flags=('--enable-features=UseOzonePlatform' '--ozone-platform=wayland')
 else
     # x11
     flags_gui=(
@@ -85,7 +86,7 @@ flags=(
     # env:
     --clearenv
     # basic
-    --setenv PATH /usr/bin --setenv USER "$USER" --setenv HOME ~
+    --setenv PATH /bin:/usr/bin --setenv USER "$USER" --setenv HOME ~
     # fcitx
     --setenv DBUS_SESSION_BUS_ADDRESS "$DBUS_SESSION_BUS_ADDRESS"
     --setenv QT_IM_MODULE "$QT_IM_MODULE" --setenv GTK_IM_MODULE "$GTK_IM_MODULE" --setenv XMODIFIERS "$XMODIFIERS"
@@ -95,7 +96,7 @@ flags=(
     --setenv LC_ALL zh_CN.utf8
     --setenv LC_CTYPE zh_CN.utf8
 
-    "${flags_archlinux[@]}"
+    "${flags_system[@]}"
 
     --tmpfs /tmp
     --ro-bind "$dbus_file_new" "$dbus_file_new"
@@ -117,18 +118,15 @@ flags=(
     # but if we modify a/b (change fd), then a/b will be rw!
     # so, do not use --ro-bind inside --bind.
 
-    --bind ~/.code-box/home ~  # add this before flags_gui because of electron-flags.conf
+    --bind ~/.code-box/home ~
     "${flags_gui[@]}"
 
     # app
-    --setenv SHELL /bin/zsh
-    --bind ~/.code-box/zshrc ~/.zshrc
     --bind ~/.code-box/vscode ~/.vscode
     --bind ~/.code-box/config ~/.config/Code
     --bind ~/.code-box/cache-fontconfig ~/.cache/fontconfig
     --bind ~/.code-box/pki ~/.pki
     --bind ~/repos/UNTRUSTED ~/repos/UNTRUSTED
-    --ro-bind ~/.config/zshrc ~/.config/zshrc
 
     # network.
     --unshare-all --share-net
@@ -139,4 +137,4 @@ flags=(
     #--die-with-parent
 )
 
-exec bwrap "${flags[@]}" -- "$code" "$@"
+exec bwrap "${flags[@]}" -- "$code" "${code_flags[@]}" "$@"
