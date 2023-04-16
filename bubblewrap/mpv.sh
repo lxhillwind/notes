@@ -6,6 +6,25 @@ set -e
 
 mpv="/usr/bin/mpv"
 
+flags_alpine=(
+    --ro-bind ~/.sandbox/alpine/usr /usr
+    --ro-bind ~/.sandbox/alpine/bin /bin
+    --ro-bind ~/.sandbox/alpine/lib /lib
+    # TODO font.
+)
+flags_fedora=(
+    --ro-bind /usr /usr
+    --ro-bind /bin /bin
+    --ro-bind /lib64 /lib64
+    --ro-bind /etc/fonts /etc/fonts
+
+    # fix missing lib
+    --ro-bind /etc/ld.so.conf /etc/ld.so.conf
+    --ro-bind /etc/ld.so.conf.d /etc/ld.so.conf.d
+    --ro-bind /etc/ld.so.cache /etc/ld.so.cache
+    --ro-bind /etc/alternatives /etc/alternatives
+)
+
 if [ -n "$WAYLAND_DISPLAY" ]; then
     # wayland
     flags_gui=(
@@ -27,18 +46,10 @@ flags=(
     --setenv PATH /usr/bin --setenv USER "$USER" --setenv HOME ~
     # app
     --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR"
-    # lib and bin
-    # check lib path via `file {binary}`.
-    --ro-bind /usr /usr
-    --ro-bind /bin /bin
-    --ro-bind /lib64 /lib64
-    --ro-bind /etc/fonts /etc/fonts
 
-    # fix missing lib
-    --ro-bind /etc/ld.so.conf /etc/ld.so.conf
-    --ro-bind /etc/ld.so.conf.d /etc/ld.so.conf.d
-    --ro-bind /etc/ld.so.cache /etc/ld.so.cache
-    --ro-bind /etc/alternatives /etc/alternatives
+    # lib and bin
+    #"${flags_alpine[@]}"
+    "${flags_fedora[@]}"
 
     --tmpfs /tmp
 
@@ -53,6 +64,8 @@ flags=(
 
     # network (also --share-net)
     --ro-bind /etc/resolv.conf /etc/resolv.conf
+    # ssl
+    --ro-bind /etc/pki/tls/cert.pem /etc/pki/tls/cert.pem
 
     # icon
     --setenv XCURSOR_SIZE "$XCURSOR_SIZE"
@@ -106,4 +119,17 @@ for arg in "$@"; do
     fi
 done
 
-exec bwrap "${flags[@]}" -- "$mpv" "$@"
+if [ -t 0 ]; then
+    printf 'disable hardware decoding? (make autocrop (video filter) work)\n[y/N] ' >&2
+    case "$(read -s -n 1 x; printf %s "$x")" in
+        y|Y)
+            mpv_options=(--hwdec=no --script-opts=autocrop-auto=yes)
+            ;;
+        *)
+            mpv_options=()
+            ;;
+    esac
+    echo
+fi
+
+exec bwrap "${flags[@]}" -- "$mpv" "${mpv_options[@]}" "$@"

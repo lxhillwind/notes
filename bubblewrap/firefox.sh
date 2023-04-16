@@ -59,10 +59,9 @@ flags_fedora=(
     # mount /bin to make /bin/sh (/bin/bash, etc) work.
     --ro-bind /bin/ /bin/
     --ro-bind /lib64/ /lib64/
-    # this is necessary to make network (ff in fedora) work.
+    # this is necessary to make network (ff in fedora) work (ssl related lib?).
     --ro-bind /etc/alternatives/ /etc/alternatives/
-    # /etc/resolv.conf is symlink.
-    --ro-bind /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+    --ro-bind /etc/resolv.conf /etc/resolv.conf
     --ro-bind /etc/fonts/ /etc/fonts/
     )
 

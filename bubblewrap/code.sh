@@ -56,7 +56,9 @@ flags_system=(
     # font
     --ro-bind /etc/fonts /etc/fonts
     # ssl
-    --ro-bind /etc/ssl/cert.pem /etc/ssl/cert.pem
+    --ro-bind /etc/pki/tls/cert.pem /etc/pki/tls/cert.pem
+    # curl depends on this.
+    --ro-bind /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
     # timezone
     --ro-bind /etc/localtime /etc/localtime
     # network (also --share-net)
