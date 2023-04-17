@@ -10,7 +10,11 @@ flags_alpine=(
     --ro-bind ~/.sandbox/alpine/usr /usr
     --ro-bind ~/.sandbox/alpine/bin /bin
     --ro-bind ~/.sandbox/alpine/lib /lib
-    # TODO font.
+    # /usr/share/fonts dir may not exist yet:
+    #   bwrap: Can't mkdir XXX: Read-only file system
+    # create <path-to-sandbox>/usr/share/fonts manually if necessary.
+    --ro-bind /usr/share/fonts /usr/share/fonts
+    --ro-bind /etc/fonts /etc/fonts
 )
 flags_fedora=(
     --ro-bind /usr /usr
@@ -124,9 +128,6 @@ if [ -t 0 ]; then
     case "$(read -s -n 1 x; printf %s "$x")" in
         y|Y)
             mpv_options=(--hwdec=no --script-opts=autocrop-auto=yes)
-            ;;
-        *)
-            mpv_options=()
             ;;
     esac
     echo
