@@ -123,7 +123,7 @@ for arg in "$@"; do
     fi
 done
 
-if [ -t 0 ]; then
+if [ -t 0 ] && ! [[ "${1:--}" =~ ^- ]]; then
     printf 'disable hardware decoding? (make autocrop (video filter) work)\n[y/N] ' >&2
     case "$(read -s -n 1 x; printf %s "$x")" in
         y|Y)

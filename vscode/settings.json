@@ -8,7 +8,7 @@
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.allowChords": false,
     "terminal.integrated.rightClickBehavior": "default",
-    "terminal.integrated.enableFileLinks": false,
+    "terminal.integrated.enableFileLinks": "notRemote",
     "vim.foldfix": true,
     "vim.leader": " ",
     "vim.ignorecase": false,
@@ -34,13 +34,13 @@
             ]
         },
         {
-            "before": ["]", "e"],
+            "before": ["]", "g"],
             "commands": [
                 "editor.action.marker.next"
             ]
         },
         {
-            "before": ["[", "e"],
+            "before": ["[", "g"],
             "commands": [
                 "editor.action.marker.prev"
             ]
@@ -67,12 +67,6 @@
                 "projectManager.listProjectsNewWindow"
             ]
         },
-        {
-            "before": ["leader", "c"],
-            "commands": [
-                "editor.action.dirtydiff.next"
-            ]
-        }
     ],
     "vim.visualModeKeyBindings": [
         {
@@ -85,8 +79,15 @@
     "workbench.editor.enablePreview": false,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.startupEditor": "none",
-    "workbench.colorTheme": "Atom One Light",
+    "workbench.colorTheme": "GitHub Light Default",
     "workbench.editor.untitled.hint": "hidden",
     "window.newWindowDimensions": "maximized",
-    "projectManager.sortList": "Recent"
+    "editor.fontFamily": "'Jetbrains Mono', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontSize": 18,
+    "terminal.integrated.fontSize": 16,
+    "window.menuBarVisibility": "toggle",
+    "zig.zigPath": "/home/box/bin/zig",
+    "zig.zls.enabled": true,
+    "zig.zls.path": "/home/box/bin/zls",
+    "zig.zls.enableInlayHints": false
 }

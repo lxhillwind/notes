@@ -3,6 +3,8 @@ set -e
 
 # setup:
 # download vscode tar, extract to ~/.sandbox/vscode/
+#
+# (optional) code.desktop file: get one from <https://gist.github.com/infosec-intern/542d39e16f46ff472803a42bc50f3b4f>
 
 # seems that we cannot open url inside vscode because of url handler missing.
 #
@@ -53,6 +55,8 @@ flags_system=(
     --tmpfs /usr/sbin/
     # --bind here to make it upgrade.
     --bind ~/.sandbox/vscode/VSCode-linux-x64 /opt/vscode
+    # ssh
+    --ro-bind /etc/passwd /etc/passwd
     # font
     --ro-bind /etc/fonts /etc/fonts
     # ssl

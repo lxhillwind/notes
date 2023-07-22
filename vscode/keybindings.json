@@ -4,18 +4,14 @@
         "command": "workbench.action.quickOpen"
     },
     {
-        "key": "ctrl+shift+t",
-        "command": "workbench.action.terminal.toggleTerminal"
-    },
-    {
         "key": "ctrl+n",
         "command": "workbench.action.quickOpenSelectNext",
-        "when": "!editorTextFocus"
+        "when": "inQuickOpen"
     },
     {
         "key": "ctrl+p",
         "command": "workbench.action.quickOpenSelectPrevious",
-        "when": "!editorTextFocus"
+        "when": "inQuickOpen"
     },
     {
         "key": "ctrl+[",
@@ -24,54 +20,12 @@
     },
     {
         "key": "ctrl+[",
-        "command": "keybindings.editor.clearSearchResults",
-        "when": "inKeybindings && inKeybindingsSearch"
-    },
-    {
-        "key": "ctrl+[",
         "command": "extension.vim_escape",
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
     {
-        "key": "ctrl+m",
-        "command": "-editor.action.toggleTabFocusMode"
-    },
-    {
-        "key": "ctrl+e",
-        "command": "-workbench.action.quickOpen"
-    },
-    {
-        "key": "ctrl+f",
-        "command": "actions.find",
-        "when": "terminalFindFocused || terminalFocus"
-    },
-    {
-        "key": "ctrl+f",
-        "command": "-workbench.action.terminal.focusFind",
-        "when": "terminalFindFocused || terminalFocus"
-    },
-    {
-        "key": "ctrl+j",
-        "command": "-workbench.action.togglePanel"
-    },
-    {
-        "key": "ctrl+f",
-        "command": "-workbench.action.terminal.focusFind",
-        "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported"
-    },
-    {
-        "key": "ctrl+v",
-        "command": "editor.action.clipboardPasteAction",
-        "when": "terminalFindFocused || terminalFocus"
-    },
-    {
-        "key": "ctrl+t",
-        "command": "-editor.action.transposeLetters",
-        "when": "textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+shift+f",
-        "command": "workbench.action.toggleMaximizedPanel"
+        "key": "alt+j",
+        "command": "workbench.action.togglePanel"
     },
     {
         "key": "shift+cmd+=",
@@ -86,6 +40,11 @@
         "command": "workbench.action.zoomReset"
     },
     {
+        "key": "f",
+        "command": "workbench.view.explorer",
+        "when": "!editorIsOpen && !inputFocus"
+    },
+    {
         "key": "o",
         "command": "projectManager.listProjects",
         "when": "!editorIsOpen && !inputFocus"
@@ -96,8 +55,58 @@
         "when": "!editorIsOpen && !inputFocus"
     },
     {
-        "key": "f",
-        "command": "workbench.view.explorer",
-        "when": "!editorIsOpen && !inputFocus"
-    }
+        "key": "ctrl+e",
+        "command": "",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+a",
+        "command": "workbench.action.terminal.selectAll",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+f",
+        "command": "workbench.action.terminal.focusFind",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+v",
+        "command": "workbench.action.terminal.paste",
+        "when": "terminalFocus"
+    },
 ]

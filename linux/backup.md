@@ -8,7 +8,7 @@ add which not worth backup to rg regex list manually. (**it's better to put
 the regex list in a file, for privacy reason**)
 
 ```sh
-\ls -A ~ | rg -v '^('"$(cat ~/backup-list.txt | tr '\n' '|')"')$' | tr '\n' '\0' | du -csh --files0-from=- | sort -hk1
+\ls -A ~ | rg -v '^('"$(cat ~/backup-ignore-list.txt | tr '\n' '|')"')$' | tr '\n' '\0' | du -csh --files0-from=- | sort -hk1
 ```
 
 # step2: backup file to a directory outside of backup content
@@ -17,7 +17,7 @@ If memory is large enough, just backup to /tmp (and it should be faster than
 backup to disk).
 
 ```sh
-tar -acf "/tmp/bak-$(date +%F).tar" -X ~/backup-list.txt -C ~ .
+tar -acf "/tmp/bak-$(date +%F).tar" -X ~/backup-ignore-list.txt -C ~ .
 ```
 
 # step3: encrypt the backup file (optional)
