@@ -1,6 +1,8 @@
 vim9script
 nnoremap <buffer> <Space>;r <ScriptCmd>RefreshContents()<CR>
 
+# open ./README.md for usage.
+
 
 def RefreshContents()
     var result: dict<list<dict<string>>>
@@ -24,7 +26,12 @@ def RefreshContents()
 
     " usage:
     : lcd %:h | source ./vimrc
-    " then pressing <Leader>;r to refresh content.
+    " - create file in this vim session
+    "   dir as tag, filename as title;
+    "   (be relax: path is used to generate tag / title; it does not do bad
+    "   thing even if format is not correct)
+    " - add file to git (git add XXX)
+    " - then pressing <Leader>;r to refresh content of README.md (this file).
     -->
 
     Idea comes from <https://til.simonwillison.net/> (which comes from others...)
