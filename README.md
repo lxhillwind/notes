@@ -41,3 +41,4 @@ Idea comes from <https://til.simonwillison.net/> (which comes from others...)
   - [legacy notes](vscode/README.md)
 - windows
   - [newline ("\\r\\n" or "\\n"?) in some programming languages](windows/newline.md) 2022-11-13
+  - [thinpc](windows/thinpc.md) 2023-07-29
