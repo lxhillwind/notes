@@ -22,7 +22,11 @@ podman exec -i pandoc pandoc -r markdown+east_asian_line_breaks-yaml_metadata_bl
 sed -E -i 's/href="(.*).md"/href=".\/\1.html"/' index.html
 
 # generate rss;
-git clone -b 52227544480facb729315ade500f77d6e5cc7657 https://github.com/chambln/pandoc-rss
+git clone https://github.com/chambln/pandoc-rss
+git -C pandoc-rss reset 52227544480facb729315ade500f77d6e5cc7657 --hard || {
+    printf 'commit not found! you should check it manually.\n';
+    exit 1;
+}
 PATH="$PWD/pandoc-rss/bin:$PATH"
 
 git ls-files '*.md' \
