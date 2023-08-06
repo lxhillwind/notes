@@ -36,6 +36,8 @@ def RefreshContents()
 
     Idea comes from <https://til.simonwillison.net/> (which comes from others...)
 
+    <a link="rss.xml">rss</a>
+
     ---
 
     END

@@ -20,3 +20,19 @@ EOF
 # generate index.html from index.md
 podman exec -i pandoc pandoc -r markdown+east_asian_line_breaks-yaml_metadata_block -w html --standalone -T 'lxhillwind' -H res-icon.html < README.md > index.html
 sed -E -i 's/href="(.*).md"/href=".\/\1.html"/' index.html
+
+# generate rss;
+git clone -b 52227544480facb729315ade500f77d6e5cc7657 https://github.com/chambln/pandoc-rss
+PATH="$PWD/pandoc-rss/bin:$PATH"
+
+git ls-files '*.md' \
+    | xargs -I {} sh -c `# use -I to handle 1 line each time` \
+    'date=$(sed -n "3 s/^% //p; 3q" "$0" `# line 3 contains date info`);
+    [ -n "$date" ] && echo "$date" "$0";' {} `# some old essay does not contain date info` \
+    | sort -rk1 `# sort by date (first column) reverse order` \
+    | sed -E 's/^[0-9-]+ //' `# remove first column` \
+    | xargs -L 1 pandoc-rss > rss.xml `# use -L to handle all items once` \
+    -t "lxhillwind's TILs" \
+    -l https://lxhillwind.github.io \
+    -c 'CC BY-SA 4.0' \
+    -n en
