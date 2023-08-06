@@ -35,7 +35,7 @@ jobs:
       - name: Build site
         run: |-
           set -e
-          podman run --name pandoc -v "$PWD":/data -w /data --init --rm -dt --entrypoint= docker.io/pandoc/core tail -f
+          podman run --name pandoc -v "$PWD":"$PWD" -w "$PWD" --init --rm -dt --entrypoint= docker.io/pandoc/core tail -f
           ./build.sh
           podman stop -t 0 pandoc
 

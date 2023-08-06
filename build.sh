@@ -3,7 +3,7 @@ set -e
 
 # start pandoc container before running this script.
 # e.g. (run it in background)
-# podman run --name pandoc -v "$PWD":/data -w /data --init --rm -dt --entrypoint= docker.io/pandoc/core tail -f
+# podman run --name pandoc -v "$PWD":"$PWD" -w "$PWD" --init --rm -dt --entrypoint= docker.io/pandoc/core tail -f
 
 if ! command -v pandoc >/dev/null; then
     printf '%s\n' 'exec podman exec -i pandoc pandoc "$@"' > /usr/local/bin/pandoc
