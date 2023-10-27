@@ -93,6 +93,7 @@ flags=(
     --setenv LANG zh_CN.utf8
     --setenv LC_ALL zh_CN.utf8
     --setenv LC_CTYPE zh_CN.utf8
+    --setenv GTK_CSD 1
 
     #"${flags_archlinux[@]}"
     "${flags_fedora[@]}"
@@ -127,6 +128,7 @@ flags=(
     --ro-bind ~/lx/linux/font-cjk-fix.conf ~/.config/fontconfig/fonts.conf
     # app
     --bind ~/.mozilla-box ~/.mozilla
+    --ro-bind ~/.config/firefoxCSS ~/.config/firefoxCSS
     --bind ~/.local/share/tridactyl-box ~/.local/share/tridactyl
     --bind ~/.config/transmission-box ~/.config/transmission
 
