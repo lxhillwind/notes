@@ -129,6 +129,16 @@ flags=(
     # app
     --bind ~/.mozilla-box ~/.mozilla
     --ro-bind ~/.config/firefoxCSS ~/.config/firefoxCSS
+    # NOTE: tridactylrc is a regular file; when modified, it will be out ot sync!
+    # we can workaround this by set autocmd (BufWriteCmd) for ~/.tridactylrc:
+    #
+    # ```vim9script
+    # au BufWriteCmd ~/.tridactylrc {
+    #     :silent w !tee % >/dev/null
+    #     setl nomodified
+    # }
+    # ```
+    --ro-bind ~/.tridactylrc ~/.tridactylrc
     --bind ~/.local/share/tridactyl-box ~/.local/share/tridactyl
     --bind ~/.config/transmission-box ~/.config/transmission
 
