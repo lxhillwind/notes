@@ -138,14 +138,14 @@ flags=(
     #     setl nomodified
     # }
     # ```
-    --ro-bind ~/.tridactylrc ~/.tridactylrc
+    --bind ~/.tridactylrc ~/.tridactylrc
     --bind ~/.local/share/tridactyl-box ~/.local/share/tridactyl
     --bind ~/.config/transmission-box ~/.config/transmission
 
     --ro-bind ~/.config/tridactyl/ ~/.config/tridactyl/
     --bind ~/Downloads/ ~/Downloads/
     --ro-bind ~/html/ ~/html/
-    --symlink ~/vimfiles/vimrc ~/.vimrc --ro-bind ~/vimfiles/ ~/vimfiles/
+    --ro-bind ~/.vimrc ~/.vimrc --ro-bind ~/vimfiles/ ~/vimfiles/
     # opensuse system doc.
     --ro-bind-try /usr/share/doc/packages/ ~/opensuse-doc-packages/
 
