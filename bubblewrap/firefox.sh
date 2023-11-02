@@ -63,6 +63,14 @@ flags_fedora=(
     --ro-bind /etc/alternatives/ /etc/alternatives/
     --ro-bind /etc/resolv.conf /etc/resolv.conf
     --ro-bind /etc/fonts/ /etc/fonts/
+
+    # ssl (non-firefox)
+    --ro-bind /etc/pki/tls/cert.pem /etc/pki/tls/cert.pem
+    # fix missing lib for mpv
+    --ro-bind /etc/ld.so.conf /etc/ld.so.conf
+    --ro-bind /etc/ld.so.conf.d /etc/ld.so.conf.d
+    --ro-bind /etc/ld.so.cache /etc/ld.so.cache
+    --ro-bind /etc/alternatives /etc/alternatives
     )
 
 if [ -n "$WAYLAND_DISPLAY" ]; then
@@ -148,6 +156,9 @@ flags=(
     --ro-bind ~/.vimrc ~/.vimrc --ro-bind ~/vimfiles/ ~/vimfiles/
     # opensuse system doc.
     --ro-bind-try /usr/share/doc/packages/ ~/opensuse-doc-packages/
+
+    # mpv conf
+    --ro-bind ~/.config/mpv/ ~/.config/mpv/
 
     # network.
     --unshare-all --share-net
