@@ -1,5 +1,5 @@
 % legacy notes
 
-- [setting](vscode-settings.json)
-- [keybindings](vscode-keybindings.json)
-- [tasks](vscode-tasks.json)
+- [setting](settings.json)
+- [keybindings](keybindings.json)
+- [tasks](tasks.json)

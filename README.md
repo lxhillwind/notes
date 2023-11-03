@@ -3,7 +3,7 @@
 ---
 
 - bubblewrap
-  - [collection of bubblewrap wrapper script](bubblewrap/README.md)
+  - [collection of bubblewrap wrapper script](bubblewrap/)
 - crypto
   - [crypto reading notes](crypto/README.md)
 - golang
