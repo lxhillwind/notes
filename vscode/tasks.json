@@ -1,17 +1,40 @@
 {
-        // See https://go.microsoft.com/fwlink/?LinkId=733558
-        // for the documentation about the tasks.json format
         "version": "2.0.0",
         "tasks": [
                 {
                         "label": "vim",
                         "type": "shell",
                         "command": "vim",
-                        "args": ["-f", "+Kjump${lineNumber}", "-c", "set bg=light", "${file}"],
+                        "args": ["-f", "${file}:${lineNumber}"],
                         "presentation": {
-                                "focus": true
+                                "focus": true,
+                                "close": true,
+                                "showReuseMessage": false
                         },
                         "problemMatcher": []
+                },
+                {
+                        "label": "project in current window",
+                        "type": "shell",
+                        "command": "sh",
+                        "args": ["-c", "find-repo ~/repos | fzf | xargs -r code -r"],
+                        "presentation": {
+                                "focus": true,
+                                "close": true,
+                                "showReuseMessage": false
+                        },
+                        "problemMatcher": []
+                },
+                {
+                        "label": "project in new window",
+                        "type": "shell",
+                        "command": "sh",
+                        "args": ["-c", "find-repo ~/repos | fzf | xargs -r code -n"],
+                        "presentation": {
+                                "focus": true,
+                                "close": true,
+                                "showReuseMessage": false
+                        }
                 }
         ]
 }

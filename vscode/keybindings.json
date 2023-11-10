@@ -46,12 +46,14 @@
     },
     {
         "key": "o",
-        "command": "projectManager.listProjects",
+        "command": "workbench.action.tasks.runTask",
+        "args": "project in current window",
         "when": "!editorIsOpen && !inputFocus"
     },
     {
         "key": "shift+o",
-        "command": "projectManager.listProjectsNewWindow",
+        "command": "workbench.action.tasks.runTask",
+        "args": "project in new window",
         "when": "!editorIsOpen && !inputFocus"
     },
     {
@@ -109,4 +111,14 @@
         "command": "workbench.action.terminal.paste",
         "when": "terminalFocus"
     },
+    {
+        "key": "alt+t",
+        "command": "workbench.action.terminal.new",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus"
+    }
 ]

@@ -4,11 +4,42 @@
     "editor.tabSize": 8,
     "editor.cursorStyle": "line",
     "editor.insertSpaces": false,
-    "editor.wordWrap": "off",
+    "editor.wordWrap": "on",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.fontFamily": "'Jetbrains Mono NL', hack, 'Source Code Pro', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 18,
+    "editor.inlineSuggest.enabled": true,
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.allowChords": false,
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.enableFileLinks": "notRemote",
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.profiles.osx": {
+        "zsh": {
+            "path": "/opt/homebrew/bin/zsh"
+        }
+    },
+    "search.useGlobalIgnoreFiles": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.startupEditor": "none",
+    "workbench.colorTheme": "GitHub Dark Dimmed",
+    "workbench.preferredLightColorTheme": "GitHub Light Default",
+    "workbench.preferredDarkColorTheme": "GitHub Dark Dimmed",
+    "workbench.layoutControl.enabled": false,
+    "workbench.editor.empty.hint": "hidden",
+    "window.autoDetectColorScheme": true,
+    "window.commandCenter": false,
+    "window.newWindowDimensions": "maximized",
+    "window.menuBarVisibility": "toggle",
+    "markdown.preview.fontSize": 18,
+    "debug.console.fontSize": 18,
+    "scm.inputFontSize": 18,
+    "extensions.autoUpdate": false,
     "vim.foldfix": true,
     "vim.leader": " ",
     "vim.ignorecase": false,
@@ -58,15 +89,27 @@
         {
             "before": ["leader", "o"],
             "commands": [
-                "projectManager.listProjects"
+                {
+                    "command": "workbench.action.tasks.runTask",
+                    "args": "project in current window"
+                }
             ]
         },
         {
             "before": ["leader", "O"],
             "commands": [
-                "projectManager.listProjectsNewWindow"
+                {
+                    "command": "workbench.action.tasks.runTask",
+                    "args": "project in new window"
+                }
             ]
-        },
+        }
+    ],
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<C-u>"],
+            "after": ["<C-g>", "u", "<C-u>"]
+        }
     ],
     "vim.visualModeKeyBindings": [
         {
@@ -76,18 +119,15 @@
             ]
         }
     ],
-    "workbench.editor.enablePreview": false,
-    "workbench.editor.enablePreviewFromQuickOpen": false,
-    "workbench.startupEditor": "none",
-    "workbench.colorTheme": "GitHub Light Default",
-    "workbench.editor.untitled.hint": "hidden",
-    "window.newWindowDimensions": "maximized",
-    "editor.fontFamily": "'Jetbrains Mono', 'Droid Sans Mono', 'monospace', monospace",
-    "editor.fontSize": 18,
-    "terminal.integrated.fontSize": 16,
-    "window.menuBarVisibility": "toggle",
-    "zig.zigPath": "/home/box/bin/zig",
+    "remote.SSH.enableDynamicForwarding": false,
+    "remote.SSH.enableX11Forwarding": false,
+    "remote.autoForwardPorts": false,
+    "remote.restoreForwardedPorts": false,
+    "remote.downloadExtensionsLocally": true,
+    "code-runner.runInTerminal": true,
+    "zig.path": "/home/box/bin/zig",
     "zig.zls.enabled": true,
     "zig.zls.path": "/home/box/bin/zls",
-    "zig.zls.enableInlayHints": false
+    "zig.zls.enableInlayHints": false,
+    "zig.zls.checkForUpdate": false
 }
