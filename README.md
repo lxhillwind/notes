@@ -1,3 +1,5 @@
+<!-- vim:sw=2
+!-->
 % TILs (today I learned)
 
 ---
@@ -18,6 +20,7 @@
   - [create iso file on linux (without root)](linux/create-iso.md) 2023-04-07
 - mac
   - [legacy notes](mac/README.md)
+  - [fix "authentication is disabled"](mac/fix_authentication_is_disabled.md)
 - untitled.md
   - [untitled](untitled.md)
 - vimium
