@@ -1,6 +1,6 @@
 <!-- vim:sw=2
 !-->
-% TILs (today I learned)
+% notes
 
 ---
 
@@ -30,7 +30,3 @@
 - windows
   - [newline ("\\r\\n" or "\\n"?) in some programming languages](windows/newline.md) 2022-11-13
   - [thinpc](windows/thinpc.md) 2023-07-29
-
-about:
-
-Idea comes from <https://til.simonwillison.net/> (which comes from others...)
