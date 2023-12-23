@@ -1,8 +1,6 @@
-<!-- vim:sw=2
-!-->
-% notes
+<!-- vim:sw=2 -->
 
----
+# notes
 
 - bubblewrap
   - [collection of bubblewrap wrapper script](bubblewrap/)
@@ -18,9 +16,12 @@
   - [legacy notes](linux/README.md)
   - [linux backup step (desktop pc; backups user home)](linux/backup.md) 2023-04-15
   - [create iso file on linux (without root)](linux/create-iso.md) 2023-04-07
+  - [replaygain](linux/replaygain.md) 2023-04-15
+  - [usb passthrough in qemu](linux/usb-passthrough.md) 2023-04-07
 - mac
   - [legacy notes](mac/README.md)
   - [fix "authentication is disabled"](mac/fix_authentication_is_disabled.md)
+- [pyqt6/](pyqt6/)
 - untitled.md
   - [untitled](untitled.md)
 - vimium
