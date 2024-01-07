@@ -8,6 +8,10 @@
   - [crypto reading notes](crypto/README.md)
 - golang
   - [Why does `gopls` not work without module (go.mod)](golang/gopls.md) 2023-07-23
+- network
+  - [https local setup](network/https-local-setup.md) 2024-01-07
+- input method
+  - [小鹤双拼 + 辅助码](input-method/xhyx.md) 2024-01-07
 - json
   - [compare json](json/compare-json.md) 2022-11-08
 - kubernetes
@@ -22,8 +26,12 @@
   - [legacy notes](mac/README.md)
   - [fix "authentication is disabled"](mac/fix_authentication_is_disabled.md)
 - [pyqt6/](pyqt6/)
+- ssh
+  - [misc](ssh/misc.md) 2024-01-07
 - untitled.md
   - [untitled](untitled.md)
+- vim
+  - [misc](vim/misc.md) 2024-01-07
 - vimium
   - [legacy notes](vimium/README.md)
 - vscode
