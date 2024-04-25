@@ -17,6 +17,7 @@
 - kubernetes
   - [mount file or dir from secret](kubernetes/mount-file-or-dir-from-secret.md) 2022-11-23
 - linux
+  - [add kernel parameters (grub)](linux/add-kernel-parameters.md) 2024-04-25
   - [legacy notes](linux/README.md)
   - [linux backup step (desktop pc; backups user home)](linux/backup.md) 2023-04-15
   - [create iso file on linux (without root)](linux/create-iso.md) 2023-04-07
