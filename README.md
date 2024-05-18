@@ -14,6 +14,8 @@
   - [小鹤双拼 + 辅助码](input-method/xhyx.md) 2024-01-07
 - json
   - [compare json](json/compare-json.md) 2022-11-08
+- koreader
+  - [koreader setup](koreader/setup.md) 2024-05-18
 - kubernetes
   - [mount file or dir from secret](kubernetes/mount-file-or-dir-from-secret.md) 2022-11-23
 - linux
