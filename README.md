@@ -16,6 +16,7 @@
   - [compare json](json/compare-json.md) 2022-11-08
 - koreader
   - [koreader setup](koreader/setup.md) 2024-05-18
+  - [add table of content for plain text file (.txt) in koreader](koreader/plain-text-toc.md) 2024-05-19
 - kubernetes
   - [mount file or dir from secret](kubernetes/mount-file-or-dir-from-secret.md) 2022-11-23
 - linux
