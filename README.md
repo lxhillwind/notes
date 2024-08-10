@@ -12,6 +12,7 @@
   - [https local setup](network/https-local-setup.md) 2024-01-07
 - input method
   - [小鹤双拼 + 辅助码](input-method/xhyx.md) 2024-01-07
+  - [fcitx5 配置](input-method/fcitx5.md) 2024-08-10
 - json
   - [compare json](json/compare-json.md) 2022-11-08
 - koreader
