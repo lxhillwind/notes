@@ -13,11 +13,18 @@ the regex list in a file, for privacy reason**)
 
 # step2: backup file to a directory outside of backup content
 
-If memory is large enough, just backup to /tmp (and it should be faster than
+**If memory is large enough**: just backup to /tmp (and it should be faster than
 backup to disk).
 
 ```sh
 tar -acf "/tmp/bak-$(date +%F).tar" -X ~/backup-ignore-list.txt -C ~ .
+```
+
+otherwise, use another directory, like `~/backup-pc/`;
+**it should be in ~/backup-ignore-list.txt** !
+
+```sh
+tar -acf ~/backup-pc/"bak-$(date +%F).tar" -X ~/backup-ignore-list.txt -C ~ .
 ```
 
 # step3: encrypt the backup file (optional)
