@@ -5,9 +5,8 @@
     "editor.cursorStyle": "line",
     "editor.insertSpaces": false,
     "editor.wordWrap": "on",
-    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-    "editor.fontFamily": "'Jetbrains Mono NL', hack, 'Source Code Pro', Menlo, Monaco, 'Courier New', monospace",
-    "editor.fontLigatures": true,
+    "editor.fontFamily": "hack, 'Jetbrains Mono', 'Source Code Pro', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": false,
     "editor.fontSize": 18,
     "editor.inlineSuggest.enabled": true,
     "terminal.integrated.copyOnSelection": true,
@@ -15,6 +14,9 @@
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.enableFileLinks": "notRemote",
     "terminal.integrated.fontSize": 16,
+    "terminal.integrated.tabs.title": "${sequence}",
+    "terminal.integrated.stickyScroll.enabled": false,
+    "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.defaultProfile.osx": "zsh",
@@ -41,10 +43,10 @@
     "scm.inputFontSize": 18,
     "extensions.autoUpdate": false,
     "vim.foldfix": true,
-    "vim.leader": " ",
     "vim.ignorecase": false,
     "vim.hlsearch": true,
     "vim.sneak": true,
+    "vim.visualstar": true,
     "vim.normalModeKeyBindings": [
         {
             "before": ["K"],
@@ -77,17 +79,17 @@
             ]
         },
         {
-            "before": ["leader", "r"],
+            "before": ["space", "r"],
             "commands": [
                 "workbench.action.tasks.runTask"
             ]
         },
         {
-            "before": ["leader", "l"],
+            "before": ["space", "l"],
             "commands": [":nohl"]
         },
         {
-            "before": ["leader", "o"],
+            "before": ["space", "o"],
             "commands": [
                 {
                     "command": "workbench.action.tasks.runTask",
@@ -96,11 +98,28 @@
             ]
         },
         {
-            "before": ["leader", "O"],
+            "before": ["space", "O"],
             "commands": [
                 {
                     "command": "workbench.action.tasks.runTask",
                     "args": "project in new window"
+                }
+            ]
+        },
+        {
+            "before": ["space", "v"],
+            "commands": [
+                {
+                    "command": "workbench.action.tasks.runTask",
+                    "args": "vim"
+                }
+            ]
+        },
+        {
+            "before": ["space", "space"],
+            "commands": [
+                {
+                    "command": "workbench.action.quickOpen"
                 }
             ]
         }
@@ -113,7 +132,7 @@
     ],
     "vim.visualModeKeyBindings": [
         {
-            "before": ["leader", "r"],
+            "before": ["space", "r"],
             "commands": [
                 "workbench.action.tasks.runTask"
             ]
