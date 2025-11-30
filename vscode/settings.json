@@ -1,3 +1,4 @@
+// vim:ft=jsonc
 {
     "files.insertFinalNewline": true,
     "editor.lineNumbers": "relative",
@@ -29,12 +30,14 @@
     "workbench.editor.enablePreview": false,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.startupEditor": "none",
-    "workbench.colorTheme": "GitHub Dark Dimmed",
+    "workbench.colorTheme": "GitHub Light Default",
+    // 如果启用了 window.autoDetectColorScheme, 就会根据明暗模式使用下述选项;
+    // 这不便于为不同的工作区配置不同的颜色.
+    //"window.autoDetectColorScheme": true,
     "workbench.preferredLightColorTheme": "GitHub Light Default",
     "workbench.preferredDarkColorTheme": "GitHub Dark Dimmed",
     "workbench.layoutControl.enabled": false,
     "workbench.editor.empty.hint": "hidden",
-    "window.autoDetectColorScheme": true,
     "window.commandCenter": false,
     "window.newWindowDimensions": "maximized",
     "window.menuBarVisibility": "toggle",
