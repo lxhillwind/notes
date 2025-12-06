@@ -1,5 +1,10 @@
 // vim:ft=jsonc
 {
+    "editor.fontSize": 18,
+    "terminal.integrated.fontSize": 16,
+    "markdown.preview.fontSize": 18,
+    "debug.console.fontSize": 18,
+    "scm.inputFontSize": 18,
     "files.insertFinalNewline": true,
     "editor.lineNumbers": "relative",
     "editor.tabSize": 8,
@@ -8,13 +13,11 @@
     "editor.wordWrap": "on",
     "editor.fontFamily": "hack, 'Jetbrains Mono', 'Source Code Pro', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": false,
-    "editor.fontSize": 18,
     "editor.inlineSuggest.enabled": true,
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.allowChords": false,
     "terminal.integrated.rightClickBehavior": "default",
     "terminal.integrated.enableFileLinks": "notRemote",
-    "terminal.integrated.fontSize": 16,
     "terminal.integrated.tabs.title": "${sequence}",
     "terminal.integrated.stickyScroll.enabled": false,
     "terminal.integrated.drawBoldTextInBrightColors": false,
@@ -41,16 +44,26 @@
     "window.commandCenter": false,
     "window.newWindowDimensions": "maximized",
     "window.menuBarVisibility": "toggle",
-    "markdown.preview.fontSize": 18,
-    "debug.console.fontSize": 18,
-    "scm.inputFontSize": 18,
     "extensions.autoUpdate": false,
     "vim.foldfix": true,
     "vim.ignorecase": false,
     "vim.hlsearch": true,
     "vim.sneak": true,
     "vim.visualstar": true,
-    "vim.normalModeKeyBindings": [
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // make vim work with vscode's modified flag.
+        {
+            "before": ["u"],
+            "commands": [
+                "undo"
+            ]
+        },
+        {
+            "before": ["<C-r>"],
+            "commands": [
+                "redo"
+            ]
+        },
         {
             "before": ["K"],
             "commands": [
@@ -133,7 +146,7 @@
             "after": ["<C-g>", "u", "<C-u>"]
         }
     ],
-    "vim.visualModeKeyBindings": [
+    "vim.visualModeKeyBindingsNonRecursive": [
         {
             "before": ["space", "r"],
             "commands": [
