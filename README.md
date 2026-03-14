@@ -6,6 +6,8 @@
   - [collection of bubblewrap wrapper script](bubblewrap/)
 - crypto
   - [crypto reading notes](crypto/README.md)
+- fltk
+  - [build and use fltk for win32 from linux](fltk/fltk-win32.md) 2026-03-14
 - golang
   - [Why does `gopls` not work without module (go.mod)](golang/gopls.md) 2023-07-23
 - network
