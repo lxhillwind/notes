@@ -13,7 +13,7 @@ cd i686-w64-mingw32
 cmake --build . -j8
 
 # compile other fltk projects
-${FLTK_HOME}/i686-w64-mingw32/fltk-config --compile XXX.cxx --link '-static -static-libgcc -static-libstdc++'
+${FLTK_HOME}/i686-w64-mingw32/fltk-config --compile XXX.cxx
 ```
 
 ## content of ...

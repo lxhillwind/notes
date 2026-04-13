@@ -1,6 +1,11 @@
 #!/bin/sh
 
-# (put downloaded binary in ~/.artefact)
+# (put binary in ~/.artefact)
+
+# build from source:
+# use git tag v1.12.12;
+# build with:
+#   `CGO_ENABLED=0 go build -o sing-box -tags with_quic,with_utls,with_clash_api ./cmd/sing-box`
 
 # additional requirements:
 # edit config.json:
