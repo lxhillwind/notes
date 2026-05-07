@@ -24,6 +24,16 @@
         "when": "editorTextFocus && vim.active && !inDebugRepl"
     },
     {
+        "key": "alt+a",
+        "command": "editor.action.selectAll",
+        "when": "editorTextFocus && vim.active && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+a",
+        "command": "editor.action.selectAll",
+        "when": "editorTextFocus && vim.active && vim.mode = 'insert'"
+    },
+    {
         "key": "alt+j",
         "command": "workbench.action.togglePanel"
     },
@@ -207,5 +217,10 @@
     {
         "key": "alt+9",
         "command": "workbench.action.lastEditorInGroup"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "-workbench.action.terminal.chat.start",
+        "when": "chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"
     }
 ]

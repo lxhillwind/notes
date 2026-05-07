@@ -14,6 +14,10 @@
     "editor.fontFamily": "hack, 'Jetbrains Mono', 'Source Code Pro', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": false,
     "editor.inlineSuggest.enabled": true,
+    "chat.disableAIFeatures": true,
+    "chat.commandCenter.enabled": false,
+    "update.showReleaseNotes": false,
+    "terminal.integrated.initialHint": false,
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.allowChords": false,
     "terminal.integrated.rightClickBehavior": "default",
@@ -30,17 +34,15 @@
         }
     },
     "search.useGlobalIgnoreFiles": true,
+    "workbench.editor.useModal": "off",
     "workbench.editor.enablePreview": false,
     "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.empty.hint": "hidden",
     "workbench.startupEditor": "none",
-    "workbench.colorTheme": "GitHub Light Default",
+    "workbench.layoutControl.enabled": false,
     // 如果启用了 window.autoDetectColorScheme, 就会根据明暗模式使用下述选项;
     // 这不便于为不同的工作区配置不同的颜色.
     //"window.autoDetectColorScheme": true,
-    "workbench.preferredLightColorTheme": "GitHub Light Default",
-    "workbench.preferredDarkColorTheme": "GitHub Dark Dimmed",
-    "workbench.layoutControl.enabled": false,
-    "workbench.editor.empty.hint": "hidden",
     "window.commandCenter": false,
     "window.newWindowDimensions": "maximized",
     "window.menuBarVisibility": "toggle",
@@ -51,61 +53,99 @@
     "vim.sneak": true,
     "vim.visualstar": true,
     "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "Y"
+            ],
+            "after": [
+                "y",
+                "$"
+            ]
+        },
         // make vim work with vscode's modified flag.
         {
-            "before": ["u"],
+            "before": [
+                "u"
+            ],
             "commands": [
                 "undo"
             ]
         },
         {
-            "before": ["<C-r>"],
+            "before": [
+                "<C-r>"
+            ],
             "commands": [
                 "redo"
             ]
         },
         {
-            "before": ["K"],
+            "before": [
+                "K"
+            ],
             "commands": [
                 "editor.action.showHover"
             ]
         },
         {
-            "before": ["]", "c"],
+            "before": [
+                "]",
+                "c"
+            ],
             "commands": [
                 "workbench.action.editor.nextChange"
             ]
         },
         {
-            "before": ["[", "c"],
+            "before": [
+                "[",
+                "c"
+            ],
             "commands": [
                 "workbench.action.editor.previousChange"
             ]
         },
         {
-            "before": ["]", "g"],
+            "before": [
+                "]",
+                "g"
+            ],
             "commands": [
                 "editor.action.marker.next"
             ]
         },
         {
-            "before": ["[", "g"],
+            "before": [
+                "[",
+                "g"
+            ],
             "commands": [
                 "editor.action.marker.prev"
             ]
         },
         {
-            "before": ["space", "r"],
+            "before": [
+                "space",
+                "r"
+            ],
             "commands": [
                 "workbench.action.tasks.runTask"
             ]
         },
         {
-            "before": ["space", "l"],
-            "commands": [":nohl"]
+            "before": [
+                "space",
+                "l"
+            ],
+            "commands": [
+                ":nohl"
+            ]
         },
         {
-            "before": ["space", "o"],
+            "before": [
+                "space",
+                "o"
+            ],
             "commands": [
                 {
                     "command": "workbench.action.tasks.runTask",
@@ -114,7 +154,10 @@
             ]
         },
         {
-            "before": ["space", "O"],
+            "before": [
+                "space",
+                "O"
+            ],
             "commands": [
                 {
                     "command": "workbench.action.tasks.runTask",
@@ -123,7 +166,10 @@
             ]
         },
         {
-            "before": ["space", "v"],
+            "before": [
+                "space",
+                "v"
+            ],
             "commands": [
                 {
                     "command": "workbench.action.tasks.runTask",
@@ -132,7 +178,10 @@
             ]
         },
         {
-            "before": ["space", "space"],
+            "before": [
+                "space",
+                "space"
+            ],
             "commands": [
                 {
                     "command": "workbench.action.quickOpen"
@@ -142,27 +191,29 @@
     ],
     "vim.insertModeKeyBindingsNonRecursive": [
         {
-            "before": ["<C-u>"],
-            "after": ["<C-g>", "u", "<C-u>"]
+            "before": [
+                "<C-u>"
+            ],
+            "after": [
+                "<C-g>",
+                "u",
+                "<C-u>"
+            ]
         }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
         {
-            "before": ["space", "r"],
+            "before": [
+                "space",
+                "r"
+            ],
             "commands": [
                 "workbench.action.tasks.runTask"
             ]
         }
     ],
-    "remote.SSH.enableDynamicForwarding": false,
-    "remote.SSH.enableX11Forwarding": false,
     "remote.autoForwardPorts": false,
     "remote.restoreForwardedPorts": false,
     "remote.downloadExtensionsLocally": true,
-    "code-runner.runInTerminal": true,
-    "zig.path": "/home/box/bin/zig",
-    "zig.zls.enabled": true,
-    "zig.zls.path": "/home/box/bin/zls",
-    "zig.zls.enableInlayHints": false,
-    "zig.zls.checkForUpdate": false
+    "workbench.colorTheme": "Light 2026",
 }

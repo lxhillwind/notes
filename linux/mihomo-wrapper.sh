@@ -10,7 +10,7 @@
 
 # cmd:
 exec \
-bwrap --new-session --die-with-parent --clearenv --ro-bind /etc/ssl/cert.pem /etc/ssl/cert.pem --ro-bind ~/.artefact/mihomo /mihomo --ro-bind ~/.config/mihomo/config.yaml /config.yaml --setenv HOME / --ro-bind ~/.config/clash/Country.mmdb /.config/mihomo/Country.mmdb --unshare-all --share-net --ro-bind /etc/resolv.conf /etc/resolv.conf /mihomo -f /config.yaml
+bwrap --new-session --die-with-parent --clearenv --ro-bind /etc/ssl/cert.pem /etc/ssl/cert.pem --ro-bind ~/.artefact/mihomo /mihomo --ro-bind ~/.config/mihomo/config.yaml /config.yaml --setenv HOME / --ro-bind ~/.config/mihomo/geosite.dat /.config/mihomo/geosite.dat --ro-bind ~/.config/mihomo/Country.mmdb /.config/mihomo/Country.mmdb --unshare-all --share-net --ro-bind /etc/resolv.conf /etc/resolv.conf /mihomo -f /config.yaml
 
 # sample (--user) systemd service file:
 #[Unit]
