@@ -26,20 +26,23 @@
     {
         "key": "alt+a",
         "command": "editor.action.selectAll",
-        "when": "editorTextFocus && vim.active && !inDebugRepl"
+        "when": "!isMac && editorTextFocus && vim.active && !inDebugRepl"
     },
     {
         "key": "ctrl+a",
         "command": "editor.action.selectAll",
-        "when": "editorTextFocus && vim.active && vim.mode = 'insert'"
+        "when": "editorTextFocus && vim.active && vim.mode == 'Insert'"
     },
     {
         "key": "alt+j",
-        "command": "workbench.action.togglePanel"
+        "command": "workbench.action.togglePanel",
+        "when": "!isMac"
+
     },
     {
         "key": "alt+n",
-        "command": "workbench.action.files.newUntitledFile"
+        "command": "workbench.action.files.newUntitledFile",
+        "when": "!isMac"
     },
     {
         "key": "shift+cmd+=",
@@ -113,22 +116,22 @@
     {
         "key": "alt+a",
         "command": "workbench.action.terminal.selectAll",
-        "when": "terminalFocus"
+        "when": "!isMac && terminalFocus"
     },
     {
         "key": "alt+f",
         "command": "workbench.action.terminal.focusFind",
-        "when": "terminalFocus"
+        "when": "!isMac && terminalFocus"
     },
     {
         "key": "alt+v",
         "command": "workbench.action.terminal.paste",
-        "when": "terminalFocus"
+        "when": "!isMac && terminalFocus"
     },
     {
         "key": "alt+t",
         "command": "workbench.action.terminal.new",
-        "when": "terminalFocus"
+        "when": "!isMac && terminalFocus"
     },
     {
         "key": "cmd+t",
@@ -184,43 +187,86 @@
     },
     {
         "key": "alt+1",
-        "command": "workbench.action.openEditorAtIndex1"
+        "command": "workbench.action.openEditorAtIndex1",
+        "when": "!isMac"
     },
     {
         "key": "alt+2",
-        "command": "workbench.action.openEditorAtIndex2"
+        "command": "workbench.action.openEditorAtIndex2",
+        "when": "!isMac"
     },
     {
         "key": "alt+3",
-        "command": "workbench.action.openEditorAtIndex3"
+        "command": "workbench.action.openEditorAtIndex3",
+        "when": "!isMac"
     },
     {
         "key": "alt+4",
-        "command": "workbench.action.openEditorAtIndex4"
+        "command": "workbench.action.openEditorAtIndex4",
+        "when": "!isMac"
     },
     {
         "key": "alt+5",
-        "command": "workbench.action.openEditorAtIndex5"
+        "command": "workbench.action.openEditorAtIndex5",
+        "when": "!isMac"
     },
     {
         "key": "alt+6",
-        "command": "workbench.action.openEditorAtIndex6"
+        "command": "workbench.action.openEditorAtIndex6",
+        "when": "!isMac"
     },
     {
         "key": "alt+7",
-        "command": "workbench.action.openEditorAtIndex7"
+        "command": "workbench.action.openEditorAtIndex7",
+        "when": "!isMac"
     },
     {
         "key": "alt+8",
-        "command": "workbench.action.openEditorAtIndex8"
+        "command": "workbench.action.openEditorAtIndex8",
+        "when": "!isMac"
     },
     {
         "key": "alt+9",
-        "command": "workbench.action.lastEditorInGroup"
+        "command": "workbench.action.lastEditorInGroup",
+        "when": "!isMac"
     },
     {
         "key": "ctrl+i",
         "command": "-workbench.action.terminal.chat.start",
         "when": "chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported"
-    }
+    },
+    {
+        "key": "ctrl+6",
+        "command": "-workbench.action.openEditorAtIndex6"
+    },
+    {
+        "key": "ctrl+6",
+        "command": "-extension.vim_ctrl+6",
+        "when": "editorTextFocus && vim.active && vim.use<C-6> && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+6",
+        "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+        "when": "!activeEditorGroupEmpty"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+        "when": "!activeEditorGroupEmpty"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
+        "when": "!activeEditorGroupEmpty"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditorInGroup",
+        "when": "!terminalFocus"
+    },
 ]
